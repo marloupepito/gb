@@ -1,0 +1,15 @@
+git init
+git add .
+git commit -m "hello"
+git remote add origin https://github.com/marloupepito/gb.git
+git push -u origin master
+git push -f origin master
+
+
+git checkout -b main
+
+git checkout master
+
+
+heroku git:remote -a gould-care
+
