@@ -11,11 +11,14 @@ function CreateSection() {
     const branchName =BranchNameParams().props.children
     const branchId =SearchBranchId().props.children
     const production = Get_all_production(branchId).props.children
+   
     let form  =window.location.pathname.split('/')[5]
     
     function goToForm(){
         navigate('/administrator/'+branchName+'/production/create/form?branch_id='+branchId);
     }
+    var result = Object.values(production)
+
     return ( 
         <Row gutter={[16,16]}>
         <Col xs={24} sm={24} md={4} lg={4} xl={4} xxl={4}>
@@ -25,8 +28,8 @@ function CreateSection() {
                {/* <IngredientsAutocomplete data={get_branch_ingredients().props.children} /> */}
             </Col>
             {
-            production === undefined?[]:
-            production.map(res =>(
+            result === undefined?[]:
+            result.map(res =>(
                     <Col key={res.id} xs={12} sm={12} md={6} lg={6} xl={6} xxl={6}>
                             <CodeModal data={res}/>
                     </Col>

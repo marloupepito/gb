@@ -55,6 +55,7 @@ Route::post('/accept_request_ingredients','IngredientsRequestController@accept_r
 
 Route::post('/get_all_production','ProductionController@get_all_production');
 Route::post('/add_branch_ingredients','ProductionController@add_branch_ingredients');
+Route::post('/get_production_code','ProductionController@get_production_code');
 
 Route::post('/bread_in','InventoryProductionController@bread_in');
 Route::post('/get_bread','InventoryProductionController@get_bread');

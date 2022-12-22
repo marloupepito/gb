@@ -19,7 +19,7 @@ useEffect(() => {
 
     const keyword = aaa.target.value;
     
-    const filtered = data.filter(entry => Object.values(entry).some(val => typeof val === "string" && val.includes(keyword)));
+    const filtered = data.filter(entry => Object.values(entry).some(val => typeof val === "string" && val.toLowerCase().includes(keyword.toLowerCase())));
     setIngdata(filtered)
   };
   // const onSelect = (value) => {
@@ -38,10 +38,10 @@ useEffect(() => {
        {
                timeCount === 0?props.data.map(res=>
                 <Col key={res.id} xs={12} sm={12} md={4} lg={4} xl={4} xxl={4}>
-                   <IngredientsCard quantity={res.ingredients_quantity} title={res.ingredients_name} />
+                   <IngredientsCard bind={res.bind_name} quantity={res.ingredients_quantity} title={res.ingredients_name} />
                 </Col>):ingdata.map(res=>
             <Col key={res.id} xs={12} sm={12} md={4} lg={4} xl={4} xxl={4}>
-               <IngredientsCard quantity={res.ingredients_quantity} title={res.ingredients_name} />
+               <IngredientsCard bind={res.bind_name}  quantity={res.ingredients_quantity} title={res.ingredients_name} />
             </Col>
                )
             }

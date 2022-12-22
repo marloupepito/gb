@@ -41,7 +41,7 @@ class CreateUsersTable extends Migration
             $table->string('branch_id')->nullable();
             $table->string('ingredients_name')->nullable();
             $table->string('ingredients_quantity')->nullable();
-            $table->string('ingredients_quantity_description')->nullable();
+            $table->string('bind_name')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -73,11 +73,11 @@ class CreateUsersTable extends Migration
          Schema::create('production', function (Blueprint $table) {
             $table->id();
             $table->string('random_id')->nullable();
+            $table->string('ingredient_id')->nullable();
             $table->string('branch_id')->nullable();
             $table->string('code_name')->nullable();
             $table->string('ingredients_name')->nullable();
             $table->string('quantity')->nullable();
-            $table->string('type')->nullable();
             $table->string('price')->nullable();
             $table->rememberToken();
             $table->timestamps();

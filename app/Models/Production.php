@@ -11,11 +11,11 @@ class Production extends Model
     use HasFactory;
     protected $fillable = [
         'random_id',
+        'ingredient_id',
         'branch_id',
         'code_name',
         'ingredients_name',
         'quantity',
-        'type',
         'price',
      ];
 }

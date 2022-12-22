@@ -16,5 +16,18 @@ export function Get_all_production(props) {
     return <>{data}</>
 }
 
+export function GetProductionCode(props){
+  const [data,setData] = useState([])
+ useEffect(() => {
+  axios.post('/get_production_code',{
+    randomid:props
+    })
+    .then(res=>{
+      setData(res.data.status)
+    })  
+ }, []);
+
+    return <>{data}</>
+}
 
 

@@ -451,6 +451,7 @@ class DatabaseSeeder extends Seeder
 			$ingredients->branch_id = 1;
 	        $ingredients->ingredients_name = $ing[$i];
 			$ingredients->ingredients_quantity = 100;
+			$ingredients->bind_name = 'Sako';
 	        $ingredients->save(); 
 		}
 		for ($i=0; $i < 66; $i++) { 
@@ -458,6 +459,7 @@ class DatabaseSeeder extends Seeder
 			$ingredients->branch_id = 2;
 	        $ingredients->ingredients_name = $ing[$i];
 			$ingredients->ingredients_quantity = 100;
+			$ingredients->bind_name = 'Kilo';
 	        $ingredients->save(); 
 		}
 		for ($i=0; $i < 66; $i++) { 
@@ -465,6 +467,7 @@ class DatabaseSeeder extends Seeder
 			$ingredients->branch_id = 3;
 	        $ingredients->ingredients_name = $ing[$i];
 			$ingredients->ingredients_quantity = 100;
+			$ingredients->bind_name = 'Tray';
 	        $ingredients->save(); 
 		}
 		for ($i=0; $i < 66; $i++) { 
@@ -472,6 +475,7 @@ class DatabaseSeeder extends Seeder
 			$ingredients->branch_id = 4;
 	        $ingredients->ingredients_name = $ing[$i];
 			$ingredients->ingredients_quantity = 100;
+			$ingredients->bind_name = 'Pcs';
 	        $ingredients->save(); 
 		}
 		for ($i=0; $i < 66; $i++) { 
@@ -479,6 +483,7 @@ class DatabaseSeeder extends Seeder
 			$ingredients->branch_id = 5;
 	        $ingredients->ingredients_name = $ing[$i];
 			$ingredients->ingredients_quantity = 100;
+			$ingredients->bind_name = 'Baro';
 	        $ingredients->save(); 
 		}
 		for ($i=0; $i < 66; $i++) { 
@@ -486,6 +491,7 @@ class DatabaseSeeder extends Seeder
 			$ingredients->branch_id = 6;
 	        $ingredients->ingredients_name = $ing[$i];
 			$ingredients->ingredients_quantity = 100;
+			$ingredients->bind_name = 'Kilo';
 	        $ingredients->save(); 
 		}
 	 }

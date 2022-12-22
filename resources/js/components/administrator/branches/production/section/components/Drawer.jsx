@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select, Space } from 'antd';
+import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select, Space,InputNumber  } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
 import { SearchBranchId } from '../../../../../routes/Search';
 import { useNavigate } from "react-router-dom";
@@ -34,6 +34,8 @@ const ProductionSectionDrawer = (props) => {
       setLoading(false)
       form.resetFields();    
   };
+
+
   return (
     <>
       <Drawer
@@ -50,19 +52,43 @@ const ProductionSectionDrawer = (props) => {
         <Form layout="vertical" form={form} name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off" >
           <Row gutter={16}>
             <Col xs={24} sm={12} md={12}>
-              <Form.Item
-                name="codename"
-                label="Code Name"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please enter Code Name',
-                  },
-                ]}
-              >
-                <Input placeholder="Please enter Code Name" />
-              </Form.Item>
+            <Row gutter={16}>
+             <Col xs={24} sm={12} md={12}>
+                <Form.Item
+                      name="codename"
+                      label="Code Name"
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please enter Code Name',
+                        },
+                      ]}
+                    >
+                  <Input placeholder="Please enter Code Name" />
+                </Form.Item>
+              </Col>
+
+              <Col xs={24} sm={12} md={12}>
+                        
+                 <Form.Item
+                   label="Price"
+                    name="price"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Missing Price',
+                      },
+                    ]}
+                  >
+                    <InputNumber style={{
+                      width:'100%'
+                          }} placeholder="Price" />
+                  </Form.Item>
+              </Col>
+              </Row>
             </Col>
+       
+            
             <Col xs={24} sm={12} md={12}>
             Ingredients List
             <div>
@@ -91,7 +117,7 @@ const ProductionSectionDrawer = (props) => {
                           <Select
                                 showSearch
                                 style={{
-                                  width: 150,
+                                  width: 300,
                                 }}
                                 placeholder="Search to Ingredients"
                                 optionFilterProp="children"
@@ -99,35 +125,12 @@ const ProductionSectionDrawer = (props) => {
                                 filterSort={(optionA, optionB) =>
                                   (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
                                 }
-                                
-                                options={ingredientsList.map((res) =>({label:res.ingredients_name.toLowerCase(), value:res.ingredients_name.toLowerCase()}))}
+                                className="text-capitalize"
+                                options={ingredientsList.map((res) =>({label:res.ingredients_name.toLowerCase()+ '-' +res.bind_name.toLowerCase(), value:res.ingredients_name.toLowerCase()+ ' ' +res.bind_name.toLowerCase()}))}
                               />
                         </Form.Item>
 
 
-                         <Form.Item
-                          name={[name, 'type']}
-                          rules={[
-                            {
-                              required: true,
-                            },
-                          ]}
-                        >
-                          <Select
-                          style={{
-                            width: 150,
-                          }}
-                            placeholder="select bundle type"
-                            // onChange={this.onGenderChange}
-                            allowClear
-                          >
-                            <Option value="Sako">Sako</Option>
-                            <Option value="Baro">Baro</Option>
-                            <Option value="Tray">Tray</Option>
-                            <Option value="Kilo">Kilo</Option>
-                            <Option value="Pcs">Pcs</Option>
-                          </Select>
-                        </Form.Item>
 
                         <Form.Item
                           {...restField}
@@ -139,26 +142,13 @@ const ProductionSectionDrawer = (props) => {
                             },
                           ]}
                         >
-                          <Input style={{
-                                  width: 150,
+                          <InputNumber style={{
+                                  width: 300,
                                 }} placeholder="Quantity" />
                         </Form.Item>
                      
 
-                        <Form.Item
-                          {...restField}
-                          name={[name, 'price']}
-                          rules={[
-                            {
-                              required: true,
-                              message: 'Missing Price',
-                            },
-                          ]}
-                        >
-                          <Input style={{
-                                  width: 150,
-                                }} placeholder="Price" />
-                        </Form.Item>
+                      
 
                         
                         

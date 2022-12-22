@@ -18,7 +18,7 @@ export default function IngredientsCard(props) {
               prefix={props.quantity >= 5?<CheckCircleOutlined />:<AlertOutlined />}
               // suffix="%"
             />
-            KiloGram
+            {props.bind}
           </Card>
         </div>
     </>

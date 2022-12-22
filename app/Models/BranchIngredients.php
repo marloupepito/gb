@@ -13,6 +13,6 @@ class BranchIngredients extends Model
         'branch_id',
         'ingredients_name',
         'ingredients_quantity',
-        'ingredients_quantity_description'
+        'bind_name'
      ];
 }
