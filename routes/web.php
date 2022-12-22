@@ -47,7 +47,6 @@ Route::post('/user_login','UsersController@user_login');
 
 Route::post('/get_all_ingredients','IngredientsController@get_all_ingredients');
 
-
 Route::post('/send_request_form','IngredientsRequestController@send_request_form');
 Route::post('/get_request_from_branch','IngredientsRequestController@get_request_from_branch');
 Route::post('/get_only_current_branch_request','IngredientsRequestController@get_only_current_branch_request');
@@ -67,4 +66,5 @@ Route::post('/get_notification','NotificationController@get_notification');
 
 
 Route::post('/get_branch_ingredients','BranchIngredientsController@get_branch_ingredients');
+Route::post('/get_every_ingredients','BranchIngredientsController@get_every_ingredients');
 

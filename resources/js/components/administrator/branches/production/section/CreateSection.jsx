@@ -12,7 +12,7 @@ function CreateSection() {
     const branchId =SearchBranchId().props.children
     const production = Get_all_production(branchId).props.children
    
-    let form  =window.location.pathname.split('/')[5]
+    let form  = window.location.pathname.split('/')[5]
     
     function goToForm(){
         navigate('/administrator/'+branchName+'/production/create/form?branch_id='+branchId);

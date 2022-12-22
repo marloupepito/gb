@@ -31,6 +31,7 @@ const CodeModal = (props) => {
       <List.Item>
           <Typography.Text ><b>Ingredients</b></Typography.Text>
           <Typography.Text ><b>Quantity</b></Typography.Text>
+          <Typography.Text ><b>Stock</b></Typography.Text>
         </List.Item>
          {codeIngredients.map(res=><ProductionList key={res.id} data={res}/>)}
       </List>

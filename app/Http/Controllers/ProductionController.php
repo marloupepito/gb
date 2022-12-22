@@ -19,6 +19,7 @@ class ProductionController extends Controller
               'status' =>  $data,
           ]);
      }
+     
        
     public function add_branch_ingredients(Request $request){
      $codename = $request->data['codename'];

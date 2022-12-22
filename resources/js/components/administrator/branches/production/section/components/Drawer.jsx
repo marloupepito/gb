@@ -26,7 +26,6 @@ const ProductionSectionDrawer = (props) => {
   
   const onFinish = (values) => {
     setLoading(true)
-  
       add_branch_ingredients({
         branchid:branchId,
         data:values
@@ -126,7 +125,7 @@ const ProductionSectionDrawer = (props) => {
                                   (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
                                 }
                                 className="text-capitalize"
-                                options={ingredientsList.map((res) =>({label:res.ingredients_name.toLowerCase()+ '-' +res.bind_name.toLowerCase(), value:res.ingredients_name.toLowerCase()+ ' ' +res.bind_name.toLowerCase()}))}
+                                options={ingredientsList.map((res) =>({label:res.ingredients_name.toLowerCase()+ '-' +res.bind_name.toLowerCase(), value:res.ingredients_name.toLowerCase()+ ' ' +res.bind_name.toLowerCase()+'|'+res.id}))}
                               />
                         </Form.Item>
 
@@ -146,11 +145,7 @@ const ProductionSectionDrawer = (props) => {
                                   width: 300,
                                 }} placeholder="Quantity" />
                         </Form.Item>
-                     
-
-                      
-
-                        
+                              
                         
                         <MinusCircleOutlined onClick={() => remove(name)} />
                       </Space>

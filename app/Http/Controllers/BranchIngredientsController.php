@@ -15,4 +15,12 @@ class BranchIngredientsController extends Controller
              'status' => $ingredients
          ]);
      }
+
+     public function get_every_ingredients(Request $request){
+
+        $ingredients = BranchIngredients::where('id',$request->id)->first();
+        return response()->json([
+            'status' => $ingredients
+        ]);
+    }
 }
