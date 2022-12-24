@@ -2,46 +2,30 @@
 
 namespace App\Http\Controllers;
 use App\Models\InventoryProduction;
+use App\Models\Production;
 use Illuminate\Http\Request;
-
+use App\Models\BranchIngredients;
 class InventoryProductionController extends Controller
 {
-  public function bread_in(Request $request){
-          $request->validate([
-            'data'=>['required'],
-            'id'=>['required'],
-            'branch'=>['required'],
+  public function add_bread_list(Request $request){
+        
+          for ($i=0; $i < count($request->data); $i++) { 
+              $branchIngredientId = $request->data[$i]['branch_ingredients_id'];
+        
+              $remaining = BranchIngredients::where('id',$branchIngredientId)->first();
+              $equal = $remaining->ingredients_quantity - $request->data[$i]['quantity'];
 
+              BranchIngredients::where('id',$branchIngredientId)
+              ->update(['ingredients_quantity' => $equal]);
+         
+          }
+          return response()->json([
+            'status' =>$request->data
         ]);
-
-        $production_id =rand(1000000000,9999999999);
+          
+        
+        
        
-
-        for ($i=0; $i < count($request->data); $i++) { 
-             $ingredients = new InventoryProduction;
-             $ingredients->branch_id = $request->id;
-             $ingredients->production_id = $production_id;
-             $ingredients->cashier_name = 'sample name';
-             $ingredients->sales_clerk = 'sample clerk';
-             $ingredients->trainee ='sample trainee';
-             $ingredients->bread_name = $request->data[$i][0];
-             $ingredients->beginning_pcs = $request->data[$i][1];
-             $ingredients->new_production_pcs = $request->data[$i][2];
-             $ingredients->price = $request->data[$i][3];
-             $ingredients->branch_name = $request->branch;
-             $ingredients->total =($request->data[$i][1] + $request->data[$i][2]) * $request->data[$i][3];
-             $ingredients->bread_out = '';
-             $ingredients->charge_pc = '';
-             $ingredients->remaining_pcs = '';
-             $ingredients->sold_bread = '';
-             $ingredients->sales = '';
-             $ingredients->production_status = 'Bread In';
-             $ingredients->date = '';
-             $ingredients->save();
-        }
-         return response()->json([
-                'status' => 'success'
-            ]);
 
      }
        public function get_bread(Request $request){

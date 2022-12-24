@@ -5,7 +5,7 @@ import { MinusCircleOutlined } from '@ant-design/icons';
 import { SearchBranchId } from '../../../../../routes/Search';
 import { useNavigate } from "react-router-dom";
 import { BranchNameParams } from '../../../../../routes/Params';
-import { add_branch_ingredients,get_branch_ingredients } from '../../../../api/Ingredients';
+import { get_branch_ingredients } from '../../../../api/Ingredients';
 
 const { Option } = Select;
 const ProductionSectionDrawer = (props) => {
@@ -26,11 +26,14 @@ const ProductionSectionDrawer = (props) => {
   
   const onFinish = (values) => {
     setLoading(true)
-      add_branch_ingredients({
+      axios.post('/add_branch_ingredients',{
         branchid:branchId,
         data:values
       })
-      setLoading(false)
+      .then(res=>{
+      
+         setLoading(false)
+      })
       form.resetFields();    
   };
 
@@ -52,7 +55,7 @@ const ProductionSectionDrawer = (props) => {
           <Row gutter={16}>
             <Col xs={24} sm={12} md={12}>
             <Row gutter={16}>
-             <Col xs={24} sm={12} md={12}>
+             <Col xs={24} sm={24} md={24}>
                 <Form.Item
                       name="codename"
                       label="Code Name"
@@ -67,7 +70,22 @@ const ProductionSectionDrawer = (props) => {
                 </Form.Item>
               </Col>
 
-              <Col xs={24} sm={12} md={12}>
+              <Col xs={24} sm={24} md={24}>
+                <Form.Item
+                      name="breadname"
+                      label="Bread Name"
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please enter Bread Name',
+                        },
+                      ]}
+                    >
+                  <Input placeholder="Please enter Bread Name" />
+                </Form.Item>
+              </Col>
+
+              <Col xs={24} sm={24} md={24}>
                         
                  <Form.Item
                    label="Price"
@@ -82,6 +100,23 @@ const ProductionSectionDrawer = (props) => {
                     <InputNumber style={{
                       width:'100%'
                           }} placeholder="Price" />
+                  </Form.Item>
+              </Col>
+              <Col xs={24} sm={24} md={24}>
+                        
+                 <Form.Item
+                   label="Production Quantity"
+                    name="productionquantity"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Production Quantity',
+                      },
+                    ]}
+                  >
+                    <InputNumber style={{
+                      width:'100%'
+                          }} placeholder="Production Quantity" />
                   </Form.Item>
               </Col>
               </Row>

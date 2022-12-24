@@ -5,7 +5,7 @@ import Error404 from '../components/Error404';
 import AdministratorPage from '../administrator/Page';
 import DeliveryPage from '../administrator/branches/delivery/Page';
 import DeliveryTable from '../administrator/branches/delivery/components/Table';
-
+import AppLoading from '../administrator/components/Loading';
 
 import EmployeesPage from '../administrator/branches/employees/Page';
 import IngredientsPage from '../administrator/branches/ingredients/Page';
@@ -49,7 +49,8 @@ export const router = createBrowserRouter([
         {path:'/administrator/:id/production/sold', element: <BreadSoldSection />},
         {path:'/administrator/:id/production/out', element: <BreadOutSection />},
       ]},
-      { path:'/administrator/:id/employees', element:<EmployeesPage />}
+      { path:'/administrator/:id/employees', element:<EmployeesPage />},
+      { path:'/administrator/:id/loading', element:<AppLoading />}
     ]
   },
 ]);

@@ -18,7 +18,7 @@ class BranchIngredientsController extends Controller
 
      public function get_every_ingredients(Request $request){
 
-        $ingredients = BranchIngredients::where('id',$request->id)->first();
+        $ingredients = BranchIngredients::whereIn('id', $request->id)->get();
         return response()->json([
             'status' => $ingredients
         ]);

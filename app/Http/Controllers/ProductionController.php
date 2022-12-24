@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Production;
 use Illuminate\Http\Request;
-
+use App\Models\BranchIngredients;
+use Illuminate\Support\Facades\DB;
 class ProductionController extends Controller
 {
        public function get_all_production(Request $request){
@@ -15,8 +16,12 @@ class ProductionController extends Controller
 
        public function get_production_code(Request $request){
           $data = Production::where('random_id','=',$request->randomid)->get();
+          $result = DB::table('production')
+            ->join('branch_ingredients', 'production.branch_ingredients_id', '=', 'branch_ingredients.id')
+            ->where('random_id','=',$data[0]->random_id)
+            ->get();
            return response()->json([
-              'status' =>  $data,
+              'status' => $result,
           ]);
      }
      
@@ -24,23 +29,28 @@ class ProductionController extends Controller
     public function add_branch_ingredients(Request $request){
      $codename = $request->data['codename'];
      $branchid =$request->branchid;
+     $breadname =$request->data['breadname'];
+     $productionquantity =$request->data['productionquantity'];
      $price =$request->data['price'];
      $random =rand(1000000,9999999);
      for ($i=0; $i < count($request->data['users']); $i++) { 
           Production::create(
                [
                     'branch_id' => $branchid,
-                    'code_name' => $codename,
+                    'branch_ingredients_id' => explode("|",$request->data['users'][$i]['ingredients'])[1],
                     'random_id' => $random,
-                    'ingredients_name' =>$request->data['users'][$i]['ingredients'],
+                    'code_name' => $codename,
+                    'bread_name' =>$breadname,
+                    'ingredients_name' =>explode("|",$request->data['users'][$i]['ingredients'])[0],
                     'quantity'=>$request->data['users'][$i]['quantity'],
                     'price' =>$price,
+                    'production_quantity'=>$productionquantity
                ]
           );
      }
     
      return response()->json([
-         'status' => $request->data['users'][0]['ingredients']
+         'status' => 'success'
      ]);
  }
 }
