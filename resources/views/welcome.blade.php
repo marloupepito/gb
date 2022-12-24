@@ -33,6 +33,9 @@
             .ant-modal-footer{
                 display:none !important
             }
+            td.ant-table-cell{
+                padding:10px !important
+            }
         </style>
     </head>
     <body class="antialiased">

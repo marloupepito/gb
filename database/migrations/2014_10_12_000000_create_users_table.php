@@ -47,7 +47,7 @@ class CreateUsersTable extends Migration
         });
 
         Schema::create('branch_bread', function (Blueprint $table) {
-            $table->id();
+            $table->id('key');
             $table->string('branch_id')->nullable();
             $table->string('bread_name')->nullable();
             $table->string('quantity')->nullable();

@@ -53,6 +53,7 @@ const BreadSoldTable = () => {
     clearFilters();
     setSearchText('');
   };
+
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
       <div

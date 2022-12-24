@@ -10,6 +10,7 @@ use App\http\Controllers\ProductionController;
 use App\http\Controllers\InventoryProductionController;
 use App\http\Controllers\BranchController;
 use App\http\Controllers\NotificationController;
+use App\http\Controllers\BranchBreadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,4 +65,8 @@ Route::post('/get_notification','NotificationController@get_notification');
 
 Route::post('/get_branch_ingredients','BranchIngredientsController@get_branch_ingredients');
 Route::post('/get_every_ingredients','BranchIngredientsController@get_every_ingredients');
+
+Route::post('/get_bread_every_branch','BranchBreadController@get_bread_every_branch');
+
+
 

@@ -114,6 +114,7 @@ class DatabaseSeeder extends Seeder
 				for($i=0; $i < 80; $i++){
 					$user = new BranchBread;
 					$user->branch_id = 2;
+					$user->quantity = 200;
 					$user->bread_name = $bread[$i];
 					$user->price = 4;
 					$user->save();
@@ -122,6 +123,7 @@ class DatabaseSeeder extends Seeder
 				for($i=0; $i < 80; $i++){
 					$user = new BranchBread;
 					$user->branch_id = 3;
+					$user->quantity = 200;
 					$user->bread_name = $bread[$i];
 					$user->price = 4;
 					$user->save();
@@ -130,6 +132,7 @@ class DatabaseSeeder extends Seeder
 				for($i=0; $i < 80; $i++){
 					$user = new BranchBread;
 					$user->branch_id = 4;
+					$user->quantity = 200;
 					$user->bread_name = $bread[$i];
 					$user->price = 4;
 					$user->save();
@@ -138,6 +141,7 @@ class DatabaseSeeder extends Seeder
 				for($i=0; $i < 80; $i++){
 					$user = new BranchBread;
 					$user->branch_id = 5;
+					$user->quantity = 200;
 					$user->bread_name = $bread[$i];
 					$user->price = 4;
 					$user->save();
@@ -146,6 +150,7 @@ class DatabaseSeeder extends Seeder
 				for($i=0; $i < 80; $i++){
 					$user = new BranchBread;
 					$user->branch_id = 6;
+					$user->quantity = 200;
 					$user->bread_name = $bread[$i];
 					$user->price = 4;
 					$user->save();
