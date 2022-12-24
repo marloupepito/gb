@@ -31,7 +31,6 @@ class ProductionController extends Controller
      $branchid =$request->branchid;
      $breadname =$request->data['breadname'];
      $productionquantity =$request->data['productionquantity'];
-     $price =$request->data['price'];
      $random =rand(1000000,9999999);
      for ($i=0; $i < count($request->data['users']); $i++) { 
           Production::create(
@@ -43,7 +42,6 @@ class ProductionController extends Controller
                     'bread_name' =>$breadname,
                     'ingredients_name' =>explode("|",$request->data['users'][$i]['ingredients'])[0],
                     'quantity'=>$request->data['users'][$i]['quantity'],
-                    'price' =>$price,
                     'production_quantity'=>$productionquantity
                ]
           );

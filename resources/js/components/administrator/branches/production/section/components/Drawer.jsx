@@ -85,23 +85,7 @@ const ProductionSectionDrawer = (props) => {
                 </Form.Item>
               </Col>
 
-              <Col xs={24} sm={24} md={24}>
-                        
-                 <Form.Item
-                   label="Price"
-                    name="price"
-                    rules={[
-                      {
-                        required: true,
-                        message: 'Missing Price',
-                      },
-                    ]}
-                  >
-                    <InputNumber style={{
-                      width:'100%'
-                          }} placeholder="Price" />
-                  </Form.Item>
-              </Col>
+            
               <Col xs={24} sm={24} md={24}>
                         
                  <Form.Item

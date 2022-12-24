@@ -8,6 +8,7 @@ use App\Models\Ingredients;
 use App\Models\BranchIngredients;
 use App\Models\Branch;
 use App\Models\Production;
+use App\Models\BranchBread;
 use Illuminate\Support\Facades\Hash;
 class DatabaseSeeder extends Seeder
 {
@@ -27,331 +28,128 @@ class DatabaseSeeder extends Seeder
 				$branch->save();
     		}
 
-			// $production = new Production;
-			// $production->price ='30';
-			// $production->bread_name = 'ATIS-ATIS(B)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'ATIS-ATIS(S)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'BANANA CAKE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'BELGIUM';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'BINANGKAL';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='50';
-			// $production->bread_name = 'BIRTHDAY CAKE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'BOHOL';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'BUKO PIE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='4';
-			// $production->bread_name = 'BUNS';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'CHEESE BREAD';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'CHEESE DSAL';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='';
-			// $production->bread_name = 'CHIFFON CAKE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'CHOCO CUP CAKE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'CHOCO FLOWER';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'CHOCO GERMAN';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'CHOCO ROLL';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'CHOCO SQUASH';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'CHOCOLATE CAKE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'CINNAMON';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'COCO BREAD/PANSO';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='10';
-			// $production->bread_name = 'CORNSTARCH CAKE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'CRINKLES - CHOCO';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'CRINKLES - UBE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'CUP CAKE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='25';
-			// $production->bread_name = 'DELETCHE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'DOUGHNUT';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'EGG BREAD';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'ELORDE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='30';
-			// $production->bread_name = 'ENSAIMADA PLAIN (b)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'ENSAIMADA PLAIN()';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='30';
-			// $production->bread_name = 'ENSAIMADA with chz(b)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='30';
-			// $production->bread_name = 'ENSAIMONGGO (b)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'ENSAIMONGGO (5)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'FRANCIS(b)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='2';
-			// $production->bread_name = 'FRANCIS(s)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='30';
-			// $production->bread_name = 'GERMAN LOAF';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'HALF MOON';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'HOPIA';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'TALIAN BREAD';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'MAIS-MAIS';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'MARBLE CAKE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'MAYONNAISE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='30';
-			// $production->bread_name = 'MONGO BREAD(B)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'MONGO BREAD';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='30';
-			// $production->bread_name = 'MUNAY BREAD(b)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'MUNAY BREAD(s)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'MUSHROOM';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'HAND BREAD';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='4';
-			// $production->bread_name = 'PANDESAL (b)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='2';
-			// $production->bread_name = 'PANDESAL (m)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='1';
-			// $production->bread_name = 'PANDESAL (s)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'PAPAYA (b)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='2';
-			// $production->bread_name = 'PAPAYA (s)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'PINAYPAY/FINGER BREAD';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'PINEAPPLE PIE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'PINEAPPLE ROLL';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'RED PIE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='40';
-			// $production->bread_name = 'SLICE/LOAF BREAD PLAIN';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='45';
-			// $production->bread_name = 'SLICE/LOAF BREAD with chz';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'SPANISH ROLL';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'STAR BREAD (b)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'SWEETHEART';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'TIRE BREAD(b)';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='7';
-			// $production->bread_name = 'TORTA';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'UBE CHEESE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'UBE ENGLISH';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'UBE FLOWER';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'UBE GERMAN';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'UBE PIE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'UBE ROLL';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'UBE SQUASH';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'WHEAT BREAD';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'YOVO-PANDAN';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'YOYO-UBE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='30';
-			// $production->bread_name = 'GRACIOSA';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'BROWNIES';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'BUTTER SCOTCH';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'PUTO CHEESE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'PUTO UBE';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='5';
-			// $production->bread_name = 'PUTO PANDAN';
-			// $production->save();
-			// $production = new Production;
-			// $production->price ='70';
-			// $production->bread_name = 'PEANUT BUTTER';
-			// $production->save();
 
+			$bread = array(
+				'ATIS-ATIS(B)',			
+				'ATIS-ATIS(S)',
+				'BANANA CAKE',
+				'BELGIUM',
+				'BINANGKAL',
+				'BIRTHDAY CAKE',
+				'BOHOL',
+				'BUKO PIE',
+				'BUNS',
+				'CHEESE BREAD',
+				'CHEESE DSAL',
+				'CHIFFON CAKE',
+				'CHOCO CUP CAKE',
+				'CHOCO FLOWER',
+				'CHOCO GERMAN',
+				'CHOCO ROLL',
+				'CHOCO SQUASH',
+				'CHOCOLATE CAKE',
+				'CINNAMON',
+				'COCO BREAD/PANSO',
+				'CORNSTARCH CAKE',
+				'CRINKLES - CHOCO',
+				'CRINKLES - UBE',
+				'CUP CAKE',
+				'DELETCHE',
+				'DOUGHNUT',
+				'EGG BREAD',
+				'ELORDE',
+				'ENSAIMADA PLAIN (b)',
+				'ENSAIMADA PLAIN()',
+				'ENSAIMADA with chz(b)',
+				'ENSAIMONGGO (b)',
+				'ENSAIMONGGO (5)',
+				'FRANCIS(b)',
+				'FRANCIS(s)',
+				'GERMAN LOAF',
+				'HALF MOON',
+				'HOPIA',
+				'TALIAN BREAD',
+				'MAIS-MAIS',
+				'MARBLE CAKE',
+				'MAYONNAISE',
+				'MONGO BREAD(B)',
+				'MONGO BREAD',
+				'MUNAY BREAD(b)',
+				'MUNAY BREAD(s)',
+				'MUSHROOM',
+				'HAND BREAD',
+				'PANDESAL (b)',
+				'PANDESAL (m)',
+				'PANDESAL (s)',
+				'PAPAYA (b)',
+				'PAPAYA (s)',			
+				'PINEAPPLE PIE',
+				'PINEAPPLE ROLL',
+				'RED PIE',
+				'SLICE/LOAF BREAD PLAIN',
+				'SLICE/LOAF BREAD with chz',
+				'SPANISH ROLL',
+				'STAR BREAD (b)',
+				'SWEETHEART',
+				'TIRE BREAD(b)',
+				'TORTA',
+				'UBE CHEESE',
+				'UBE ENGLISH',
+				'UBE FLOWER',
+				'UBE GERMAN',
+				'UBE PIE',
+				'UBE ROLL',
+				'UBE SQUASH',
+				'WHEAT BREAD',
+				'YOVO-PANDAN',
+				'YOYO-UBE',
+				'GRACIOSA',
+				'BROWNIES',
+				'BUTTER SCOTCH',
+				'PUTO CHEESE',
+				'PUTO UBE',
+				'PUTO PANDAN',
+				'PEANUT BUTTER');
+			
+				for($i=0; $i < 80; $i++){
+					$user = new BranchBread;
+					$user->branch_id = 2;
+					$user->bread_name = $bread[$i];
+					$user->price = 4;
+					$user->save();
+				}
+
+				for($i=0; $i < 80; $i++){
+					$user = new BranchBread;
+					$user->branch_id = 3;
+					$user->bread_name = $bread[$i];
+					$user->price = 4;
+					$user->save();
+				}
+
+				for($i=0; $i < 80; $i++){
+					$user = new BranchBread;
+					$user->branch_id = 4;
+					$user->bread_name = $bread[$i];
+					$user->price = 4;
+					$user->save();
+				}
+
+				for($i=0; $i < 80; $i++){
+					$user = new BranchBread;
+					$user->branch_id = 5;
+					$user->bread_name = $bread[$i];
+					$user->price = 4;
+					$user->save();
+				}
+
+				for($i=0; $i < 80; $i++){
+					$user = new BranchBread;
+					$user->branch_id = 6;
+					$user->bread_name = $bread[$i];
+					$user->price = 4;
+					$user->save();
+				}
 
 
      	    $user = new User;

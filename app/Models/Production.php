@@ -17,7 +17,6 @@ class Production extends Model
         'code_name',
         'ingredients_name',
         'quantity',
-        'price',
         'ingredients_name',
         'production_quantity',
      ];

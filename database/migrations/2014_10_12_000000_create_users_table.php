@@ -46,6 +46,16 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
+        Schema::create('branch_bread', function (Blueprint $table) {
+            $table->id();
+            $table->string('branch_id')->nullable();
+            $table->string('bread_name')->nullable();
+            $table->string('quantity')->nullable();
+            $table->string('price')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
         Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
             $table->string('ingredients_name')->nullable();
@@ -80,7 +90,6 @@ class CreateUsersTable extends Migration
             $table->string('ingredients_name')->nullable();
             $table->string('production_quantity')->nullable();
             $table->string('quantity')->nullable();
-            $table->string('price')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

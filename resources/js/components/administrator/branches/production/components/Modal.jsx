@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Modal,List, Typography  } from 'antd';
-import { GetProductionCode } from '../../../api/Production';
-import { ProductionList } from './List';
+import { Button, Modal, } from 'antd';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { BranchNameParams } from '../../../../routes/Params';
