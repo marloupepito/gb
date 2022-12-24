@@ -3,16 +3,14 @@ import { Button, Modal, } from 'antd';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { BranchNameParams } from '../../../../routes/Params';
+import { AppNotification } from '../../../../components/Notification';
 const CodeModal = (props) => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [data,setData] = useState([])
   const branch = BranchNameParams().props.children
-
-
-
-
+  const [notify,setNotify] =useState(false)
 
   const showModal = () => {
     setIsModalOpen(true); 
@@ -29,7 +27,6 @@ const CodeModal = (props) => {
             setLoading(false)
           }else{
             setLoading(true)
-            console.log('error');
           }
         
         })  
@@ -47,18 +44,26 @@ const CodeModal = (props) => {
     })
     .then(res=>{
       console.log(res.data.status)
-      //navigate('/administrator'+'/'+branch+'/loading')
+      setNotify('success')
       setLoading(false)
       setIsModalOpen(false);
+    })
+    .catch(err=>{
+      setNotify('error')
     })
   }
   return (
     <>
+    {
+      notify ==='success'?<AppNotification type="success" message="Production has been added!"/>:notify ==='error'?<AppNotification type="error" message="Error!"/>:""
+    }
       <Button block type="dashed" size="large" danger onClick={showModal}>
         {props.data.code_name}
       </Button>
       <Modal title={props.data.code_name} open={isModalOpen} onOk={handleOk} maskClosable={false} onCancel={handleCancel}
       >
+        <b>Bread Name: {props.data.bread_name}</b><br />
+        <b>Quantity: {props.data.production_quantity}</b>
         <table className="table">
           <thead>
             <tr>

@@ -5,6 +5,7 @@ use App\Models\InventoryProduction;
 use App\Models\Production;
 use Illuminate\Http\Request;
 use App\Models\BranchIngredients;
+use App\Models\BranchBread;
 class InventoryProductionController extends Controller
 {
   public function add_bread_list(Request $request){
@@ -17,10 +18,17 @@ class InventoryProductionController extends Controller
 
               BranchIngredients::where('id',$branchIngredientId)
               ->update(['ingredients_quantity' => $equal]);
-         
           }
+
+              $totalBread = BranchBread::where('bread_name','=',$request->data[0]['bread_name'])->first();
+              $result = $totalBread->quantity + $request->data[0]['production_quantity'];
+
+              BranchBread::where('bread_name','=',$request->data[0]['bread_name'])
+              ->update(['quantity' => $result]);
+
+
           return response()->json([
-            'status' =>$request->data
+            'status' =>'success'
         ]);
           
         
