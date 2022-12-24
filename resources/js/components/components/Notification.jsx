@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Button, notification, Space } from 'antd';
 const key = 'updatable';
-const type ='success'
+export function AppNotification(props) {
 
-export function AppNotification() {
   const [api, contextHolder] = notification.useNotification();
-  useEffect(() => {
-   api[type]({
-     key,
-     message: 'Notification Title',
-     });
-  }, []);
+      useEffect(() => {
+        api[props.type]({
+          key,
+        message:props.message
+        });
+  
+      }, [props.type]);
    return (
      <>
        {contextHolder}

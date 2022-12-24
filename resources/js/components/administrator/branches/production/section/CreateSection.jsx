@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Col, Row,Button } from 'antd';
+import { Col, Row,Button,Skeleton  } from 'antd';
 import CodeModal from '../components/Modal';
 import { Get_all_production } from '../../../api/Production';
 import { useNavigate } from "react-router-dom";
@@ -10,14 +10,25 @@ function CreateSection() {
     const navigate = useNavigate();
     const branchName =BranchNameParams().props.children
     const branchId =SearchBranchId().props.children
-    const production = Get_all_production(branchId).props.children
-   
-    let form  = window.location.pathname.split('/')[5]
+    const [data,setData] = useState([])
+    const [loading,setLoading] = useState(true)
     
     function goToForm(){
         navigate('/administrator/'+branchName+'/production/create/form?branch_id='+branchId);
     }
-    var result = Object.values(production)
+    var result = 
+
+
+    useEffect(() => {
+        axios.post('/get_all_production',{
+          id:branchId
+          })
+          .then(res=>{
+            setLoading(false)
+               setData(Object.values(res.data.status))
+          })
+      }, [branchName]);
+
 
     return ( 
         <Row gutter={[16,16]}>
@@ -27,15 +38,16 @@ function CreateSection() {
             <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                {/* <IngredientsAutocomplete data={get_branch_ingredients().props.children} /> */}
             </Col>
+            <Skeleton loading={loading}>
             {
-            result === undefined?[]:
-            result.map(res =>(
+            data === undefined?[]:
+            data.map(res =>(
                     <Col key={res.id} xs={12} sm={12} md={6} lg={6} xl={6} xxl={6}>
                             <CodeModal data={res}/>
                     </Col>
                 ))
             }
-            
+            </Skeleton>
         </Row>
      );
 }

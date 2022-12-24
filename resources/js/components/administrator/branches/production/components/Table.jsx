@@ -9,15 +9,21 @@ const BreadListTable = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const searchInput = useRef(null);
+const branch_id=SearchBranchId().props.children
 
-
+useEffect(() => {
   axios.post('/get_bread_every_branch',{
-    branchid:SearchBranchId().props.children
+    current:1,
+    pageSize:10,
+    branchid:branch_id
   })
   .then(res=>{
-    setData(res.data.status)
+    setData(res.data.status.data)
+    setLoading(false)
   })
+}, []);
 
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -187,6 +193,9 @@ const BreadListTable = () => {
         ),
       },
   ];
-  return <Table columns={columns} dataSource={data} />;
+  function PaginateNext (e){
+    console.log(e)
+  }
+  return <Table loading={loading} onChange={(e)=>PaginateNext(e)} columns={columns} dataSource={data} />;
 };
 export default BreadListTable;

@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Col, Row,Button } from 'antd';
+import {  Col, Row,Skeleton  } from 'antd';
 import IngredientsModal from './components/Modal';
 import IngredientsAutocomplete from './components/Autocomplete';
-import { get_branch_ingredients } from '../../api/Ingredients';
-
-
+import { BranchNameParams } from '../../../routes/Params';
 
 
 function IngredientsLayout() {
-
+   const [branches,setBranches] = useState([])
+   const [loading,setLoading] = useState(true)
+   const branchName = BranchNameParams().props.children.replace(/_/g,' ')
+      useEffect(() => {
+         axios.post('/get_branch_ingredients',{
+            branchName:branchName
+         })
+         .then(res=>{
+            setBranches(res.data.status)
+            setLoading(false)
+         })
+      },[branchName]);
     return ( 
         <div>
         <Row gutter={[16,16]}>
@@ -16,7 +25,9 @@ function IngredientsLayout() {
                <IngredientsModal />
             </Col>
             <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
-               <IngredientsAutocomplete data={get_branch_ingredients().props.children} />
+               <Skeleton loading={loading}>
+               <IngredientsAutocomplete data={branches} />
+               </Skeleton>
             </Col>
         </Row>
         </div>

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select, Space,InputNumber  } from 'antd';
+import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select, Space,InputNumber   } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
 import { SearchBranchId } from '../../../../../routes/Search';
 import { useNavigate } from "react-router-dom";
 import { BranchNameParams } from '../../../../../routes/Params';
 import { get_branch_ingredients } from '../../../../api/Ingredients';
+import { AppNotification } from '../../../../../components/Notification';
+import axios from 'axios';
 
 const { Option } = Select;
 const ProductionSectionDrawer = (props) => {
@@ -15,15 +17,25 @@ const ProductionSectionDrawer = (props) => {
   const navigate = useNavigate();
   const branchName =BranchNameParams().props.children
   const branchId =SearchBranchId().props.children
-
   const ingredientsList = get_branch_ingredients().props.children
+  const [notify,setNotify] =useState(false)
+  const [breadList,setBreadList] =useState([])
   const onClose = () => {
     setOpen(false)
     navigate('/administrator/'+branchName+'/production/create?branch_id='+branchId);
   };
 
 
+useEffect(() => {
+  axios.post('/get_bread_every_branch2',{
+    branchid:branchId
+  })
+  .then(res=>{
+    setBreadList(res.data.status)
+  })
+}, []);
   
+ 
   const onFinish = (values) => {
     setLoading(true)
       axios.post('/add_branch_ingredients',{
@@ -31,15 +43,22 @@ const ProductionSectionDrawer = (props) => {
         data:values
       })
       .then(res=>{
-      
          setLoading(false)
-      })
-      form.resetFields();    
+         setNotify('success')
+         form.resetFields(); 
+      })  
+      .catch(err=>{
+         setLoading(false)
+         setNotify('error')
+      }) 
   };
 
 
   return (
     <>
+    {
+      notify ==='success'?<AppNotification type="success" message="Product code has been genarated!"/>:notify ==='error'?<AppNotification type="error" message="Error!"/>:""
+    }
       <Drawer
         title="Create Code Bread"
         width={'100%'}
@@ -51,6 +70,7 @@ const ProductionSectionDrawer = (props) => {
           </Space>
         }
       >
+       
         <Form layout="vertical" form={form} name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off" >
           <Row gutter={16}>
             <Col xs={24} sm={12} md={12}>
@@ -81,7 +101,19 @@ const ProductionSectionDrawer = (props) => {
                         },
                       ]}
                     >
-                  <Input placeholder="Please enter Bread Name" />
+                  <Select
+                        showSearch
+                        style={{ width: '100%' }}
+                        placeholder="Search bread"
+                        optionFilterProp="children"
+                        filterOption={(input, option) => (option?.label ?? '').includes(input)}
+                        filterSort={(optionA, optionB) =>
+                          (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+                        }
+                        className="text-capitalize"
+                        options={breadList.map((res) =>({label:res.bread_name.toLowerCase(), value:res.bread_name.toLowerCase()}))}
+                              
+                      />
                 </Form.Item>
               </Col>
 

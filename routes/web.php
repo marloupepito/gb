@@ -67,6 +67,7 @@ Route::post('/get_branch_ingredients','BranchIngredientsController@get_branch_in
 Route::post('/get_every_ingredients','BranchIngredientsController@get_every_ingredients');
 
 Route::post('/get_bread_every_branch','BranchBreadController@get_bread_every_branch');
+Route::post('/get_bread_every_branch2','BranchBreadController@get_bread_every_branch2');
 
 
 

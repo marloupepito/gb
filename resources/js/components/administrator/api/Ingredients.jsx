@@ -1,7 +1,6 @@
 import { useState,useEffect,useReducer } from "react";
 import axios from 'axios'
 import { BranchNameParams } from "../../routes/Params";
-import {Get_all_production} from './Production'
 export function get_branch_ingredients() {
   
     const [branches,setBranches] = useState([])
