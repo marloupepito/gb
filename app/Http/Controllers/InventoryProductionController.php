@@ -6,6 +6,8 @@ use App\Models\Production;
 use Illuminate\Http\Request;
 use App\Models\BranchIngredients;
 use App\Models\BranchBread;
+use App\Models\BranchBreadSold;
+use App\Models\BranchBreadOut;
 class InventoryProductionController extends Controller
 {
   public function add_bread_list(Request $request){
@@ -32,6 +34,20 @@ class InventoryProductionController extends Controller
         ]);
 
      }
+
+     public function get_branch_bread_sold(Request $request){
+        $bread = BranchBreadSold::where('branch_id','=',$request->branchid)->get();
+        return response()->json([
+            'status' =>$bread
+        ]);
+     }
+
+     public function get_branch_bread_out(Request $request){
+        $bread = BranchBreadOut::where('branch_id','=',$request->branchid)->get();
+        return response()->json([
+            'status' =>$bread
+        ]);
+    }
 
      
     //   public function get_bread(Request $request){

@@ -58,6 +58,8 @@ Route::post('/add_branch_ingredients','ProductionController@add_branch_ingredien
 Route::post('/get_production_code','ProductionController@get_production_code');
 
 Route::post('/add_bread_list','InventoryProductionController@add_bread_list');
+Route::post('/get_branch_bread_sold','InventoryProductionController@get_branch_bread_sold');
+Route::post('/get_branch_bread_out','InventoryProductionController@get_branch_bread_out');
 
 
 Route::post('/get_notification','NotificationController@get_notification');
@@ -69,7 +71,10 @@ Route::post('/make_branch_ingredients','BranchIngredientsController@make_branch_
 
 Route::post('/get_bread_every_branch','BranchBreadController@get_bread_every_branch');
 Route::post('/get_bread_every_branch2','BranchBreadController@get_bread_every_branch2');
+
+
 Route::post('/add_bread_branch_sold','BranchBreadController@add_bread_branch_sold');
+Route::post('/add_bread_branch_out','BranchBreadController@add_bread_branch_out');
 
 
 

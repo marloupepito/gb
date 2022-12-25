@@ -44,7 +44,7 @@ function ProductionTabs() {
                Bread Sold
             </span>
           ),
-          key: 'out',
+          key: 'sold',
           children: <Outlet />,
         },
         {
@@ -54,7 +54,7 @@ function ProductionTabs() {
              Bread Out
           </span>
         ),
-        key: 'sold',
+        key: 'out',
         children: <Outlet />,
       },
         ]}

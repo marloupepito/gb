@@ -1,49 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState,useEffect } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table,Tag } from 'antd';
+import { SearchBranchId } from '../../../../routes/Search';
+import moment from 'moment'
 import Highlighter from 'react-highlight-words';
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    quantity: 5,
-    price: '300',
-    total: '100 Pesos',
-    sold: 'nice',
-    out: 'nice',
-  },
-  {
-    key: '2',
-    name: 'Joe Black',
-    quantity: 42,
-    price: '555',
-    total: '100 Pesos',
-    sold: 'loser',
-    out: 'nice',
-  },
-  {
-    key: '3',
-    name: 'Jim Green',
-    quantity: 9,
-    price: 'S22',
-    total: '100 Pesos',
-    sold: 'cool',
-    out: 'nice',
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    quantity: 32,
-    price: '99',
-    total: '100 Pesos',
-    sold: 'cool',
-    out: 'nice',
-  },
-];
+
 const BreadSoldTable = () => {
+  const branch_id=SearchBranchId().props.children
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -53,6 +21,19 @@ const BreadSoldTable = () => {
     clearFilters();
     setSearchText('');
   };
+
+  useEffect(() => {
+    axios.post('/get_branch_bread_sold',{
+      branchid:branch_id
+    })
+    .then(res=>{
+      setData(res.data.status)
+      setLoading(false)
+    })
+    .catch(err=>{
+      
+    })
+  }, []);
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
@@ -151,10 +132,10 @@ const BreadSoldTable = () => {
   const columns = [
     {
       title: 'Bread Name',
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'bread_name',
+      key: 'bread_name',
       width: '15%',
-      ...getColumnSearchProps('name'),
+      ...getColumnSearchProps('bread_name'),
     },
     {
       title: 'Quantity',
@@ -163,7 +144,7 @@ const BreadSoldTable = () => {
       width: '10%',
       ...getColumnSearchProps('quantity'),
       render: (_, { quantity }) => (
-        <Tag color={quantity <= 10?'volcano':'green'} key={quantity}>
+        <Tag color={quantity <= 10?'green':'green'} key={quantity}>
              {quantity}
            </Tag>
     ),
@@ -185,30 +166,27 @@ const BreadSoldTable = () => {
         ...getColumnSearchProps('total'),
         sorter: (a, b) => a.total.length - b.total.length,
         sortDirections: ['descend', 'ascend'],
+        render: (_, { sold,price,quantity }) => (
+          <>
+          {price * quantity}
+          </>
+      ),
       },
     {
-        title: 'Bread Sold',
-        key: 'sold',
-        dataIndex: 'sold',
-        render: (_, { sold }) => (
-            <Button block type="primary"  ghost>
-            Sold Out
-          </Button>
+        title: 'Bread Sold At',
+        key: 'created_at',
+        dataIndex: 'created_at',
+        ...getColumnSearchProps('price'),
+      sorter: (a, b) => a.price.length - b.price.length,
+        render: (_, { created_at }) => (
+           <>
+           {moment(created_at).format('L')+' '+moment(created_at).format('LT')}
+           </>
         ),
-          width: '5%',
+          width: '10%',
       },
-      {
-        title: 'Bread Out',
-        dataIndex: 'out',
-        key: 'out',
-        width: '5%',
-        render: (_, { sold }) => (
-            <Button block type="primary" danger ghost>
-            Bread Out
-          </Button>
-        ),
-      },
+     
   ];
-  return <Table columns={columns} dataSource={data} />;
+  return <Table loading={loading} columns={columns} dataSource={data} />;
 };
 export default BreadSoldTable;

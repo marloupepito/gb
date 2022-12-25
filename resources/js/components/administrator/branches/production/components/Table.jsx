@@ -2,9 +2,8 @@ import React, { useRef, useState,useEffect } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table,Tag } from 'antd';
 import Highlighter from 'react-highlight-words';
-import ModalSoldOut from '../section/components/Modal';
+import {ModalSoldOut,ModalBreadOut} from '../section/components/Modal';
 import { SearchBranchId } from '../../../../routes/Search';
-
 const BreadListTable = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
@@ -13,7 +12,9 @@ const BreadListTable = () => {
   const searchInput = useRef(null);
 const branch_id=SearchBranchId().props.children
 
+
 useEffect(() => {
+
   axios.post('/get_bread_every_branch',{
     current:1,
     pageSize:10,
@@ -36,7 +37,6 @@ useEffect(() => {
     setSearchText('');
   };
 
- 
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
@@ -192,10 +192,8 @@ useEffect(() => {
         dataIndex: 'out',
         key: 'out',
         width: '5%',
-        render: (_, { sold }) => (
-            <Button size="small" block type="primary" danger ghost>
-            Bread Out
-          </Button>
+        render: (_, { quantity,bread_name,key,price,branchid }) => (
+          <ModalBreadOut data={[key,bread_name,quantity,price,branchid]}/>
         ),
       },
   ];
@@ -211,6 +209,6 @@ useEffect(() => {
       setLoading(false)
     })
   }
-  return <Table loading={loading} onChange={(e)=>PaginateNext(e)} columns={columns} dataSource={data} />;
+  return  <Table loading={loading} onChange={(e)=>PaginateNext(e)} columns={columns} dataSource={data} />;
 };
 export default BreadListTable;

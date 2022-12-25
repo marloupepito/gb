@@ -56,6 +56,25 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
+        Schema::create('branch_bread_sold', function (Blueprint $table) {
+            $table->id('key');
+            $table->string('branch_id')->nullable();
+            $table->string('bread_name')->nullable();
+            $table->string('quantity')->nullable();
+            $table->string('price')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('branch_bread_out', function (Blueprint $table) {
+            $table->id('key');
+            $table->string('branch_id')->nullable();
+            $table->string('bread_name')->nullable();
+            $table->string('quantity')->nullable();
+            $table->string('price')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
+        });
         
         Schema::create('production', function (Blueprint $table) {
             $table->id();
