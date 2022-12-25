@@ -4,7 +4,9 @@ import { createBrowserRouter } from "react-router-dom";
 import Error404 from '../components/Error404';
 import AdministratorPage from '../administrator/Page';
 import DeliveryPage from '../administrator/branches/delivery/Page';
-import DeliveryTable from '../administrator/branches/delivery/components/Table';
+import RequestSection from '../administrator/branches/delivery/section/Request';
+import DeliverySection from '../administrator/branches/delivery/section/Delivery';
+import ReceivedSection from '../administrator/branches/delivery/section/Received';
 import AppLoading from '../administrator/components/Loading';
 
 import EmployeesPage from '../administrator/branches/employees/Page';
@@ -36,9 +38,9 @@ export const router = createBrowserRouter([
       { path:'/administrator/:id/ingredients', element:<IngredientsPage />},
       { path:'/administrator/:id/delivery', element:<DeliveryPage />,
         children:[
-          {path:'/administrator/:id/delivery/request', element: <DeliveryTable />},
-          {path:'/administrator/:id/delivery/delivered', element: <DeliveryTable />},
-          {path:'/administrator/:id/delivery/received', element: <DeliveryTable />},
+          {path:'/administrator/:id/delivery/request', element: <RequestSection />},
+          {path:'/administrator/:id/delivery/delivered', element: <DeliverySection />},
+          {path:'/administrator/:id/delivery/received', element: <ReceivedSection />},
         ]
       },
       { path:'/administrator/:id/production', element:<ProductionPage />,

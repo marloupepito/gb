@@ -4,59 +4,38 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\IngredientsRequest;
+use App\Models\BranchIngredients;
 use App\Models\User;
 class IngredientsRequestController extends Controller
 {
     public function send_request_form(Request $request){
-
-        $request->validate([
-            'data'=>['required'],
-            'id'=>['required'],
-            'branch'=>['required'],
-        ]);
-
+        
         $request_id =rand(1000000000,9999999999);
        
 
         for ($i=0; $i < count($request->data); $i++) { 
+            $ing = BranchIngredients::where('ingredients_name','=',$request->data[$i])->first();
+            
              $ingredients = new IngredientsRequest;
-             $ingredients->branch_id = $request->id;
+             $ingredients->branch_id = $request->branchid;
              $ingredients->request_id = $request_id;
-             $ingredients->branch_name = $request->branch;
-             $ingredients->ingredients_name = $request->data[$i][0];
-             $ingredients->ingredients_quantity = $request->data[$i][1];
-             $ingredients->ingredients_package = $request->data[$i][2];
-             $ingredients->ingredients_status = $request->data[$i][3];
+             $ingredients->ingredients_id = $ing->id;
+             $ingredients->ingredients_name = $request->data[$i];
+             $ingredients->ingredients_status = 'Pending';
              $ingredients->save();
         }
          return response()->json([
-                'status' => 'success'
+                'status' =>'success'
             ]);
     }
      public function get_request_from_branch(Request $request){
 
-             $request->validate([
-                'id'=>['required'],
-             ]);
+             $limit = ($request->current * $request->pageSize) +1;
 
-             $branch = User::where('branch_name' ,ucwords($request->id))->first();
-
-             if($branch === null){
-                     $requestsss = IngredientsRequest::where('branch_id','=' ,$request->id)
-                      ->select('request_id','ingredients_status','created_at')->distinct()->orderBy('created_at','DESC')->get();
-
+             $delivery = IngredientsRequest::where('branch_id','=' ,$request->branchid)->get()->unique('request_id');
                        return response()->json([
-                        'status' => $requestsss,
+                        'status' => $delivery,
                     ]);
-             }else{
-                     $requestsss = IngredientsRequest::where('branch_id','=',  $branch['id'])
-                      ->select('request_id','ingredients_status','created_at')->distinct()->orderBy('created_at','DESC')->get();
-
-                       return response()->json([
-                        'status' => $requestsss,
-                         'status2' => $branch
-                    ]);
-             }
              
 
      }
