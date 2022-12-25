@@ -36,14 +36,16 @@ class InventoryProductionController extends Controller
      }
 
      public function get_branch_bread_sold(Request $request){
-        $bread = BranchBreadSold::where('branch_id','=',$request->branchid)->get();
+        $limit = ($request->current * $request->pageSize) +1;
+        $bread = BranchBreadSold::where('branch_id','=',$request->branchid)->simplePaginate($limit);
         return response()->json([
             'status' =>$bread
         ]);
      }
 
      public function get_branch_bread_out(Request $request){
-        $bread = BranchBreadOut::where('branch_id','=',$request->branchid)->get();
+        $limit = ($request->current * $request->pageSize) +1;
+        $bread = BranchBreadOut::where('branch_id','=',$request->branchid)->simplePaginate($limit);
         return response()->json([
             'status' =>$bread
         ]);

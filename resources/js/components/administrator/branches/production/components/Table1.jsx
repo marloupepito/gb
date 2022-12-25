@@ -24,10 +24,12 @@ const BreadSoldTable = () => {
 
   useEffect(() => {
     axios.post('/get_branch_bread_sold',{
+      current:1,
+    pageSize:10,
       branchid:branch_id
     })
     .then(res=>{
-      setData(res.data.status)
+      setData(res.data.status.data)
       setLoading(false)
     })
     .catch(err=>{
@@ -187,6 +189,18 @@ const BreadSoldTable = () => {
       },
      
   ];
-  return <Table loading={loading} columns={columns} dataSource={data} />;
+  function PaginateNext (e){
+    setLoading(true)
+    axios.post('/get_branch_bread_sold',{
+      current:e.current,
+      pageSize:e.pageSize,
+      branchid:branch_id
+    })
+    .then(res=>{
+      setData(res.data.status.data)
+      setLoading(false)
+    })
+  }
+  return <Table onChange={(e)=>PaginateNext(e)} loading={loading} columns={columns} dataSource={data} />;
 };
 export default BreadSoldTable;
