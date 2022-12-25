@@ -47,7 +47,8 @@ class CreateUsersTable extends Migration
         });
 
         Schema::create('branch_bread', function (Blueprint $table) {
-            $table->id('key');
+            
+            $table->id();
             $table->string('branch_id')->nullable();
             $table->string('bread_name')->nullable();
             $table->string('quantity')->nullable();
@@ -57,7 +58,8 @@ class CreateUsersTable extends Migration
         });
 
         Schema::create('branch_bread_sold', function (Blueprint $table) {
-            $table->id('key');
+            
+            $table->id();
             $table->string('branch_id')->nullable();
             $table->string('bread_name')->nullable();
             $table->string('quantity')->nullable();
@@ -67,7 +69,8 @@ class CreateUsersTable extends Migration
         });
 
         Schema::create('branch_bread_out', function (Blueprint $table) {
-            $table->id('key');
+            
+            $table->id();
             $table->string('branch_id')->nullable();
             $table->string('bread_name')->nullable();
             $table->string('quantity')->nullable();
@@ -100,7 +103,8 @@ class CreateUsersTable extends Migration
         // });
 
          Schema::create('ingredients_request', function (Blueprint $table) {
-            $table->id('key');
+            
+            $table->id();
             $table->string('branch_id')->nullable();
             $table->string('ingredients_id')->nullable();
             $table->string('request_id')->nullable();
