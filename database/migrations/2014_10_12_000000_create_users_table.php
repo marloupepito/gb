@@ -26,14 +26,14 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('branch', function (Blueprint $table) {
-            $table->id();
-            $table->string('path')->nullable()->unique();
-            $table->string('title')->nullable();
-            $table->string('icon')->nullable();
-            $table->rememberToken();
-            $table->timestamps();
-        });
+        // Schema::create('branch', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('path')->nullable()->unique();
+        //     $table->string('title')->nullable();
+        //     $table->string('icon')->nullable();
+        //     $table->rememberToken();
+        //     $table->timestamps();
+        // });
 
 
         Schema::create('branch_ingredients', function (Blueprint $table) {
@@ -56,31 +56,8 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('ingredients', function (Blueprint $table) {
-            $table->id();
-            $table->string('ingredients_name')->nullable();
-            $table->string('ingredients_quantity')->nullable();
-            $table->string('ingredients_quantity_description')->nullable();
-            $table->rememberToken();
-            $table->timestamps();
-        });
-
-         Schema::create('ingredients_request', function (Blueprint $table) {
-            $table->id();
-            $table->string('branch_id')->nullable();
-            $table->string('branch_name')->nullable();
-            $table->string('request_id')->nullable();
-            $table->string('ingredients_name')->nullable();
-            $table->string('ingredients_quantity')->nullable();
-            $table->string('ingredients_package')->nullable();
-            $table->string('ingredients_status')->nullable();
-            $table->string('notify')->nullable();
-            $table->rememberToken();
-            $table->timestamps();
-        });
-
-
-         Schema::create('production', function (Blueprint $table) {
+        
+        Schema::create('production', function (Blueprint $table) {
             $table->id();
             $table->string('random_id')->nullable();
             $table->string('branch_ingredients_id')->nullable();
@@ -94,18 +71,43 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-          Schema::create('inventory_production', function (Blueprint $table) {
-            $table->id();
-            $table->string('branch_id')->nullable();
-            $table->string('branch_name')->nullable();
-            $table->string('production_id')->nullable();
-            $table->string('bread_name')->nullable();
-            $table->string('quantity')->nullable();
-            $table->string('price')->nullable();
-            $table->string('total')->nullable();
-            $table->rememberToken();
-            $table->timestamps();
-        });
+        // Schema::create('ingredients', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('ingredients_name')->nullable();
+        //     $table->string('ingredients_quantity')->nullable();
+        //     $table->string('ingredients_quantity_description')->nullable();
+        //     $table->rememberToken();
+        //     $table->timestamps();
+        // });
+
+        //  Schema::create('ingredients_request', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('branch_id')->nullable();
+        //     $table->string('branch_name')->nullable();
+        //     $table->string('request_id')->nullable();
+        //     $table->string('ingredients_name')->nullable();
+        //     $table->string('ingredients_quantity')->nullable();
+        //     $table->string('ingredients_package')->nullable();
+        //     $table->string('ingredients_status')->nullable();
+        //     $table->string('notify')->nullable();
+        //     $table->rememberToken();
+        //     $table->timestamps();
+        // });
+
+
+
+        //   Schema::create('inventory_production', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('branch_id')->nullable();
+        //     $table->string('branch_name')->nullable();
+        //     $table->string('production_id')->nullable();
+        //     $table->string('bread_name')->nullable();
+        //     $table->string('quantity')->nullable();
+        //     $table->string('price')->nullable();
+        //     $table->string('total')->nullable();
+        //     $table->rememberToken();
+        //     $table->timestamps();
+        // });
 
         
 

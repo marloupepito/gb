@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Ingredients;
 use App\Models\BranchIngredients;
-use App\Models\Branch;
 use App\Models\Production;
 use App\Models\BranchBread;
 use Illuminate\Support\Facades\Hash;
@@ -20,15 +19,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-    		for ($i=0; $i < 5; $i++) { 
-    			$branch = new Branch;
-				$branch->path ='/adminstrator/branch/loading?branch-'.$i;
-				$branch->title = 'Branch '.$i;
-				$branch->icon = 'fa fa-store';
-				$branch->save();
-    		}
-
-
+    
 			$bread = array(
 				'ATIS-ATIS(B)',			
 				'ATIS-ATIS(S)',

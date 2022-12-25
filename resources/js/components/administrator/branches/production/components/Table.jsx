@@ -182,8 +182,8 @@ useEffect(() => {
         title: '',
         key: 'sold',
         dataIndex: 'sold',
-        render: (_, { sold,bread_name,key }) => (
-            <ModalSoldOut data={[key,bread_name,sold]}/>
+        render: (_, { quantity,bread_name,key,price,branchid }) => (
+            <ModalSoldOut data={[key,bread_name,quantity,price,branchid]}/>
         ),
           width: '5%',
       },

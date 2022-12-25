@@ -30,67 +30,65 @@ class InventoryProductionController extends Controller
           return response()->json([
             'status' =>'success'
         ]);
-          
-        
-        
-       
 
      }
-       public function get_bread(Request $request){
 
-             $request->validate([
-                'id'=>['required'],
-             ]);
+     
+    //   public function get_bread(Request $request){
 
-              $request = InventoryProduction::where('branch_id','=' ,$request->id)
-              ->select('production_id','production_status','created_at')->distinct()->orderBy('created_at','DESC')->get();
+    //          $request->validate([
+    //             'id'=>['required'],
+    //          ]);
 
-               return response()->json([
-                'status' => $request
-            ]);
+    //           $request = InventoryProduction::where('branch_id','=' ,$request->id)
+    //           ->select('production_id','production_status','created_at')->distinct()->orderBy('created_at','DESC')->get();
 
-     }
-      public function get_specific_production(Request $request){
+    //            return response()->json([
+    //             'status' => $request
+    //         ]);
 
-             $request->validate([
-                'production_id'=>['required'],
-             ]);
+    //  }
+    //   public function get_specific_production(Request $request){
 
-              $request = InventoryProduction::where('production_id' ,$request->production_id)->get();
+    //          $request->validate([
+    //             'production_id'=>['required'],
+    //          ]);
 
-               return response()->json([
-                'status' => $request
-            ]);
+    //           $request = InventoryProduction::where('production_id' ,$request->production_id)->get();
 
-     }
-      public function update_bread_out(Request $request){
+    //            return response()->json([
+    //             'status' => $request
+    //         ]);
 
-             $request->validate([
-                'data'=>['required'],
-             ]);
+    //  }
+    //   public function update_bread_out(Request $request){
 
-            for ($i=0; $i < count($request->data); $i++) { 
-                InventoryProduction::where('id',  $request->data[$i]['id'])
-                ->update([
-                  'bread_out' => $request->data[$i]['bread_out'],
-                  'charge_pc' => $request->data[$i]['charge_pc'],
-                  'remaining_pcs' => $request->data[$i]['remaining_pcs'],
-                  'sold_bread' => $request->data[$i]['sold_bread'],
-                  'sales' => $request->data[$i]['sales'],
-                  'production_status' => 'Bread Out',
-                ]);
-            }
+    //          $request->validate([
+    //             'data'=>['required'],
+    //          ]);
 
-              $inventory = InventoryProduction::where([
-                ['branch_id','=' ,$request->data[0]['branch_id']],
-                ['production_id','=',$request->data[0]['production_id']]
-              ])->get();
+    //         for ($i=0; $i < count($request->data); $i++) { 
+    //             InventoryProduction::where('id',  $request->data[$i]['id'])
+    //             ->update([
+    //               'bread_out' => $request->data[$i]['bread_out'],
+    //               'charge_pc' => $request->data[$i]['charge_pc'],
+    //               'remaining_pcs' => $request->data[$i]['remaining_pcs'],
+    //               'sold_bread' => $request->data[$i]['sold_bread'],
+    //               'sales' => $request->data[$i]['sales'],
+    //               'production_status' => 'Bread Out',
+    //             ]);
+    //         }
 
-               return response()->json([
-                'status' =>  $inventory
-               ]);
+    //           $inventory = InventoryProduction::where([
+    //             ['branch_id','=' ,$request->data[0]['branch_id']],
+    //             ['production_id','=',$request->data[0]['production_id']]
+    //           ])->get();
 
-     }
+    //            return response()->json([
+    //             'status' =>  $inventory
+    //            ]);
+
+    //  }
 
      
 }

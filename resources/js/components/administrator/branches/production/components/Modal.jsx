@@ -43,7 +43,6 @@ const CodeModal = (props) => {
       data:event
     })
     .then(res=>{
-      console.log(res.data.status)
       setNotify('success')
       setLoading(false)
       setIsModalOpen(false);
