@@ -8,6 +8,7 @@ import moment from 'moment'
 const DeliveryTable1 = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const searchInput = useRef(null);
   const branchid = SearchBranchId().props.children
@@ -28,6 +29,7 @@ const DeliveryTable1 = () => {
     })
     .then(res=>{
       setData(Object.values(res.data.status))
+      setLoading(false)
     })
   }, []);
   const getColumnSearchProps = (dataIndex) => ({
@@ -205,7 +207,7 @@ const DeliveryTable1 = () => {
   }
   return (
     <>
-  <Table columns={columns} onChange={(e)=>PaginateNext(e)} dataSource={data} />
+  <Table columns={columns} loading={loading} onChange={(e)=>PaginateNext(e)} dataSource={data} />
   </>);
 };
 export default DeliveryTable1;

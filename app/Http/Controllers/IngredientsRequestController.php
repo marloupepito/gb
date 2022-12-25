@@ -32,7 +32,7 @@ class IngredientsRequestController extends Controller
 
              $limit = ($request->current * $request->pageSize) +1;
 
-             $delivery = IngredientsRequest::where('branch_id','=' ,$request->branchid)->get()->unique('request_id');
+             $delivery = IngredientsRequest::where([['branch_id','=' ,$request->branchid],['ingredients_status','=' ,'Pending']])->get()->unique('request_id');
                        return response()->json([
                         'status' => $delivery,
                     ]);
