@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BranchBreadSold extends Model
 {
+   protected $primaryKey = 'key';
     protected $table = 'branch_bread_sold';
     use HasFactory;
      protected $fillable = [

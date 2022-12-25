@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BranchBreadOut extends Model
 {
+   protected $primaryKey = 'key';
     protected $table = 'branch_bread_out';
     use HasFactory;
      protected $fillable = [

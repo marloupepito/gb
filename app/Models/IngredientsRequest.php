@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class IngredientsRequest extends Model
 {
+    protected $primaryKey = 'key';
     protected $table = 'ingredients_request';
     use HasFactory;
      protected $fillable = [
