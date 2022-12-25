@@ -2,7 +2,7 @@ import React, { useRef, useState,useEffect } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table,Tag } from 'antd';
 import Highlighter from 'react-highlight-words';
-
+import ModalSoldOut from '../section/components/Modal';
 import { SearchBranchId } from '../../../../routes/Search';
 
 const BreadListTable = () => {
@@ -35,6 +35,8 @@ useEffect(() => {
     clearFilters();
     setSearchText('');
   };
+
+ 
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
@@ -132,6 +134,12 @@ useEffect(() => {
   });
   const columns = [
     {
+      title: 'ID',
+      dataIndex: 'key',
+      key: 'key',
+      width: '2%',
+    },
+    {
       title: 'Bread Name',
       dataIndex: 'bread_name',
       key: 'bread_name',
@@ -174,10 +182,8 @@ useEffect(() => {
         title: '',
         key: 'sold',
         dataIndex: 'sold',
-        render: (_, { sold }) => (
-            <Button size="small" block type="primary"  ghost>
-            Sold Out{sold}
-          </Button>
+        render: (_, { sold,bread_name,key }) => (
+            <ModalSoldOut data={[key,bread_name,sold]}/>
         ),
           width: '5%',
       },
@@ -194,7 +200,16 @@ useEffect(() => {
       },
   ];
   function PaginateNext (e){
-    console.log(e)
+    setLoading(true)
+    axios.post('/get_bread_every_branch',{
+      current:e.current,
+      pageSize:e.pageSize,
+      branchid:branch_id
+    })
+    .then(res=>{
+      setData(res.data.status.data)
+      setLoading(false)
+    })
   }
   return <Table loading={loading} onChange={(e)=>PaginateNext(e)} columns={columns} dataSource={data} />;
 };

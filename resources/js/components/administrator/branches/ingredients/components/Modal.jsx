@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 import { Form, Input, Select,InputNumber } from 'antd';
+import { SearchBranchId } from '../../../../routes/Search';
+import { BranchNameParams } from '../../../../routes/Params';
+import { useNavigate } from "react-router-dom";
+import { AppNotification } from '../../../../components/Notification'
 const { Option } = Select;
 
-
-
 const IngredientsModal = () => {
+  const [notify,setNotify] =useState(false)
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-
+  const branchid = SearchBranchId().props.children
+  const branchname = BranchNameParams().props.children
+  const [loading, setLoading] = useState(false)
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -23,13 +28,31 @@ const IngredientsModal = () => {
 
 
   const onFinish = (values) => {
-    console.log(values);
-    form.resetFields();
-    setIsModalOpen(false);
+    setLoading(true)
+    axios.post('/make_branch_ingredients',{
+      branchid:branchid,
+      data:values
+    })
+    .then(res=>{
+      setNotify('success')
+      setTimeout(() => {
+        setLoading(false)
+        navigate('/administrator/'+branchname+'/loading')
+      }, 1000);
+    })
+    .catch(err=>{
+      setNotify('error')
+      setLoading(false)
+      form.resetFields();
+    })
+    
   };
 
   return (
     <>
+     {
+      notify ==='success'?<AppNotification type="success" message="Product code has been genarated!"/>:notify ==='error'?<AppNotification type="error" message="Error!"/>:""
+    }
       <Button block size="large" type="primary" onClick={showModal}>
         Create Ingredients
       </Button>
@@ -84,7 +107,7 @@ const IngredientsModal = () => {
     
 
       <Form.Item className='mt-3'>
-        <Button type="primary" block htmlType="submit">
+        <Button type="primary" loading={loading} block htmlType="submit">
           Submit
         </Button>
       

@@ -8,8 +8,8 @@ class BranchBreadController extends Controller
 {
     public function get_bread_every_branch(Request $request){
 
-        $limit = $request->current * $request->pageSize;
-        $ingredients = BranchBread::where('branch_id', $request->branchid)->simplePaginate(15);
+        $limit = ($request->current * $request->pageSize) +1;
+        $ingredients = BranchBread::where('branch_id', $request->branchid)->simplePaginate($limit);
         return response()->json([
             'status' => $ingredients
         ]);
