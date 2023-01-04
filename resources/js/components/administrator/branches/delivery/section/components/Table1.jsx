@@ -2,13 +2,14 @@ import React, { useRef, useState,useEffect  } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table,Tag } from 'antd';
 import Highlighter from 'react-highlight-words';
-
+import AcceptRequestIngredients from './Modal1'
 import {SearchBranchId} from '../../../../../routes/Search';
 import moment from 'moment'
 const DeliveryTable1 = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const [loading, setLoading] = useState(true);
+  const [modal, setModal] = useState(false);
   const [data, setData] = useState([]);
   const searchInput = useRef(null);
   const branchid = SearchBranchId().props.children
@@ -25,13 +26,19 @@ const DeliveryTable1 = () => {
     axios.post('/get_request_from_branch',{
       current:1,
       pageSize:10,
-      branchid:branchid
+      branchid:branchid,
+      status:'Pending'
     })
     .then(res=>{
       setData(Object.values(res.data.status))
       setLoading(false)
     })
   }, []);
+
+
+function acceptDelivery(request_id){
+  setModal([Math.random(),true,branchid,request_id])
+}
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
       <div
@@ -131,7 +138,7 @@ const DeliveryTable1 = () => {
       title: 'ID Request',
       dataIndex: 'request_id',
       key: 'request_id',
-      width: '15%',
+      width: '40%',
       ...getColumnSearchProps('request_id'),
     },
    
@@ -145,19 +152,8 @@ const DeliveryTable1 = () => {
                  {ingredients_status}
                </Tag>
         ),
-        filters: [
-            {
-              text: 'Cool',
-              value: 'Cool',
-            },
-            {
-              text: 'Nice',
-              value: 'Nice',
-            },
-          ],
-          onFilter: (value, record) => record.address.startsWith(value),
-          filterSearch: true,
-          width: '10%',
+      
+          width: '20%',
       },
       {
         title: 'Requested At',
@@ -175,9 +171,9 @@ const DeliveryTable1 = () => {
         dataIndex: 'created_at',
         key: 'created_at',
         width: '5%',
-        render: (_, { created_at }) => (
+        render: (_, { created_at,request_id }) => (
           <>
-           <Button block type="primary" ghost>ACCEPT</Button>
+           <Button block type="primary" ghost onClick={(e)=>acceptDelivery(request_id)}>ACCEPT</Button>
            </>
         ),
       },
@@ -207,7 +203,9 @@ const DeliveryTable1 = () => {
   }
   return (
     <>
-  <Table columns={columns} loading={loading} onChange={(e)=>PaginateNext(e)} dataSource={data} />
+    <AcceptRequestIngredients show={modal}/>
+  <Table columns={columns}
+     loading={loading} onChange={(e)=>PaginateNext(e)} dataSource={data} />
   </>);
 };
 export default DeliveryTable1;

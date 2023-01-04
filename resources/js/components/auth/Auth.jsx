@@ -54,7 +54,7 @@ function Auth() {
                   
               
                     <Form.Item>
-                      <Button loading={loading} block type="primary" htmlType="submit">
+                      <Button loading={loading} className="mt-5" block type="primary" htmlType="submit">
                         Submit
                       </Button>
                     </Form.Item>

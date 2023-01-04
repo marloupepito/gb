@@ -20,6 +20,7 @@ class IngredientsRequestController extends Controller
              $ingredients->branch_id = $request->branchid;
              $ingredients->request_id = $request_id;
              $ingredients->ingredients_id = $ing->id;
+             $ingredients->ingredients_bind = $ing->bind_name;
              $ingredients->ingredients_name = $request->data[$i];
              $ingredients->ingredients_status = 'Pending';
              $ingredients->save();
@@ -32,7 +33,7 @@ class IngredientsRequestController extends Controller
 
              $limit = ($request->current * $request->pageSize) +1;
 
-             $delivery = IngredientsRequest::where([['branch_id','=' ,$request->branchid],['ingredients_status','=' ,'Pending']])->get()->unique('request_id');
+             $delivery = IngredientsRequest::where([['branch_id','=' ,$request->branchid],['ingredients_status','=' ,$request->status]])->get()->unique('request_id');
                        return response()->json([
                         'status' => $delivery,
                     ]);
@@ -60,13 +61,34 @@ class IngredientsRequestController extends Controller
                 'requestid'=>['required'],
              ]);
 
-               IngredientsRequest::where([['branch_id','=',$request->branchid],['request_id','=',$request->requestid]])
-              ->update(['ingredients_status' => $request->response]);
+             if($request->response === 'Pending'){
+                for ($i=0; $i < count($request->quantity); $i++) { 
+                        IngredientsRequest::where([['key','=',$request->key[$i]],['branch_id','=',$request->branchid],['request_id','=',$request->requestid]])
+                ->update([
+                    'ingredients_status' => $request->response,
+                    'ingredients_quantity' => $request->quantity[$i],
+                    ]);
+                }
+             }else if($request->response === 'Received'){
+                    IngredientsRequest::where([['branch_id','=',$request->branchid],['request_id','=',$request->requestid]])
+                    ->update([
+                      'ingredients_status' => $request->response,
+                    ]);
+             }
+            
 
-            $ingredients = IngredientsRequest::where([['branch_id','=',$request->branchid],['request_id','=',$request->requestid]])->get();
+
+            // $ingredients = IngredientsRequest::where([['branch_id','=',$request->branchid],['request_id','=',$request->requestid]])->get();
             
                return response()->json([
-                'status' => $ingredients
+                'status' => $request->key
             ]);
+     }
+
+     public function get_ingredients_list(Request $request){
+        $ingredients = IngredientsRequest::where([['branch_id','=',$request->branchid],['request_id','=',$request->requestid]])->get();
+        return response()->json([
+            'status' => $ingredients
+        ]);
      }
 }

@@ -52,6 +52,7 @@ Route::post('/send_request_form','IngredientsRequestController@send_request_form
 Route::post('/get_request_from_branch','IngredientsRequestController@get_request_from_branch');
 Route::post('/get_only_current_branch_request','IngredientsRequestController@get_only_current_branch_request');
 Route::post('/accept_request_ingredients','IngredientsRequestController@accept_request_ingredients');
+Route::post('/get_ingredients_list','IngredientsRequestController@get_ingredients_list');
 
 Route::post('/get_all_production','ProductionController@get_all_production');
 Route::post('/add_branch_ingredients','ProductionController@add_branch_ingredients');

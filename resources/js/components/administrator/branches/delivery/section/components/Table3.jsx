@@ -1,41 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState,useEffect  } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table,Tag } from 'antd';
 import Highlighter from 'react-highlight-words';
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: 'nice',
-  },
-  {
-    key: '2',
-    name: 'Joe Black',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: 'loser',
-  },
-  {
-    key: '3',
-    name: 'Jim Green',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: 'cool',
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    age: 32,
-    address: 'London No. 2 Lake Park',
-    tags: 'cool',
-  },
-];
-const DeliveryTable = () => {
+import AcceptRequestIngredients from './Modal3'
+import {SearchBranchId} from '../../../../../routes/Search';
+import moment from 'moment'
+const DeliveryTable3 = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [modal, setModal] = useState(false);
+  const [data, setData] = useState([]);
   const searchInput = useRef(null);
+  const branchid = SearchBranchId().props.children
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -45,6 +22,23 @@ const DeliveryTable = () => {
     clearFilters();
     setSearchText('');
   };
+  useEffect(() => {
+    axios.post('/get_request_from_branch',{
+      current:1,
+      pageSize:10,
+      branchid:branchid,
+      status:'Received'
+    })
+    .then(res=>{
+      setData(Object.values(res.data.status))
+      setLoading(false)
+    })
+  }, []);
+
+
+function acceptDelivery(request_id){
+  setModal([Math.random(),true,branchid,request_id])
+}
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
       <div
@@ -141,50 +135,77 @@ const DeliveryTable = () => {
   });
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      width: '20%',
-      ...getColumnSearchProps('name'),
+      title: 'ID Request',
+      dataIndex: 'request_id',
+      key: 'request_id',
+      width: '40%',
+      ...getColumnSearchProps('request_id'),
     },
+   
+   
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
-      width: '10%',
-      ...getColumnSearchProps('age'),
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-      ...getColumnSearchProps('address'),
-      sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ['descend', 'ascend'],
-    },{
-        title: 'Tags',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: (_, { tags }) => (
-            <Tag color={tags === 'nice'?'green':'volcano'} key={tags}>
-                 {tags.toUpperCase()}
+        title: 'Status',
+        key: 'ingredients_status',
+        dataIndex: 'ingredients_status',
+        render: (_, { ingredients_status }) => (
+            <Tag color={ingredients_status === 'nice'?'green':'volcano'} key={ingredients_status}>
+                 {ingredients_status}
                </Tag>
         ),
-        filters: [
-            {
-              text: 'Cool',
-              value: 'Cool',
-            },
-            {
-              text: 'Nice',
-              value: 'Nice',
-            },
-          ],
-          onFilter: (value, record) => record.address.startsWith(value),
-          filterSearch: true,
-          width: '10%',
+      
+          width: '20%',
       },
+      {
+        title: 'Requested At',
+        dataIndex: 'created_at',
+        key: 'created_at',
+        width: '20%',
+        render: (_, { created_at }) => (
+          <>
+           {moment(created_at).format('L')+' '+moment(created_at).format('LT')}
+           </>
+      ),
+      },
+      {
+        title: '',
+        dataIndex: 'created_at',
+        key: 'created_at',
+        width: '5%',
+        render: (_, { created_at,request_id }) => (
+          <>
+           <Button block type="primary" ghost onClick={(e)=>acceptDelivery(request_id)}>SHOW</Button>
+           </>
+        ),
+      },
+      {
+        title: '',
+        dataIndex: 'created_at',
+        key: 'created_at',
+        width: '5%',
+        render: (_, { created_at }) => (
+          <>
+           <Button block danger>DELETE</Button>
+           </>
+        ),
+      }
   ];
-  return <Table columns={columns} dataSource={data} />;
+  function PaginateNext (e){
+    setLoading(true)
+    axios.post('/get_bread_every_branch',{
+      current:e.current,
+      pageSize:e.pageSize,
+      branchid:branch_id
+    })
+    .then(res=>{
+      setData(res.data.status)
+      setLoading(false)
+    })
+  }
+  return (
+    <>
+    <AcceptRequestIngredients show={modal}/>
+  <Table columns={columns}
+     loading={loading} onChange={(e)=>PaginateNext(e)} dataSource={data} />
+  </>);
 };
-export default DeliveryTable;
+export default DeliveryTable3;
