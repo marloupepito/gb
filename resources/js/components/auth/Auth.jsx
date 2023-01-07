@@ -1,13 +1,32 @@
-import React,{useState} from 'react'
-import { Button, Result, Form, Input  } from 'antd';
+import React,{useState,useEffect} from 'react'
+import { Button, Result, Form, Input,Skeleton   } from 'antd';
 import { WarningTwoTone } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 function Auth() {
     const [loading,setLoading] = useState(false)
+    const [loading2,setLoading2] = useState(true)
     const [error,setError] = useState(false)
     const navigate = useNavigate();
     
+    useEffect(() => {
+      axios.get('/api/user')
+      .then(res=>{
+          if(window.location.pathname === '/'){
+               
+              if(res.data.branch_position === 'admin'){
+                navigate('/administrator/dashboard');
+                setLoading2(false) 
+              }else{
+                navigate('/branch/'+localStorage.getItem("branch").replace(/ /g,'_')+'/ingredients');
+              }
+          }
+      })
+      .catch(err=>{
+        setLoading2(false)
+      })
+  }, []);
+
     const onFinish = (values) => {
       setError(false)  
        setLoading(true)
@@ -48,7 +67,7 @@ function Auth() {
      
       };
     return ( 
-        <div>
+        <Skeleton loading={loading2}>
             <Result
             icon={<WarningTwoTone twoToneColor="red" />}
                 title="Authorized Person Only"
@@ -91,7 +110,7 @@ function Auth() {
                   </div>
                 }
             />
-        </div>
+        </Skeleton>
      );
 }
 
