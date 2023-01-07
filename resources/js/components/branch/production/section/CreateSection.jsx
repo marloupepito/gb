@@ -21,7 +21,7 @@ function CreateSection() {
 
     useEffect(() => {
         axios.post('/get_all_production',{
-          id:branchId
+          id:localStorage.getItem("id")
           })
           .then(res=>{
             setLoading(false)

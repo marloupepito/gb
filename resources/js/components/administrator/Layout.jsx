@@ -58,7 +58,7 @@ const AdminLayoutPage = () => {
             background: colorBgContainer,
           }}
         ><div style={{marginLeft:'10px'}}>
-            GB BAKESHOPE
+            <b className="text-danger">GB</b> <b>BAKESHOP</b>
             </div></Header>
         <Content
         >

@@ -172,17 +172,6 @@ function acceptDelivery(request_id){
         dataIndex: 'created_at',
         key: 'created_at',
         width: '5%',
-        render: (_, { created_at,request_id }) => (
-          <>
-           <Button block type="primary" ghost onClick={(e)=>acceptDelivery(request_id)}>ACCEPT</Button>
-           </>
-        ),
-      },
-      {
-        title: '',
-        dataIndex: 'created_at',
-        key: 'created_at',
-        width: '5%',
         render: (_, { created_at }) => (
           <>
            <Button block danger>DELETE</Button>

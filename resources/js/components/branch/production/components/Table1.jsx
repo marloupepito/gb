@@ -25,7 +25,7 @@ const BreadSoldTable = () => {
   useEffect(() => {
     axios.post('/get_branch_bread_sold',{
       current:1,
-    pageSize:10,
+      pageSize:10,
       branchid:branch_id
     })
     .then(res=>{
