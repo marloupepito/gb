@@ -11,6 +11,7 @@ use App\http\Controllers\InventoryProductionController;
 use App\http\Controllers\BranchController;
 use App\http\Controllers\NotificationController;
 use App\http\Controllers\BranchBreadController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,13 @@ use App\http\Controllers\BranchBreadController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
+Route::middleware('auth:sanctum')->get('/authenticated', function () {
+    return true;
+});
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,6 +38,7 @@ Route::get('/', function () {
 Route::get('/{jsx?}',function(){
     return view('welcome');
 })->where('jsx','[\/\w\.-]*');
+
 
 
 Route::post('/logout','UsersController@logout');

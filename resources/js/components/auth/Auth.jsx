@@ -10,7 +10,7 @@ function Auth() {
     const navigate = useNavigate();
     
     useEffect(() => {
-      axios.get('/api/user')
+      axios.get('/user')
       .then(res=>{
           if(window.location.pathname === '/'){
                

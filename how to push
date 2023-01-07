@@ -17,3 +17,6 @@ heroku git:remote -a gould-care
 
  @viteReactRefresh
          @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+
+         
