@@ -177,17 +177,17 @@ function acceptDelivery(request_id){
            </>
         ),
       },
-      {
-        title: '',
-        dataIndex: 'created_at',
-        key: 'created_at',
-        width: '5%',
-        render: (_, { created_at }) => (
-          <>
-           <Button block danger>DELETE</Button>
-           </>
-        ),
-      }
+      // {
+      //   title: '',
+      //   dataIndex: 'created_at',
+      //   key: 'created_at',
+      //   width: '5%',
+      //   render: (_, { created_at }) => (
+      //     <>
+      //      <Button block danger>DELETE</Button>
+      //      </>
+      //   ),
+      // }
   ];
   function PaginateNext (e){
     setLoading(true)

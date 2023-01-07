@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from "react-router-dom";
-export function SearchBranchId() {
+export function SearchBranchId(props) {
     let [searchParams, setSearchParams] = useSearchParams();
     
-    const id = searchParams.get('branch_id')
+    const value = searchParams.get('branch_id')
     useEffect(() => {
-        setSearchParams('branch_id='+id)
+      if(localStorage.getItem("position") === 'admin'){
+            setSearchParams(value === null?'branch_id=main':'branch_id='+value)
+        }else{
+            const user = localStorage.getItem("id")
+            setSearchParams('branch_id='+user)
+        }
     }, []);
  
     return ( 
         <>
-       {id}
+       {value}
         </>
      );
 }

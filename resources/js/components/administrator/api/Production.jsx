@@ -30,4 +30,3 @@ export function GetProductionCode(props){
     return <>{data}</>
 }
 
-

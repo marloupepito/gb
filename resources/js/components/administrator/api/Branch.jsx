@@ -64,4 +64,3 @@ export function get_branch_ingredients() {
         </>
      );
 }
-

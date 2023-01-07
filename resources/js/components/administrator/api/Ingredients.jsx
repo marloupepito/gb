@@ -35,4 +35,3 @@ export function add_branch_ingredients(props){
         </>
     )
 }
-

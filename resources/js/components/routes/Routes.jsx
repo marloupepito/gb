@@ -19,6 +19,24 @@ import ProductionSectionDrawer from '../administrator/branches/production/sectio
 import BreadListSection from '../administrator/branches/production/section/BreadListSection';
 import BreadOutSection from '../administrator/branches/production/section/BreadOutSection';
 import BreadSoldSection from '../administrator/branches/production/section/BreadSoldSection';
+import DashboardPage from '../administrator/dashboard/Page'
+
+import BranchPageBranch from '../branch/Page'
+import DeliveryPageBranch from '../branch/delivery/Page';
+import RequestSectionBranch from '../branch/delivery/section/Request';
+import DeliverySectionBranch from '../branch/delivery/section/Delivery';
+import ReceivedSectionBranch from '../branch/delivery/section/Received';
+import AppLoadingBranch from '../branch/components/Loading';
+// import EmployeesPageBranch from '../employees/Page';
+import IngredientsPageBranch from '../branch/ingredients/Page';
+import ProductionPageBranch from '../branch/production/Page';
+import CreateSectionBranch from '../branch/production/section/CreateSection';
+import ProductionSectionDrawerBranch from '../branch/production/section/components/Drawer';
+import BreadListSectionBranch from '../branch/production/section/BreadListSection';
+import BreadOutSectionBranch from '../branch/production/section/BreadOutSection';
+import BreadSoldSectionBranch from '../branch/production/section/BreadSoldSection';
+//import DashboardPageBranch from '../branch/dashboard/Page'
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -35,6 +53,7 @@ export const router = createBrowserRouter([
   { path:'*',element:<Error404 /> },
   { path:'/administrator',element:<AdministratorPage />,
     children:[
+      { path:'/administrator/dashboard', element:<DashboardPage />},
       { path:'/administrator/:id/ingredients', element:<IngredientsPage />},
       { path:'/administrator/:id/delivery', element:<DeliveryPage />,
         children:[
@@ -55,4 +74,29 @@ export const router = createBrowserRouter([
       { path:'/administrator/:id/loading', element:<AppLoading />}
     ]
   },
+
+
+  { path:'/branch',element:<BranchPageBranch />,
+  children:[
+    { path:'/branch/:id/ingredients', element:<IngredientsPageBranch />},
+    { path:'/branch/:id/delivery', element:<DeliveryPageBranch />,
+      children:[
+        {path:'/branch/:id/delivery/request', element: <RequestSectionBranch />},
+        {path:'/branch/:id/delivery/delivered', element: <DeliverySectionBranch />},
+        {path:'/branch/:id/delivery/received', element: <ReceivedSectionBranch />},
+      ]
+    },
+    { path:'/branch/:id/production', element:<ProductionPageBranch />,
+    children:[
+      {path:'/branch/:id/production/create', element: <CreateSectionBranch />},
+      {path:'/branch/:id/production/create/form', element: <ProductionSectionDrawerBranch />},
+      {path:'/branch/:id/production/list', element: <BreadListSectionBranch />},
+      {path:'/branch/:id/production/sold', element: <BreadSoldSectionBranch />},
+      {path:'/branch/:id/production/out', element: <BreadOutSectionBranch />},
+    ]},
+   // { path:'/branch/:id/employees', element:<EmployeesPageBranch />},
+    { path:'/branch/:id/loading', element:<AppLoadingBranch />}
+  ]
+},
+ 
 ]);

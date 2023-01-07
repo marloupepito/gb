@@ -41,6 +41,7 @@ function AcceptRequestIngredients(props) {
         branchid:props.show[2]
       })
       .then(res=>{
+        console.log(res.data.status)
         setNotify('success')
         setTimeout(() => {
           navigate('/administrator/'+branchname+'/loading')
