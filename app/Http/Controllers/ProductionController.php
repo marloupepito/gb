@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Production;
 use Illuminate\Http\Request;
 use App\Models\BranchIngredients;
+use App\Models\BranchBread;
 use Illuminate\Support\Facades\DB;
 class ProductionController extends Controller
 {
@@ -32,14 +33,18 @@ class ProductionController extends Controller
      $breadname =$request->data['breadname'];
      $productionquantity =$request->data['productionquantity'];
      $random =rand(1000000,9999999);
+
+     $breadId= BranchBread::where([['branch_id','=',$branchid],['bread_name','=',strtoupper($breadname)]])->first();
      for ($i=0; $i < count($request->data['users']); $i++) { 
+          
           Production::create(
                [
                     'branch_id' => $branchid,
                     'branch_ingredients_id' => explode("|",$request->data['users'][$i]['ingredients'])[1],
+                    'branch_bread_id' => $breadId->key,
                     'random_id' => $random,
                     'code_name' => $codename,
-                    'bread_name' =>$breadname,
+                    'bread_name' =>strtoupper($breadname),
                     'ingredients_name' =>explode("|",$request->data['users'][$i]['ingredients'])[0],
                     'quantity'=>$request->data['users'][$i]['quantity'],
                     'production_quantity'=>$productionquantity

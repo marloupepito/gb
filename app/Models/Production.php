@@ -12,6 +12,7 @@ class Production extends Model
     protected $fillable = [
         'random_id',
         'branch_ingredients_id',
+        'branch_bread_id',
         'branch_id',
         'bread_name',
         'code_name',

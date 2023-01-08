@@ -80,6 +80,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('random_id')->nullable();
             $table->bigInteger('branch_ingredients_id')->nullable();
+            $table->bigInteger('branch_bread_id')->nullable();
             $table->string('branch_id')->nullable();
             $table->string('bread_name')->nullable();
             $table->string('code_name')->nullable();
