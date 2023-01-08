@@ -25,10 +25,10 @@ class InventoryProductionController extends Controller
 
           
           $breadname = strtoupper($request->data[0]['bread_name']);
-          $totalbread = BranchBread::where([['branch_id','=',$request->branchid],['bread_name','=',$breadname]])->first();     
-              $result = $totalbread->quantity + $request->data[0]['production_quantity'];
+          $totalbread = BranchBread::where([['branch_id','=',$request->branchid],['bread_name','=',$breadname]])->first();
 
-              BranchBread::where([['branch_id','=',$request->branchid],['bread_name','=',$request->data[0]['bread_name']]])
+              $result = $totalbread->quantity + $request->data[0]['production_quantity'];
+              BranchBread::where([['branch_id','=',$request->branchid],['bread_name','=',$breadname]])
               ->update(['quantity' => $result]);
 
           return response()->json([
