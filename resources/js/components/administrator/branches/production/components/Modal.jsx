@@ -3,6 +3,7 @@ import { Button, Modal, } from 'antd';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { BranchNameParams } from '../../../../routes/Params';
+import { SearchBranchId } from '../../../../routes/Search';
 import { AppNotification } from '../../../../components/Notification';
 const CodeModal = (props) => {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ const CodeModal = (props) => {
   const [loading, setLoading] = useState(true);
   const [data,setData] = useState([])
   const branch = BranchNameParams().props.children
+  const branchid = SearchBranchId().props.children
   const [notify,setNotify] =useState(false)
 
   const showModal = () => {
@@ -40,7 +42,8 @@ const CodeModal = (props) => {
   function handleSubmit(event){
     setLoading(true)
     axios.post('/add_bread_list',{
-      data:event
+      data:event,
+      branchid:branchid
     })
     .then(res=>{
       console.log(res.data.status)

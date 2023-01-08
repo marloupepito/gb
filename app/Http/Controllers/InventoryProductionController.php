@@ -12,6 +12,7 @@ class InventoryProductionController extends Controller
 {
   public function add_bread_list(Request $request){
         
+    
           for ($i=0; $i < count($request->data); $i++) { 
               $branchIngredientId = $request->data[$i]['branch_ingredients_id'];
         
@@ -22,12 +23,11 @@ class InventoryProductionController extends Controller
               ->update(['ingredients_quantity' => $equal]);
           }
 
-              $totalBread = BranchBread::where('bread_name','=',$request->data[0]['bread_name'])->first();
-              $result = $totalBread['quantity'] + $request->data[0]['production_quantity'];
+              $totalBread = BranchBread::where([['branch_id','=',$request->branchid],['bread_name','=',$request->data[0]['bread_name']]])->first();
+              $result = $totalBread->quantity + $request->data[0]['production_quantity'];
 
               BranchBread::where('bread_name','=',$request->data[0]['bread_name'])
               ->update(['quantity' => $result]);
-
 
           return response()->json([
             'status' =>'success'
