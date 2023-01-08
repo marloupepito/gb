@@ -23,11 +23,12 @@ class InventoryProductionController extends Controller
               ->update(['ingredients_quantity' => $equal]);
           }
 
-            //   $totalBread = BranchBread::where([['branch_id','=',$request->branchid],['bread_name','=',$request->data[0]['bread_name']]])->first();
-            //   $result = $totalBread->quantity + $request->data[0]['production_quantity'];
+              $totalbread = BranchBread::where([['branch_id','=',$request->branchid],['bread_name','=',$request->data[0]['bread_name']]])->first();
+             
+              $result =  $request->data[0]['production_quantity'];
 
-            //   BranchBread::where('bread_name','=',$request->data[0]['bread_name'])
-            //   ->update(['quantity' => $result]);
+              BranchBread::where('bread_name','=',$request->data[0]['bread_name'])
+              ->update(['quantity' => $result]);
 
           return response()->json([
             'status' =>'success'
