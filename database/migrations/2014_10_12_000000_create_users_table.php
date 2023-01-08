@@ -79,7 +79,7 @@ class CreateUsersTable extends Migration
         Schema::create('production', function (Blueprint $table) {
             $table->id();
             $table->string('random_id')->nullable();
-            $table->string('branch_ingredients_id')->nullable();
+            $table->bigInteger('branch_ingredients_id')->nullable();
             $table->string('branch_id')->nullable();
             $table->string('bread_name')->nullable();
             $table->string('code_name')->nullable();

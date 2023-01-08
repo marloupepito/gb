@@ -10,6 +10,7 @@ function LogoutSession(props) {
         setLoading(true)
         axios.post('/logout')
         .then(res=>{
+          localStorage.clear();
            navigate("/");
            setIsModalOpen(false);
            setLoading(false)
