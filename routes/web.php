@@ -44,6 +44,8 @@ Route::get('/{jsx?}',function(){
 Route::post('/logout','UsersController@logout');
 Route::post('/get_all_branch','BranchController@get_all_branch');
 Route::post('/get_branch_id','BranchController@get_branch_id');
+Route::post('/add_branch','BranchController@add_branch');
+Route::post('/delete_branch','BranchController@delete_branch');
 
 Route::post('/user_login','UsersController@user_login');
 
@@ -55,6 +57,7 @@ Route::post('/get_request_from_branch','IngredientsRequestController@get_request
 Route::post('/get_only_current_branch_request','IngredientsRequestController@get_only_current_branch_request');
 Route::post('/accept_request_ingredients','IngredientsRequestController@accept_request_ingredients');
 Route::post('/get_ingredients_list','IngredientsRequestController@get_ingredients_list');
+Route::post('/delete_ingredients_request','IngredientsRequestController@delete_ingredients_request');
 
 Route::post('/get_all_production','ProductionController@get_all_production');
 Route::post('/add_branch_ingredients','ProductionController@add_branch_ingredients');
@@ -73,6 +76,7 @@ Route::post('/get_every_ingredients','BranchIngredientsController@get_every_ingr
 Route::post('/make_branch_ingredients','BranchIngredientsController@make_branch_ingredients');
 
 Route::post('/get_bread_every_branch','BranchBreadController@get_bread_every_branch');
+Route::post('/get_bread_every_branch2','BranchBreadController@get_bread_every_branch2');
 Route::post('/get_bread_every_branch2','BranchBreadController@get_bread_every_branch2');
 
 

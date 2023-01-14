@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
         <title>GB Bakeshop</title>
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -12,7 +13,7 @@
 
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <!-- Styles -->
-
+        
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -37,6 +38,9 @@
             }
             td.ant-table-cell{
                 padding:10px !important
+            }
+            .ant-form-item.css-dev-only-do-not-override-sk7ap8{
+                margin:0px !important
             }
         </style>
     </head>

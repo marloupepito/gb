@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-
+import DashboardLayout from './Layout'
 function DashboardPage() {
     return ( 
         <>
-        DashboardPage
+        <DashboardLayout />
         </>
      );
 }

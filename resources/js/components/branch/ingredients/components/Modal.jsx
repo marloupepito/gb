@@ -106,8 +106,8 @@ const IngredientsModal = () => {
 
     
 
-      <Form.Item className='mt-3'>
-        <Button type="primary" loading={loading} block htmlType="submit">
+      <Form.Item>
+        <Button type="primary"  className='mt-3' loading={loading} block htmlType="submit">
           Submit
         </Button>
       

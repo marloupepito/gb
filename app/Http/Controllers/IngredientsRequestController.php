@@ -8,6 +8,12 @@ use App\Models\BranchIngredients;
 use App\Models\User;
 class IngredientsRequestController extends Controller
 {
+    public function delete_ingredients_request(Request $request){
+        IngredientsRequest::where('key','=',$request->id)->delete();
+        return response()->json([
+            'status' =>'success'
+        ]);
+    }
     public function send_request_form(Request $request){
         
         $request_id =rand(1000000000,9999999999);

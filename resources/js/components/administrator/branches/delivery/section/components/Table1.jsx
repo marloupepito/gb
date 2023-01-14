@@ -1,6 +1,6 @@
 import React, { useRef, useState,useEffect  } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Space, Table,Tag } from 'antd';
+import { Button, Input, Space, Table,Tag, message, Popconfirm } from 'antd';
 import Highlighter from 'react-highlight-words';
 import AcceptRequestIngredients from './Modal1'
 import {SearchBranchId} from '../../../../../routes/Search';
@@ -39,6 +39,30 @@ const DeliveryTable1 = () => {
 function acceptDelivery(request_id){
   setModal([Math.random(),true,branchid,request_id])
 }
+
+function deleteDelivery(id){
+  setLoading(true)
+  axios.post('/delete_ingredients_request',{
+    id:id
+  })
+  .then(result=>{
+      axios.post('/get_request_from_branch',{
+        current:1,
+        pageSize:10,
+        branchid:branchid,
+        status:'Pending'
+      })
+      .then(res=>{  
+        message.success('Click on Yes');
+        setData(Object.values(res.data.status))
+        setLoading(false)
+      })
+  })
+};
+function cancel(e){
+  console.log(e);
+  message.error('Click on No');
+};
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
       <div
@@ -182,9 +206,19 @@ function acceptDelivery(request_id){
         dataIndex: 'created_at',
         key: 'created_at',
         width: '5%',
-        render: (_, { created_at }) => (
+        render: (_, { created_at,key }) => (
           <>
-           <Button block danger>DELETE</Button>
+           <Popconfirm
+              title="Delete the request"
+              description="Are you sure to delete this request?"
+              onConfirm={()=>deleteDelivery(key)}
+              onCancel={cancel}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button block danger>DELETE</Button>
+            </Popconfirm>
+          
            </>
         ),
       }

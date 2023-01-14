@@ -19,7 +19,11 @@ import ProductionSectionDrawer from '../administrator/branches/production/sectio
 import BreadListSection from '../administrator/branches/production/section/BreadListSection';
 import BreadOutSection from '../administrator/branches/production/section/BreadOutSection';
 import BreadSoldSection from '../administrator/branches/production/section/BreadSoldSection';
+
+
 import DashboardPage from '../administrator/dashboard/Page'
+import DashboardSection from '../administrator/dashboard/section/Dashboard'
+import DashboardCharts from '../administrator/dashboard/section/Charts'
 
 import BranchPageBranch from '../branch/Page'
 import DeliveryPageBranch from '../branch/delivery/Page';
@@ -38,6 +42,7 @@ import BreadSoldSectionBranch from '../branch/production/section/BreadSoldSectio
 //import DashboardPageBranch from '../branch/dashboard/Page'
 
 
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -54,7 +59,12 @@ export const router = createBrowserRouter([
   { path:'*',element:<Error404 /> },
   { path:'/administrator',element:<AdministratorPage />,
     children:[
-      { path:'/administrator/dashboard', element:<DashboardPage />},
+      { path:'/administrator/dashboard', element:<DashboardPage />,
+        children:[
+          { path:'/administrator/dashboard', element:<DashboardSection />},
+          { path:'/administrator/dashboard/charts/:id', element:<DashboardCharts />},
+        ]
+      },
       { path:'/administrator/:id/ingredients', element:<IngredientsPage />},
       { path:'/administrator/:id/delivery', element:<DeliveryPage />,
         children:[

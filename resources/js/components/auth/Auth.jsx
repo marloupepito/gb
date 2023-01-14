@@ -10,10 +10,11 @@ function Auth() {
     const navigate = useNavigate();
     
     useEffect(() => {
-      axios.get('/user')
+      axios.get('/api/user')
       .then(res=>{
+        console.log(res.data)
           if(window.location.pathname === '/'){
-               
+              
               if(res.data.branch_position === 'admin'){
                 navigate('/administrator/dashboard');
                 setLoading2(false) 

@@ -160,6 +160,7 @@ class DatabaseSeeder extends Seeder
 
         for ($i=0; $i < 5; $i++) { 
         	$user = new User;
+			$user->key = rand(10000,1000000);
 	        $user->branch_name = 'Branch '.$i;
 	        $user->branch_assigned_person = 'person '.$i;
 	        $user->branch_position = 'personnel';
