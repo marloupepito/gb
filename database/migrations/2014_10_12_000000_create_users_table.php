@@ -43,6 +43,7 @@ class CreateUsersTable extends Migration
             $table->string('ingredients_name')->nullable();
             $table->string('ingredients_quantity')->nullable();
             $table->string('bind_name')->nullable();
+            $table->string('notify')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -107,7 +108,7 @@ class CreateUsersTable extends Migration
             $table->string('ingredients_id')->nullable();
             $table->string('request_id')->nullable();
             $table->string('ingredients_name')->nullable();
-            $table->string('ingredients_quantity')->nullable();
+            $table->float('ingredients_quantity')->nullable();
             $table->string('ingredients_bind')->nullable();
             $table->string('ingredients_status')->nullable();
             $table->string('notify')->nullable();

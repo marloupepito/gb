@@ -37,19 +37,30 @@ useEffect(() => {
   
  
   const onFinish = (values) => {
+    console.log(values)
     setLoading(true)
       axios.post('/add_branch_ingredients',{
         branchid:branchId,
         data:values
       })
       .then(res=>{
-         setLoading(false)
+         
          setNotify('success')
-         form.resetFields(); 
+         form.resetFields();
+         function myGreeting() {
+           setNotify(false)
+           setLoading(false)
+          }
+          setTimeout(myGreeting, 1000);
+          
       })  
       .catch(err=>{
-         setLoading(false)
          setNotify('error')
+         function myGreeting() {
+           setNotify(false)
+           setLoading(false)
+          }
+          setTimeout(myGreeting, 1000);
       }) 
   };
 
@@ -108,10 +119,10 @@ useEffect(() => {
                         optionFilterProp="children"
                         filterOption={(input, option) => (option?.label ?? '').includes(input)}
                         filterSort={(optionA, optionB) =>
-                          (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+                          (optionA?.label ?? '').toUpperCase().localeCompare((optionB?.label ?? '').toUpperCase())
                         }
                         className="text-capitalize"
-                        options={breadList.map((res) =>({label:res.bread_name.toLowerCase(), value:res.bread_name.toLowerCase()}))}
+                        options={breadList.map((res) =>({label:res.bread_name.toUpperCase(), value:res.bread_name.toUpperCase()}))}
                               
                       />
                 </Form.Item>

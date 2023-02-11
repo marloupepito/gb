@@ -9,6 +9,7 @@ function IngredientsLayout() {
    const [branches,setBranches] = useState([])
    const [loading,setLoading] = useState(true)
    const branchName = BranchNameParams().props.children.replace(/_/g,' ')
+
       useEffect(() => {
          axios.post('/get_branch_ingredients',{
             branchName:branchName

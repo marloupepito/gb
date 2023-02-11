@@ -241,53 +241,73 @@ class DatabaseSeeder extends Seeder
 		'Ola Oil',
 		'Anti Amag');
 
+		$bind = ['Sako','Baro','Tray','Kilo','Grams','Pcs'];
+
 		for ($i=0; $i < 66; $i++) { 
+			$randBind = $bind[array_rand($bind)];
 			$ingredients = new BranchIngredients;
 			$ingredients->branch_id = 1;
 	        $ingredients->ingredients_name = $ing[$i];
 			$ingredients->ingredients_quantity = 100;
-			$ingredients->bind_name = 'Sako';
+			$ingredients->bind_name = $randBind;
+			$ingredients->notify = 30;
 	        $ingredients->save(); 
 		}
+
 		for ($i=0; $i < 66; $i++) { 
+			$randBind = $bind[array_rand($bind)];
 			$ingredients = new BranchIngredients;
 			$ingredients->branch_id = 2;
 	        $ingredients->ingredients_name = $ing[$i];
 			$ingredients->ingredients_quantity = 100;
-			$ingredients->bind_name = 'Kilo';
+			$ingredients->bind_name = $randBind;
+			$ingredients->notify = 30;
 	        $ingredients->save(); 
 		}
+
 		for ($i=0; $i < 66; $i++) { 
+			$randBind = $bind[array_rand($bind)];
 			$ingredients = new BranchIngredients;
 			$ingredients->branch_id = 3;
 	        $ingredients->ingredients_name = $ing[$i];
 			$ingredients->ingredients_quantity = 100;
-			$ingredients->bind_name = 'Tray';
+			$ingredients->bind_name = $randBind;
+			$ingredients->notify = 30;
 	        $ingredients->save(); 
 		}
+
 		for ($i=0; $i < 66; $i++) { 
+			$randBind = $bind[array_rand($bind)];
 			$ingredients = new BranchIngredients;
 			$ingredients->branch_id = 4;
 	        $ingredients->ingredients_name = $ing[$i];
 			$ingredients->ingredients_quantity = 100;
-			$ingredients->bind_name = 'Pcs';
+			$ingredients->bind_name = $randBind;
+			$ingredients->notify = 30;
 	        $ingredients->save(); 
 		}
+
 		for ($i=0; $i < 66; $i++) { 
+			$randBind = $bind[array_rand($bind)];
 			$ingredients = new BranchIngredients;
 			$ingredients->branch_id = 5;
 	        $ingredients->ingredients_name = $ing[$i];
 			$ingredients->ingredients_quantity = 100;
-			$ingredients->bind_name = 'Baro';
+			$ingredients->bind_name = $randBind;
+			$ingredients->notify = 30;
 	        $ingredients->save(); 
 		}
+
 		for ($i=0; $i < 66; $i++) { 
+			$randBind = $bind[array_rand($bind)];
 			$ingredients = new BranchIngredients;
 			$ingredients->branch_id = 6;
 	        $ingredients->ingredients_name = $ing[$i];
 			$ingredients->ingredients_quantity = 100;
-			$ingredients->bind_name = 'Kilo';
+			$ingredients->bind_name = $randBind;
+			$ingredients->notify = 30;
 	        $ingredients->save(); 
 		}
-	 }
+	}
+		
 }

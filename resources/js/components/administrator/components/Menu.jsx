@@ -57,7 +57,7 @@ const Menus = () => {
               
                 {
                     key: String('ingredients'+res.id),
-                    label:<a id={res.branch_name+'/ingredients?branch_id='+res.id} onClick={onTitleClick}>Ingredients</a>,
+                    label:<a id={res.branch_name+'/ingredients?branch_id='+res.id} onClick={onTitleClick}>Raw Materials</a>,
                     icon:<SettingTwoTone />,
                 },
                 {

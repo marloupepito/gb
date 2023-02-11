@@ -10,7 +10,7 @@ class BranchIngredientsController extends Controller
 {
     public function get_branch_ingredients(Request $request){
         $branch =User::where('branch_name','=',$request->branchName)->first();
-        $ingredients = BranchIngredients::where('branch_id','=',$branch->id)->orderBy('id', 'DESC')->get();
+        $ingredients = BranchIngredients::where('branch_id','=',$branch->id)->orderBy('ingredients_quantity', 'ASC')->get();
          return response()->json([
              'status' => $ingredients
          ]);
@@ -29,9 +29,10 @@ class BranchIngredientsController extends Controller
         $branchid = $request->branchid;
         $ingredients = new BranchIngredients;
         $ingredients->branch_id = $branchid;
-        $ingredients->ingredients_name = $request->data['ingredient_name'];
+        $ingredients->ingredients_name = $request->data['product'];
         $ingredients->ingredients_quantity = $request->data['quantity'];
         $ingredients->bind_name = $request->data['bundle'];
+        $ingredients->notify = $request->data['notification'];
         $ingredients->save();
          
         $ingredients->save();

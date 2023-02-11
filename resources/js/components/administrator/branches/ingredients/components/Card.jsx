@@ -13,9 +13,9 @@ export default function IngredientsCard(props) {
               value={props.quantity}
               precision={0}
               valueStyle={{
-                color: props.quantity >= 5?'#3f8600':'#cf1322',
+                color: parseInt(props.quantity) >= parseInt(props.notify)?'#3f8600':'#cf1322',
               }}
-              prefix={props.quantity >= 5?<CheckCircleOutlined />:<AlertOutlined />}
+              prefix={parseInt(props.quantity) >= parseInt(props.notify)?<CheckCircleOutlined />:<AlertOutlined />}
               // suffix="%"
             />
             {props.bind}

@@ -90,7 +90,7 @@ const CodeModal = (props) => {
           </tbody>
         </table>
       <Button key="submit" type="primary" block className='mt-3' loading={loading} onClick={(e)=>handleSubmit(data)}>
-          Create Production
+          Create Beginning
         </Button>
       </Modal>
     </>

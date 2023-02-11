@@ -54,13 +54,13 @@ const IngredientsModal = () => {
       notify ==='success'?<AppNotification type="success" message="Product code has been genarated!"/>:notify ==='error'?<AppNotification type="error" message="Error!"/>:""
     }
       <Button block size="large" type="primary" onClick={showModal}>
-        Create Ingredients
+        Create Products
       </Button>
       <Modal title="Create Ingredients" open={isModalOpen} onOk={handleOk} type="primary" className='mr-3' htmlType="submit" onCancel={handleCancel}>
       <Form form={form} onFinish={onFinish} layout="vertical">
       <Form.Item
-        name="ingredient_name"
-        label="Ingredient Name"
+        name="product"
+        label="Product Name"
         rules={[
           {
             required: true,
@@ -88,10 +88,23 @@ const IngredientsModal = () => {
             <Option value="Baro">Baro</Option>
             <Option value="Tray">Tray</Option>
             <Option value="Kilo">Kilo</Option>
+             <Option value="Grams">Grams</Option>
             <Option value="Pcs">Pcs</Option>
           </Select>
         </Form.Item>
      
+     <Form.Item
+        name="notification"
+        label="Notification Alert"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Input type="number"/>
+      </Form.Item>
+
         <Form.Item
           name="quantity"
           label="Quantity"
