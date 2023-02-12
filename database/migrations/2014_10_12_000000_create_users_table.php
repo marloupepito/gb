@@ -13,6 +13,26 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+
+         Schema::create('records', function (Blueprint $table) {
+            $table->id('key');
+            $table->string('branch_id')->nullable();
+            $table->string('bread_id')->nullable();
+            $table->string('bread_name')->nullable();
+            $table->string('beginning')->nullable();
+            $table->string('production')->nullable();
+            $table->string('price')->nullable();
+            $table->string('total')->nullable();
+            $table->string('breadout')->nullable();
+            $table->string('charge')->nullable();
+            $table->string('remaining')->nullable();
+            $table->string('soldout')->nullable();
+            $table->string('sales')->nullable();
+            $table->string('date')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('key')->nullable()->unique();

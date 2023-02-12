@@ -11,6 +11,7 @@ use App\http\Controllers\InventoryProductionController;
 use App\http\Controllers\BranchController;
 use App\http\Controllers\NotificationController;
 use App\http\Controllers\BranchBreadController;
+use App\http\Controllers\RecordsController;
 use Illuminate\Http\Request;
 
 /*
@@ -82,6 +83,10 @@ Route::post('/get_bread_every_branch2','BranchBreadController@get_bread_every_br
 
 Route::post('/add_bread_branch_sold','BranchBreadController@add_bread_branch_sold');
 Route::post('/add_bread_branch_out','BranchBreadController@add_bread_branch_out');
+
+
+
+Route::post('/get_branch_record','RecordsController@get_branch_record');
 
 
 

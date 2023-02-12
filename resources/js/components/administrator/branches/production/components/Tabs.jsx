@@ -27,7 +27,7 @@ function ProductionTabs() {
               key: 'create',
               children: <Outlet />,
             },
-            {
+              {
               label: (
               <span>
                 <PullRequestOutlined />
@@ -37,26 +37,38 @@ function ProductionTabs() {
             key: 'list',
             children: <Outlet />,
           },
-          {
-            label: (
-            <span>
-              <PullRequestOutlined />
-               Bread Sold
-            </span>
-          ),
-          key: 'sold',
-          children: <Outlet />,
-        },
-        {
-          label: (
-          <span>
-            <PullRequestOutlined />
-             Bread Out
-          </span>
-        ),
-        key: 'out',
-        children: <Outlet />,
-      },
+            {
+              label: (
+              <span>
+                <PullRequestOutlined />
+                Records
+              </span>
+            ),
+            key: 'records',
+            children: <Outlet />,
+          },
+ 
+          
+      //     {
+      //       label: (
+      //       <span>
+      //         <PullRequestOutlined />
+      //          Bread Sold
+      //       </span>
+      //     ),
+      //     key: 'sold',
+      //     children: <Outlet />,
+      //   },
+      //   {
+      //     label: (
+      //     <span>
+      //       <PullRequestOutlined />
+      //        Bread Out
+      //     </span>
+      //   ),
+      //   key: 'out',
+      //   children: <Outlet />,
+      // },
         ]}
       />
      );

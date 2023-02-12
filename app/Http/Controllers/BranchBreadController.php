@@ -7,13 +7,14 @@ use App\Models\BranchBread;
 use App\Models\BranchIngredients;
 use App\Models\BranchBreadSold;
 use App\Models\BranchBreadOut;
+use App\Models\Records;
 
 class BranchBreadController extends Controller
 {
     public function get_bread_every_branch(Request $request){
 
         $limit = ($request->current * $request->pageSize) +1;
-        $ingredients = BranchBread::where('branch_id', $request->branchid)->orderBy('key', 'ASC')->simplePaginate($limit);
+        $ingredients = Records::where([['date','=',date("F d, Y A")],['remember_token','=',null],['branch_id','=',$request->branchid]])->orderBy('key', 'ASC')->simplePaginate($limit);
         return response()->json([
             'status' => $ingredients
         ]);
@@ -29,22 +30,36 @@ class BranchBreadController extends Controller
 
         $branchid = $request->branchid;
 
-        $getBread = BranchBread::where([['branch_id','=', $branchid],['key','=',$request->breadid]])->first();
-        $total = $getBread->quantity - $request->quantitysold;
+        $getBread = Records::where([['branch_id','=', $branchid],['key','=',$request->breadid]])->first();
+       
+       // $breadout=$getBread->beginning - $request->breadout;
+       // $charge=$getBread->production - $request->charge;
+        $date = date("A") === "AM"?date("F d, Y").' '.'PM':date("F d, Y",strtotime ('+1 day')).' '.'AM';
 
-         BranchBread::where([['branch_id', $branchid],['key', $request->breadid]])
-          ->update(['quantity' => $total]);
+              $records = new Records;
+              $records->branch_id = $branchid;
+              $records->bread_id = $getBread->bread_id;
+              $records->bread_name =$getBread->bread_name;
+              $records->beginning = $request->remaining;
+              $records->price = $getBread->price;
+              $records->date = $date;
+              $records->save();
 
-            $ingredients = new BranchBreadSold;
-            $ingredients->branch_id = $branchid;
-            $ingredients->bread_name = $getBread->bread_name;
-            $ingredients->quantity = $request->quantitysold;
-            $ingredients->price = $getBread->price;
-            $ingredients->save();
+         Records::where([['branch_id', $branchid],['key', $request->breadid]])
+          ->update([
+            'breadout' => $request->breadout,
+            'charge' => $request->charge,
+            'remaining' => $request->remaining,
+            'soldout' =>$getBread->total-$request->remaining,
+            'sales' =>$getBread->price * ($getBread->total-$request->remaining),
+            'remember_token' =>'done',
+        ]);
+          
 
         return response()->json([
-            'status' => $getBread->quantity
+            'status' => $getBread
         ]);
+
     }
     public function add_bread_branch_out(Request $request){
 

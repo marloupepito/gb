@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Row,Button,Skeleton  } from 'antd';
+import { Col, Row,Button,Skeleton,Input  } from 'antd';
 import CodeModal from '../components/Modal';
 import { Get_all_production } from '../../../api/Production';
 import { useNavigate } from "react-router-dom";
@@ -11,8 +11,10 @@ function CreateSection() {
     const branchName =BranchNameParams().props.children
     const branchId =SearchBranchId().props.children
     const [data,setData] = useState([])
+    const [data2,setData2] = useState([])
     const [loading,setLoading] = useState(true)
-    
+    const [timeCount,setTimeCount] = useState(0);
+
     function goToForm(){
         navigate('/administrator/'+branchName+'/production/create/form?branch_id='+branchId);
     }
@@ -26,9 +28,22 @@ function CreateSection() {
           .then(res=>{
             setLoading(false)
                setData(Object.values(res.data.status))
+               setData2(Object.values(res.data.status))
           })
       }, [branchName]);
 
+
+  const handleSearch = (aaa) => {
+    // const { datas } = {
+    //   "data": data
+    // };
+      setTimeCount(1);
+
+    const keyword = aaa.target.value;
+    
+    const filtered = data2.filter(entry => Object.values(entry).some(val => typeof val === "string" && val.toLowerCase().includes(keyword.toLowerCase())));
+    setData(filtered)
+  };
 
     return ( 
         <Row gutter={[16,16]}>
@@ -36,6 +51,8 @@ function CreateSection() {
           <Button onClick={goToForm} type="primary" block>Production Code</Button>
             </Col>
             <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
+                    <Input.Search
+                     onChange={handleSearch} size="large" placeholder="Search Products" enterButton />
                {/* <IngredientsAutocomplete data={get_branch_ingredients().props.children} /> */}
             </Col>
             <Skeleton loading={loading}>

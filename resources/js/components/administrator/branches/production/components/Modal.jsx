@@ -40,13 +40,14 @@ const CodeModal = (props) => {
     setIsModalOpen(false);
   };
   function handleSubmit(event){
+    console.log(event)
     setLoading(true)
     axios.post('/add_bread_list',{
       data:event,
-      branchid:branchid
+      branchid:branchid,
     })
     .then(res=>{
-      console.log(res.data.status)
+      console.log('waa',res.data.status)
       setNotify('success')
       setLoading(false)
       setIsModalOpen(false);

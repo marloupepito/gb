@@ -2,7 +2,7 @@ import React, { useRef, useState,useEffect } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table,Tag } from 'antd';
 import Highlighter from 'react-highlight-words';
-import {ModalSoldOut,ModalBreadOut} from '../section/components/Modal';
+import {ModalSoldOut} from '../section/components/Modal';
 import { SearchBranchId } from '../../../../routes/Search';
 const BreadListTable = () => {
   const [searchText, setSearchText] = useState('');
@@ -147,14 +147,14 @@ useEffect(() => {
       ...getColumnSearchProps('bread_name'),
     },
     {
-      title: 'Quantity',
-      dataIndex: 'quantity',
-      key: 'quantity',
+      title: 'Total',
+      dataIndex: 'total',
+      key: 'total',
       width: '10%',
-      ...getColumnSearchProps('quantity'),
-      render: (_, { quantity }) => (
-        <Tag color={quantity <= 10?'volcano':'green'} key={quantity}>
-             {quantity}
+      ...getColumnSearchProps('total'),
+      render: (_, { total }) => (
+        <Tag color={total <= 10?'volcano':'green'} key={total}>
+             {total}
            </Tag>
     ),
     },
@@ -172,9 +172,9 @@ useEffect(() => {
         dataIndex: 'price',
         key: 'total',
         width: '10%',
-        render: (_, { price,quantity }) => (
+        render: (_, { price,total }) => (
           <b >
-        {price * quantity}
+        {price * total}
         </b>
       ),
       },
@@ -182,20 +182,12 @@ useEffect(() => {
         title: '',
         key: 'sold',
         dataIndex: 'sold',
-        render: (_, { quantity,bread_name,key,price,branchid }) => (
-            <ModalSoldOut data={[key,bread_name,quantity,price,branchid]}/>
+        render: (_, { total,bread_name,key,price,branchid }) => (
+            <ModalSoldOut data={[key,bread_name,total,price,branchid]}/>
         ),
           width: '5%',
       },
-      {
-        title: '',
-        dataIndex: 'out',
-        key: 'out',
-        width: '5%',
-        render: (_, { quantity,bread_name,key,price,branchid }) => (
-          <ModalBreadOut data={[key,bread_name,quantity,price,branchid]}/>
-        ),
-      },
+     
   ];
   function PaginateNext (e){
     setLoading(true)

@@ -8,32 +8,71 @@ use App\Models\BranchIngredients;
 use App\Models\BranchBread;
 use App\Models\BranchBreadSold;
 use App\Models\BranchBreadOut;
+use App\Models\Records;
 class InventoryProductionController extends Controller
 {
   public function add_bread_list(Request $request){
         
         
-          for ($i=0; $i < count($request->data); $i++) { 
-              $branchIngredientId = $request->data[$i]['branch_ingredients_id'];
+          // for ($i=0; $i < count($request->data); $i++) { 
+          //     $branchIngredientId = $request->data[$i]['branch_ingredients_id'];
         
-              $remaining = BranchIngredients::where('id',$branchIngredientId)->first();
-              $equal = $remaining->ingredients_quantity - $request->data[$i]['quantity'];
+          //     $remaining = BranchIngredients::where('id',$branchIngredientId)->first();
+          //     $equal = $remaining->ingredients_quantity - $request->data[$i]['quantity'];
 
-              BranchIngredients::where('id',$branchIngredientId)
-              ->update(['ingredients_quantity' => $equal]);
+          //     BranchIngredients::where('id',$branchIngredientId)
+          //     ->update(['ingredients_quantity' => $equal]);
+          // }
+
+        $date = date("A") === "AM"?date("F d, Y",strtotime ('-1 day')).' '.'PM':date("F d, Y").' '.'AM';
+     
+
+        $bread=BranchBread::where([['branch_id','=',$request->branchid],['key','=',$request->data[0]['branch_bread_id']]])->first();
+
+        $beginning =  Records::where([['date','=',$date],['branch_id','=',$request->branchid],['bread_id','=',$request->data[0]['branch_bread_id']]])->orderBy('created_at','DESC')->first();
+
+
+        $checkExist =  Records::where([['date','=',date("F d, Y A")],['branch_id','=',$request->branchid],['bread_id','=',$request->data[0]['branch_bread_id']]])->orderBy('created_at','DESC')->first();
+
+
+        if ($beginning === null) {
+
+          if($checkExist !== null){
+              Records::where('key',$checkExist->key)->update([
+                'total' =>$checkExist->total+$request->data[0]['production_quantity'],
+                'production' =>$checkExist->production+$request->data[0]['production_quantity'],
+              ]);
+              return response()->json([
+                  'status' =>$checkExist
+              ]);
+          }else{
+              $records = new Records;
+              $records->branch_id = $request->branchid;
+              $records->bread_id = $request->data[0]['branch_bread_id'];
+              $records->bread_name =$request->data[0]['bread_name'];
+              $records->beginning = $beginning === null?0:$beginning->remaining;
+              $records->production = $request->data[0]['production_quantity'];
+              $records->price = $bread->price;
+              $records->total = $beginning === null?$request->data[0]['production_quantity']:$beginning->remaining+$request->data[0]['production_quantity'];
+              $records->date = date("F d, Y A");
+              $records->save();
+              return response()->json([
+                  'status' =>$beginning
+              ]);
           }
+            
+        }else{
 
-       
-          $breadId = $request->data[0]['branch_bread_id'];
-          $totalbread = BranchBread::where([['branch_id','=',$request->branchid],['key','=',$breadId]])->first();
+             Records::where('key',$checkExist->key)->update([
+                'total' =>$checkExist->beginning+$request->data[0]['production_quantity'],
+                'production' =>$request->data[0]['production_quantity'],
+              ]);
+              return response()->json([
+                  'status' =>$checkExist
+              ]);
 
-              $result = $totalbread->quantity + $request->data[0]['production_quantity'];
-              BranchBread::where([['branch_id','=',$request->branchid],['key','=',$breadId]])
-              ->update(['quantity' => $result]);
-
-          return response()->json([
-            'status' =>$totalbread
-        ]);
+        }
+      
 
      }
 

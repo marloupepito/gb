@@ -15,6 +15,7 @@ import IngredientsPage from '../administrator/branches/ingredients/Page';
 import ProductionPage from '../administrator/branches/production/Page';
 
 import CreateSection from '../administrator/branches/production/section/CreateSection';
+import ProductionRecords from '../administrator/branches/production/section/ProductionRecords';
 import ProductionSectionDrawer from '../administrator/branches/production/section/components/Drawer';
 import BreadListSection from '../administrator/branches/production/section/BreadListSection';
 import BreadOutSection from '../administrator/branches/production/section/BreadOutSection';
@@ -76,6 +77,7 @@ export const router = createBrowserRouter([
       { path:'/administrator/:id/production', element:<ProductionPage />,
       children:[
         {path:'/administrator/:id/production/create', element: <CreateSection />},
+        {path:'/administrator/:id/production/records', element: <ProductionRecords />},
         {path:'/administrator/:id/production/create/form', element: <ProductionSectionDrawer />},
         {path:'/administrator/:id/production/list', element: <BreadListSection />},
         {path:'/administrator/:id/production/sold', element: <BreadSoldSection />},

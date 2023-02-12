@@ -19,4 +19,24 @@ heroku git:remote -a gould-care
          @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 
+
+
+           $breadId = $request->data[0]['branch_bread_id'];
+          $totalbread = BranchBread::where([['branch_id','=',$request->branchid],['key','=',$breadId]])->first();
+
+          
+            $records = new Records;
+            $records->branch_id = $request->branchid;
+            $records->bread_name = $totalbread->bread_name;
+            $records->beginning = $totalbread->quantity;
+            $records->production = $request->data[0]['production_quantity'];
+            $records->price = $totalbread->price;
+            $records->total = $totalbread->quantity+$request->data[0]['production_quantity'];
+            $records->save();
+
+              $result = $totalbread->quantity + $request->data[0]['production_quantity'];
+              BranchBread::where([['branch_id','=',$request->branchid],['key','=',$breadId]])
+              ->update(['quantity' => $result]);
+
+
          
