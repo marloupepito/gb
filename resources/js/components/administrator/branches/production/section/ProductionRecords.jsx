@@ -1,26 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import { SearchBranchId } from '../../../../routes/Search';
-
-
+import { DatePicker, Button } from 'antd';
+import moment from 'moment'
 function ProductionRecords() {
 const branch_id=SearchBranchId().props.children
  const [data, setData] = useState([]);
+ const [date, setDate] = useState(moment().format('MMMM DD, YYYY A'));
+ const [dateSearch, setDateSearch] = useState(null);
 
 useEffect(() => {
   axios.post('/get_branch_record',{
     current:1,
     pageSize:200,
-    branchid:branch_id
+    branchid:branch_id,
+    date:date
   })
   .then(res=>{
     setData(res.data.status)
-    
   })
-}, []);
+}, [date]);
+
+const onChange = (date, dateString) => {
+  setDateSearch(dateString)
+};
+
+const searchDate =()=>{
+ setDate(dateSearch)
+}
 
 
     return ( 
         <div>
+     
+          <div className="row">
+            <div className="col-md-3">
+             <DatePicker showTime = {{ user12hours: true, format: "a" }} 
+             allowClear={false}  
+             format="MMMM DD, YYYY A"  
+            onChange={onChange} 
+            // defaultValue={moment()}
+            className="mb-3 w-100"/>
+
+            </div>
+             <div className="col-md-2">
+             <Button type="primary" onClick={searchDate} className="w-100">Search</Button>
+            </div>
+         </div>
+
+
         <table className="table table-bordered">
   <thead>
     <tr>
@@ -43,7 +70,7 @@ useEffect(() => {
       <td>{res.beginning}</td>
       <td>{res.production}</td>
       <td>{res.price}</td>
-      <th>{parseInt(res.beginning) + parseInt(res.production)}</th>
+      <th>{res.production === null?res.beginning:parseInt(res.beginning) + parseInt(res.production)}</th>
       <td>{res.breadout}</td>
       <td>{res.charge}</td>
       <td>{res.remaining}</td>

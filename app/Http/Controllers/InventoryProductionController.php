@@ -14,15 +14,15 @@ class InventoryProductionController extends Controller
   public function add_bread_list(Request $request){
         
         
-          // for ($i=0; $i < count($request->data); $i++) { 
-          //     $branchIngredientId = $request->data[$i]['branch_ingredients_id'];
+          for ($i=0; $i < count($request->data); $i++) { 
+              $branchIngredientId = $request->data[$i]['branch_ingredients_id'];
         
-          //     $remaining = BranchIngredients::where('id',$branchIngredientId)->first();
-          //     $equal = $remaining->ingredients_quantity - $request->data[$i]['quantity'];
+              $remaining = BranchIngredients::where('id',$branchIngredientId)->first();
+              $equal = $remaining->ingredients_quantity - $request->data[$i]['quantity'];
 
-          //     BranchIngredients::where('id',$branchIngredientId)
-          //     ->update(['ingredients_quantity' => $equal]);
-          // }
+              BranchIngredients::where('id',$branchIngredientId)
+              ->update(['ingredients_quantity' => $equal]);
+          }
 
         $date = date("A") === "AM"?date("F d, Y",strtotime ('-1 day')).' '.'PM':date("F d, Y").' '.'AM';
      

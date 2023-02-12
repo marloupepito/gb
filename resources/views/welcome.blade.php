@@ -14,8 +14,8 @@
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <!-- Styles -->
         
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <script src="{{ asset('js/app.js') }}" defer></script>
+      <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <script src="{{ asset('js/app.js') }}" defer></script> 
 
         <style>
             body {
