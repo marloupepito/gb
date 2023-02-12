@@ -61,7 +61,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('branch_id')->nullable();
             $table->string('ingredients_name')->nullable();
-            $table->string('ingredients_quantity')->nullable();
+            $table->float('ingredients_quantity')->nullable();
             $table->string('bind_name')->nullable();
             $table->string('notify')->nullable();
             $table->rememberToken();

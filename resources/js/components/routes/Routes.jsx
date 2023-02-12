@@ -37,6 +37,7 @@ import IngredientsPageBranch from '../branch/ingredients/Page';
 import ProductionPageBranch from '../branch/production/Page';
 import CreateSectionBranch from '../branch/production/section/CreateSection';
 import ProductionSectionDrawerBranch from '../branch/production/section/components/Drawer';
+import ProductionRecordsBranch from '../branch/production/section/ProductionRecords';
 import BreadListSectionBranch from '../branch/production/section/BreadListSection';
 import BreadOutSectionBranch from '../branch/production/section/BreadOutSection';
 import BreadSoldSectionBranch from '../branch/production/section/BreadSoldSection';
@@ -102,6 +103,7 @@ export const router = createBrowserRouter([
     { path:'/branch/:id/production', element:<ProductionPageBranch />,
     children:[
       {path:'/branch/:id/production/create', element: <CreateSectionBranch />},
+      {path:'/branch/:id/production/records', element: <ProductionRecordsBranch />},
       {path:'/branch/:id/production/create/form', element: <ProductionSectionDrawerBranch />},
       {path:'/branch/:id/production/list', element: <BreadListSectionBranch />},
       {path:'/branch/:id/production/sold', element: <BreadSoldSectionBranch />},

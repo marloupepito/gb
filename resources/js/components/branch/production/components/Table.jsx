@@ -2,8 +2,9 @@ import React, { useRef, useState,useEffect } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table,Tag } from 'antd';
 import Highlighter from 'react-highlight-words';
-import {ModalSoldOut,ModalBreadOut} from '../section/components/Modal';
+import {ModalSoldOut} from '../section/components/Modal';
 import { SearchBranchId } from '../../../routes/Search';
+import moment from 'moment'
 const BreadListTable = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
@@ -147,14 +148,26 @@ useEffect(() => {
       ...getColumnSearchProps('bread_name'),
     },
     {
-      title: 'Quantity',
-      dataIndex: 'quantity',
-      key: 'quantity',
+      title: 'New Production',
+      dataIndex: 'production',
+      key: 'production',
+      width: '15%',
+      ...getColumnSearchProps('production'),
+       render: (_, { production }) => (
+        <Tag color={production === null?'volcano':'green'} key={production}>
+             {production === null?'None New production':production}
+           </Tag>
+    ),
+    },
+    {
+      title: 'Total',
+      dataIndex: 'total',
+      key: 'total',
       width: '10%',
-      ...getColumnSearchProps('quantity'),
-      render: (_, { quantity }) => (
-        <Tag color={quantity <= 10?'volcano':'green'} key={quantity}>
-             {quantity}
+      ...getColumnSearchProps('total'),
+      render: (_, { total }) => (
+        <Tag color={total <= 10?'volcano':'green'} key={total}>
+             {total}
            </Tag>
     ),
     },
@@ -172,9 +185,9 @@ useEffect(() => {
         dataIndex: 'price',
         key: 'total',
         width: '10%',
-        render: (_, { price,quantity }) => (
+        render: (_, { price,total }) => (
           <b >
-        {price * quantity}
+        {price * total}
         </b>
       ),
       },
@@ -182,20 +195,17 @@ useEffect(() => {
         title: '',
         key: 'sold',
         dataIndex: 'sold',
-        render: (_, { quantity,bread_name,key,price,branchid }) => (
-            <ModalSoldOut data={[key,bread_name,quantity,price,branchid]}/>
+        render: (_, { total,bread_name,key,price,branchid,production,created_at }) => (
+         <div>
+         {moment().format('A') === moment(created_at).format('A')?'Unavailable':<ModalSoldOut data={[key,bread_name,total,price,branchid]}/>}
+              {/*  {moment(created_at).add(12, 'hours').format('LLL')  < moment(new Date(created_at)).format('LLL')?
+         <ModalSoldOut data={[key,bread_name,total,price,branchid]}/>:'Unavailable'}
+            */}
+            </div>
         ),
           width: '5%',
       },
-      {
-        title: '',
-        dataIndex: 'out',
-        key: 'out',
-        width: '5%',
-        render: (_, { quantity,bread_name,key,price,branchid }) => (
-          <ModalBreadOut data={[key,bread_name,quantity,price,branchid]}/>
-        ),
-      },
+     
   ];
   function PaginateNext (e){
     setLoading(true)
