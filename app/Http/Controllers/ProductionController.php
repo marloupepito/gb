@@ -28,7 +28,7 @@ class ProductionController extends Controller
      
        
     public function add_branch_ingredients(Request $request){
-     $codename = $request->data['codename'];
+     $codename = $request->code;
      $branchid =$request->branchid;
      $breadname =$request->data['breadname'];
      $productionquantity =$request->data['productionquantity'];

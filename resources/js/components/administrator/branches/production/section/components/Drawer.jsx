@@ -20,6 +20,8 @@ const ProductionSectionDrawer = (props) => {
   const ingredientsList = get_branch_ingredients().props.children
   const [notify,setNotify] =useState(false)
   const [breadList,setBreadList] =useState([])
+    const [a,setA] =useState([])
+     const [b,setB] =useState([])
   const onClose = () => {
     setOpen(false)
     navigate('/administrator/'+branchName+'/production/create?branch_id='+branchId);
@@ -37,14 +39,13 @@ useEffect(() => {
   
  
   const onFinish = (values) => {
-    console.log(values)
     setLoading(true)
       axios.post('/add_branch_ingredients',{
         branchid:branchId,
-        data:values
+        data:values,
+        code:a+' - '+b+'PCS'
       })
       .then(res=>{
-         
          setNotify('success')
          form.resetFields();
          function myGreeting() {
@@ -52,7 +53,6 @@ useEffect(() => {
            setLoading(false)
           }
           setTimeout(myGreeting, 1000);
-          
       })  
       .catch(err=>{
          setNotify('error')
@@ -64,6 +64,13 @@ useEffect(() => {
       }) 
   };
 
+const breadNameHandler = (e)=>{
+  setA(e)
+}
+
+const breadQuantityHandler = (e)=>{
+  setB(e)
+}
 
   return (
     <>
@@ -81,8 +88,9 @@ useEffect(() => {
           </Space>
         }
       >
-       
-        <Form layout="vertical" form={form} name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off" >
+     
+        <Form layout="vertical"
+         form={form} name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off" >
           <Row gutter={16}>
             <Col xs={24} sm={12} md={12}>
             <Row gutter={16}>
@@ -90,14 +98,9 @@ useEffect(() => {
                 <Form.Item
                       name="codename"
                       label="Code Name"
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Please enter Code Name',
-                        },
-                      ]}
+                   
                     >
-                  <Input placeholder="Please enter Code Name" />
+                    {a+' - '+b+'PCS'}
                 </Form.Item>
               </Col>
 
@@ -113,6 +116,7 @@ useEffect(() => {
                       ]}
                     >
                   <Select
+                    onChange={breadNameHandler}
                         showSearch
                         style={{ width: '100%' }}
                         placeholder="Search bread"
@@ -141,7 +145,9 @@ useEffect(() => {
                       },
                     ]}
                   >
-                    <InputNumber style={{
+                    <InputNumber
+                    onChange={breadQuantityHandler}
+                     style={{
                       width:'100%'
                           }} placeholder="Production Quantity" />
                   </Form.Item>

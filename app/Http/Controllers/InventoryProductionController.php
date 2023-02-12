@@ -24,21 +24,21 @@ class InventoryProductionController extends Controller
               ->update(['ingredients_quantity' => $equal]);
           }
 
-        $date = date("A") === "AM"?date("F d, Y",strtotime ('-1 day')).' '.'PM':date("F d, Y").' '.'AM';
-     
+      //  $date = date("A") === "AM"?date("F d, Y",strtotime ('-1 day')).' '.'PM':date("F d, Y").' '.'AM';
+     $date= date("F d, Y A");
 
         $bread=BranchBread::where([['branch_id','=',$request->branchid],['key','=',$request->data[0]['branch_bread_id']]])->first();
 
         $beginning =  Records::where([['date','=',$date],['branch_id','=',$request->branchid],['bread_id','=',$request->data[0]['branch_bread_id']]])->orderBy('created_at','DESC')->first();
 
 
-        $checkExist =  Records::where([['date','=',date("F d, Y A")],['branch_id','=',$request->branchid],['bread_id','=',$request->data[0]['branch_bread_id']]])->orderBy('created_at','DESC')->first();
+        $checkExist =  Records::where([['remember_token','=',null],['date','=',date("F d, Y A")],['branch_id','=',$request->branchid],['bread_id','=',$request->data[0]['branch_bread_id']]])->orderBy('created_at','DESC')->first();
 
 
         if ($beginning === null) {
 
           if($checkExist !== null){
-              Records::where('key',$checkExist->key)->update([
+              Records::where([['remember_token','=',null],['bread_id','=',$request->data[0]['branch_bread_id']],['branch_id','=',$request->branchid]])->update([
                 'total' =>$checkExist->total+$request->data[0]['production_quantity'],
                 'production' =>$checkExist->production+$request->data[0]['production_quantity'],
               ]);

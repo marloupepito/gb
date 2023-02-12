@@ -4,6 +4,7 @@ import { Button, Input, Space, Table,Tag } from 'antd';
 import Highlighter from 'react-highlight-words';
 import {ModalSoldOut} from '../section/components/Modal';
 import { SearchBranchId } from '../../../../routes/Search';
+import moment from 'moment'
 const BreadListTable = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
@@ -147,6 +148,18 @@ useEffect(() => {
       ...getColumnSearchProps('bread_name'),
     },
     {
+      title: 'New Production',
+      dataIndex: 'production',
+      key: 'production',
+      width: '15%',
+      ...getColumnSearchProps('production'),
+       render: (_, { production }) => (
+        <Tag color={production === null?'volcano':'green'} key={production}>
+             {production === null?'None New production':production}
+           </Tag>
+    ),
+    },
+    {
       title: 'Total',
       dataIndex: 'total',
       key: 'total',
@@ -182,8 +195,13 @@ useEffect(() => {
         title: '',
         key: 'sold',
         dataIndex: 'sold',
-        render: (_, { total,bread_name,key,price,branchid }) => (
-            <ModalSoldOut data={[key,bread_name,total,price,branchid]}/>
+        render: (_, { total,bread_name,key,price,branchid,production,created_at }) => (
+         <div>
+         {moment().format('A') === moment(created_at).format('A')?'Unavailable':<ModalSoldOut data={[key,bread_name,total,price,branchid]}/>}
+              {/*  {moment(created_at).add(12, 'hours').format('LLL')  < moment(new Date(created_at)).format('LLL')?
+         <ModalSoldOut data={[key,bread_name,total,price,branchid]}/>:'Unavailable'}
+            */}
+            </div>
         ),
           width: '5%',
       },

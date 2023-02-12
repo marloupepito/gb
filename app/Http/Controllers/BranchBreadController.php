@@ -13,8 +13,9 @@ class BranchBreadController extends Controller
 {
     public function get_bread_every_branch(Request $request){
 
+// ['date','=',date("F d, Y A")],
         $limit = ($request->current * $request->pageSize) +1;
-        $ingredients = Records::where([['date','=',date("F d, Y A")],['remember_token','=',null],['branch_id','=',$request->branchid]])->orderBy('key', 'ASC')->simplePaginate($limit);
+        $ingredients = Records::where([['remember_token','=',null],['branch_id','=',$request->branchid]])->orderBy('key', 'ASC')->simplePaginate($limit);
         return response()->json([
             'status' => $ingredients
         ]);
@@ -34,14 +35,16 @@ class BranchBreadController extends Controller
        
        // $breadout=$getBread->beginning - $request->breadout;
        // $charge=$getBread->production - $request->charge;
-        $date = date("A") === "AM"?date("F d, Y").' '.'PM':date("F d, Y",strtotime ('+1 day')).' '.'AM';
-
+       // $date = date("A") === "AM"?date("F d, Y").' '.'PM':date("F d, Y",strtotime ('+1 day')).' '.'AM';
+        $date= date("F d, Y A");
+        
               $records = new Records;
               $records->branch_id = $branchid;
               $records->bread_id = $getBread->bread_id;
               $records->bread_name =$getBread->bread_name;
               $records->beginning = $request->remaining;
               $records->price = $getBread->price;
+              $records->total = $request->remaining;
               $records->date = $date;
               $records->save();
 
