@@ -61,6 +61,7 @@ const searchDate =()=>{
       <th scope="col">Remaining<small>(pcs)</small></th>
       <th scope="col">Sold Bread</th>
       <th scope="col">Sales</th>
+      <th scope="col">Date</th>
     </tr>
   </thead>
   <tbody>
@@ -75,7 +76,7 @@ const searchDate =()=>{
       <td>{res.charge}</td>
       <td>{res.remaining}</td>
       <td>{res.soldout}</td>
-      <td>{res.sales}</td>
+      <td>{res.date}</td>
     </tr>)
   }
    

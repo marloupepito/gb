@@ -55,6 +55,7 @@ class BranchBreadController extends Controller
             'remaining' => $request->remaining,
             'soldout' =>$getBread->total-$request->remaining,
             'sales' =>$getBread->price * ($getBread->total-$request->remaining),
+            'date' =>$date,
             'remember_token' =>'done',
         ]);
           

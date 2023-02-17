@@ -31,7 +31,7 @@ const searchDate =()=>{
 
     return ( 
         <div>
-     {date}
+    
           <div className="row">
             <div className="col-md-3">
              <DatePicker showTime = {{ user12hours: true, format: "a" }} 
