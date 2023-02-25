@@ -211,7 +211,7 @@ useEffect(() => {
          // <ModalSoldOut data={[key,bread_name,total,price,branchid]}/>:'Unavailable'}
          //    */}
          //    </div>
-          <ModalSoldOut data={[key,bread_name,total,price,branchid]}/>
+          <ModalSoldOut data={[key,bread_name,total,price,branchid,production]}/>
         ),
           width: '5%',
       },

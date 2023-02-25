@@ -77,7 +77,7 @@ const breadoutHandler =(e)=>{
         {
       notify ==='success'?<AppNotification type="success" message="Production has been added!"/>:notify ==='error'?<AppNotification type="error" message="Error!"/>:""
     }
-        <Button block type="primary"  ghost size="small" onClick={showModal}>
+        <Button block type="primary" disabled={props.data[5] === null?true:false} ghost size="small" onClick={showModal}>
             Remaining
         </Button>
         <Modal title={props.data[1]+' '+props.data[2] +'pcs'} open={isModalOpen} onOk={handleOk} maskClosable={false} onCancel={handleCancel}>
