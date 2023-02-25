@@ -20,7 +20,6 @@ const CodeModal = (props) => {
 //this is the calculation of grams to kilo -> res.bind === 'Grams'?res.ingredients_quantity-(parseInt(res.quantity) / 1000):res.ingredients_quantity-res.quantity
   const showModal = () => {
     setIsModalOpen(true); 
-
       axios.post('/get_production_code',{
         randomid:props.data.random_id
         })
@@ -44,22 +43,38 @@ const CodeModal = (props) => {
     setIsModalOpen(false);
   };
   function handleSubmit(event){
-    setLoading(true)
-    axios.post('/add_bread_list',{
-      data:event,
-      branchid:branchid,
-      pieces:pieces,
-      date:moment().format('MMMM DD, YYYY A')
-    })
-    .then(res=>{
-      console.log('waa',res.data.status)
-      setNotify('success')
-      setLoading(false)
-      setIsModalOpen(false);
-    })
-    .catch(err=>{
+
+    if(pieces === null || pieces === ''){
       setNotify('error')
-    })
+       function myGreeting() {
+           setNotify(false)
+           setLoading(false)
+          }
+          setTimeout(myGreeting, 1500);
+    }else{
+       setLoading(true)
+        axios.post('/add_bread_list',{
+          data:event,
+          branchid:branchid,
+          pieces:pieces,
+          date:moment().format('MMMM DD, YYYY A')
+        })
+        .then(res=>{
+          console.log('waa',res.data.status)
+          setNotify('success')
+          setLoading(false)
+          setIsModalOpen(false);
+        })
+        .catch(err=>{
+          setNotify('error')
+           function myGreeting() {
+           setNotify(false)
+           setLoading(false)
+          }
+          setTimeout(myGreeting, 1500);
+        })
+    }
+   
   }
 
  const breadQuantityHandler =(e)=>{
@@ -68,7 +83,7 @@ const CodeModal = (props) => {
   return (
     <>
     {
-      notify ==='success'?<AppNotification type="success" message="Production has been added!"/>:notify ==='error'?<AppNotification type="error" message="Error!"/>:""
+      notify ==='success'?<AppNotification type="success" message="Production has been added!"/>:notify ==='error'?<AppNotification type="error" message="Please input current pieces!"/>:""
     }
       <Button block type="dashed" size="large" danger onClick={showModal}>
         {props.data.code_name}
