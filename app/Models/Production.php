@@ -15,6 +15,7 @@ class Production extends Model
         'branch_bread_id',
         'branch_id',
         'bread_name',
+        'bind',
         'code_name',
         'ingredients_name',
         'quantity',

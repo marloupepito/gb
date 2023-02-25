@@ -35,6 +35,25 @@ class ProductionController extends Controller
      $random =rand(1000000,9999999);
 
      $breadId= BranchBread::where([['branch_id','=',$branchid],['bread_name','=',strtoupper($breadname)]])->first();
+
+     $branching = BranchIngredients::where([['branch_id','=',$branchid],['ingredients_name','=','Flour']])->first();
+
+
+      Production::create(
+               [
+                    'branch_id' => $branchid,
+                    'branch_ingredients_id' => $branching->id,
+                    'branch_bread_id' => $breadId->key,
+                    'random_id' => $random,
+                    'code_name' => $codename,
+                    'bind' =>$request->data['bind'],
+                    'bread_name' =>strtoupper($breadname),
+                    'ingredients_name' =>'Flour',
+                    'quantity'=>$request->data['quantity'],
+                    'production_quantity'=>$productionquantity
+               ]
+          );
+
      for ($i=0; $i < count($request->data['users']); $i++) { 
           
           Production::create(
@@ -44,6 +63,7 @@ class ProductionController extends Controller
                     'branch_bread_id' => $breadId->key,
                     'random_id' => $random,
                     'code_name' => $codename,
+                    'bind' =>$request->data['users'][$i]['bind'],
                     'bread_name' =>strtoupper($breadname),
                     'ingredients_name' =>explode("|",$request->data['users'][$i]['ingredients'])[0],
                     'quantity'=>$request->data['users'][$i]['quantity'],

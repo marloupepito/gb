@@ -22,7 +22,7 @@ function IngredientsLayout() {
     return ( 
         <div>
         <Row gutter={[16,16]}>
-            <Col xs={24} sm={24} md={4} lg={4} xl={4} xxl={4}>
+            <Col xs={24} sm={24} md={6} lg={6} xl={6} xxl={6}>
                <IngredientsModal />
             </Col>
             <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>

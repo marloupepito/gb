@@ -53,9 +53,9 @@ const IngredientsModal = () => {
      {
       notify ==='success'?<AppNotification type="success" message="Product code has been genarated!"/>:notify ==='error'?<AppNotification type="error" message="Error!"/>:""
     }
-      <Button block size="large" type="primary" onClick={showModal}>
-        Create Raw Materials
-      </Button>
+      <a block size="large" type="primary" onClick={showModal}>
+      Edit
+      </a>
       <Modal title="Create Ingredients" open={isModalOpen} onOk={handleOk} type="primary" className='mr-3' htmlType="submit" onCancel={handleCancel}>
       <Form form={form} onFinish={onFinish} layout="vertical">
       <Form.Item
@@ -84,7 +84,11 @@ const IngredientsModal = () => {
             // onChange={this.onGenderChange}
             allowClear
           >
+            <Option value="Sako">Sako</Option>
+            <Option value="Baro">Baro</Option>
+            <Option value="Tray">Tray</Option>
             <Option value="Kilo">Kilo</Option>
+             <Option value="Grams">Grams</Option>
             <Option value="Pcs">Pcs</Option>
           </Select>
         </Form.Item>

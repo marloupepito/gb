@@ -4,7 +4,7 @@ import { SearchBranchId } from '../../../../../routes/Search';
 import { AppNotification } from '../../../../../components/Notification';
 import { BranchNameParams } from '../../../../../routes/Params';
 import { useNavigate } from "react-router-dom";
-
+import moment from 'moment'
 
 export function ModalSoldOut(props) {
     const [form] = Form.useForm();
@@ -12,9 +12,9 @@ export function ModalSoldOut(props) {
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [remaining, setRemaining] = useState(0);
     const [breadout, setBreadout] = useState(0);
-    const [charge, setCharge] = useState(0);
+   // const [charge, setCharge] = useState(0);
+    const [remaining, setRemaining] = useState(0);
     const [notify,setNotify] =useState(false)
     const branchname = BranchNameParams().props.children
     
@@ -29,6 +29,11 @@ export function ModalSoldOut(props) {
       form.resetFields(); 
     };
 
+
+    useEffect(() => {
+ console.log(moment().format('LL'))
+}, []);
+
     const onFinish = (values) => {
       setLoading(true)
       const remaining= values.remaining
@@ -36,8 +41,9 @@ export function ModalSoldOut(props) {
           breadid:props.data[0],
           branchid:branchId,
           remaining:values.remaining,
-          charge:values.charge,
-          breadout:values.breadout
+          // charge:values.charge,
+          breadout:values.breadout,
+          date:moment().format('MMMM DD, YYYY A')
         })
         .then(res=>{
           setNotify('success')
@@ -57,6 +63,14 @@ export function ModalSoldOut(props) {
 
 
 
+const remainingHandler =(e)=>{
+    setRemaining(e.target.value)
+}
+    
+
+const breadoutHandler =(e)=>{
+   setBreadout(e.target.value) 
+}
      
     return ( 
         <>
@@ -66,15 +80,15 @@ export function ModalSoldOut(props) {
         <Button block type="primary"  ghost size="small" onClick={showModal}>
             Remaining
         </Button>
-        <Modal title={props.data[1]} open={isModalOpen} onOk={handleOk} maskClosable={false} onCancel={handleCancel}>
-         
+        <Modal title={props.data[1]+' '+props.data[2] +'pcs'} open={isModalOpen} onOk={handleOk} maskClosable={false} onCancel={handleCancel}>
+   
             <Form
             form={form}
                     layout="vertical" 
                     name="basic"
                     initialValues={{
+                        remaining: 0,
                         breadout: 0,
-                        charge: 0,
                     }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
@@ -90,7 +104,7 @@ export function ModalSoldOut(props) {
                         },
                         ]}
                     >
-                        <Input type="number"/>
+                        <Input type="number" onChange={remainingHandler}/>
                     </Form.Item>
 
                      <Form.Item
@@ -103,10 +117,10 @@ export function ModalSoldOut(props) {
                         },
                         ]}
                     >
-                        <Input type="number"/>
+                        <Input type="number" onChange={breadoutHandler}/>
                     </Form.Item>
 
-                     <Form.Item
+             {/*        <Form.Item
                         label="Charge/pcs"
                         name="charge"
                         rules={[
@@ -117,11 +131,11 @@ export function ModalSoldOut(props) {
                         ]}
                     >
                         <Input type="number" />
-                    </Form.Item>
+                    </Form.Item>*/}
 
                     <Form.Item
                     >
-                        <Button loading={loading} type="primary" className='mt-3' block htmlType="submit">
+                        <Button disabled={ parseInt(remaining) > parseInt(props.data[2]) || parseInt(breadout) > parseInt(props.data[2])?true:false } loading={loading} type="primary" className='mt-3' block htmlType="submit">
                         SUBMIT
                         </Button>
                     </Form.Item>

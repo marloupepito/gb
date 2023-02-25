@@ -105,6 +105,7 @@ class CreateUsersTable extends Migration
             $table->bigInteger('branch_bread_id')->nullable();
             $table->string('branch_id')->nullable();
             $table->string('bread_name')->nullable();
+            $table->string('bind')->nullable();
             $table->string('code_name')->nullable();
             $table->string('ingredients_name')->nullable();
             $table->string('production_quantity')->nullable();

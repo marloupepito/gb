@@ -25,6 +25,7 @@ useEffect(() => {
     setData(res.data.status.data)
     setLoading(false)
   })
+
 }, []);
 
 
@@ -147,8 +148,15 @@ useEffect(() => {
       width: '15%',
       ...getColumnSearchProps('bread_name'),
     },
+     {
+      title: 'Beginning(pcs)',
+      dataIndex: 'beginning',
+      key: 'beginning',
+      width: '15%',
+      ...getColumnSearchProps('beginning'),
+    },
     {
-      title: 'New Production',
+      title: 'New Production(pcs)',
       dataIndex: 'production',
       key: 'production',
       width: '15%',
@@ -159,8 +167,29 @@ useEffect(() => {
            </Tag>
     ),
     },
+   
     {
-      title: 'Total',
+      title: 'Charge(pcs)',
+      dataIndex: 'charge',
+      key: 'charge',
+      width: '10%',
+      ...getColumnSearchProps('charge'),
+      sorter: (a, b) => a.charge.length - b.charge.length,
+      sortDirections: ['descend', 'ascend'],
+    },
+    // {
+    //     title: 'Total Amount',
+    //     dataIndex: 'price',
+    //     key: 'total',
+    //     width: '10%',
+    //     render: (_, { price,total }) => (
+    //       <b >
+    //     {price * total}
+    //     </b>
+    //   ),
+    //   },
+       {
+      title: 'Total(pcs)',
       dataIndex: 'total',
       key: 'total',
       width: '10%',
@@ -169,39 +198,20 @@ useEffect(() => {
         <Tag color={total <= 10?'volcano':'green'} key={total}>
              {total}
            </Tag>
-    ),
+     ),
     },
-    {
-      title: 'Price',
-      dataIndex: 'price',
-      key: 'price',
-      width: '10%',
-      ...getColumnSearchProps('price'),
-      sorter: (a, b) => a.price.length - b.price.length,
-      sortDirections: ['descend', 'ascend'],
-    },
-    {
-        title: 'Total Amount',
-        dataIndex: 'price',
-        key: 'total',
-        width: '10%',
-        render: (_, { price,total }) => (
-          <b >
-        {price * total}
-        </b>
-      ),
-      },
     {
         title: '',
         key: 'sold',
         dataIndex: 'sold',
         render: (_, { total,bread_name,key,price,branchid,production,created_at }) => (
-         <div>
-         {moment().format('A') === moment(created_at).format('A')?'Unavailable':<ModalSoldOut data={[key,bread_name,total,price,branchid]}/>}
-              {/*  {moment(created_at).add(12, 'hours').format('LLL')  < moment(new Date(created_at)).format('LLL')?
-         <ModalSoldOut data={[key,bread_name,total,price,branchid]}/>:'Unavailable'}
-            */}
-            </div>
+         // <div>
+         // {moment().format('A') === moment(created_at).format('A')?'Unavailable':<ModalSoldOut data={[key,bread_name,total,price,branchid]}/>}
+         //      {/*  {moment(created_at).add(12, 'hours').format('LLL')  < moment(new Date(created_at)).format('LLL')?
+         // <ModalSoldOut data={[key,bread_name,total,price,branchid]}/>:'Unavailable'}
+         //    */}
+         //    </div>
+          <ModalSoldOut data={[key,bread_name,total,price,branchid]}/>
         ),
           width: '5%',
       },

@@ -20,6 +20,9 @@ const ProductionSectionDrawer = (props) => {
   const ingredientsList = get_branch_ingredients().props.children
   const [notify,setNotify] =useState(false)
   const [breadList,setBreadList] =useState([])
+  const [bind,setBind] =useState(null)
+  const [quantity,setQuantity] =useState(null)
+
     const [a,setA] =useState([])
      const [b,setB] =useState([])
   const onClose = () => {
@@ -39,7 +42,15 @@ useEffect(() => {
   
  
   const onFinish = (values) => {
-    setLoading(true)
+    if(values.users === undefined){
+      setNotify('error')
+         function myGreeting() {
+           setNotify(false)
+           setLoading(false)
+          }
+          setTimeout(myGreeting, 1000);
+    }else{
+          setLoading(true)
       axios.post('/add_branch_ingredients',{
         branchid:branchId,
         data:values,
@@ -47,6 +58,8 @@ useEffect(() => {
       })
       .then(res=>{
          setNotify('success')
+         setA('')
+         setB('')
          form.resetFields();
          function myGreeting() {
            setNotify(false)
@@ -62,6 +75,8 @@ useEffect(() => {
           }
           setTimeout(myGreeting, 1000);
       }) 
+    }
+  
   };
 
 const breadNameHandler = (e)=>{
@@ -69,8 +84,18 @@ const breadNameHandler = (e)=>{
 }
 
 const breadQuantityHandler = (e)=>{
-  setB(e)
+  setB(e.target.value)
 }
+
+
+const bindHandler = (e)=>{
+  setBind(e)
+}
+
+const quantityHandler = (e)=>{
+  setQuantity(e.target.value)
+}
+
 
   return (
     <>
@@ -88,7 +113,7 @@ const breadQuantityHandler = (e)=>{
           </Space>
         }
       >
-     
+  
         <Form layout="vertical"
          form={form} name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off" >
           <Row gutter={16}>
@@ -96,7 +121,6 @@ const breadQuantityHandler = (e)=>{
             <Row gutter={16}>
              <Col xs={24} sm={24} md={24}>
                 <Form.Item
-                      name="codename"
                       label="Code Name"
                    
                     >
@@ -107,7 +131,7 @@ const breadQuantityHandler = (e)=>{
               <Col xs={24} sm={24} md={24}>
                 <Form.Item
                       name="breadname"
-                      label="Bread Name"
+                      label="Name of Bread"
                       rules={[
                         {
                           required: true,
@@ -134,30 +158,107 @@ const breadQuantityHandler = (e)=>{
 
             
               <Col xs={24} sm={24} md={24}>
-                        
+                     
                  <Form.Item
-                   label="Production Quantity"
+                   label={bind === 'Grams'?"Target "+quantity/20+' pieces':"Target "+(quantity*50)+' pieces'}
                     name="productionquantity"
+                    //initialValue={quantity}
                     rules={[
                       {
                         required: true,
-                        message: 'Production Quantity',
+                        message: 'required',
                       },
                     ]}
                   >
-                    <InputNumber
+                    <Input
                     onChange={breadQuantityHandler}
                      style={{
                       width:'100%'
-                          }} placeholder="Production Quantity" />
+                          }} placeholder="Target pieces" />
                   </Form.Item>
               </Col>
               </Row>
             </Col>
-       
-            
-            <Col xs={24} sm={12} md={12}>
-            Ingredients List
+               
+                  <Col xs={24} sm={12} md={12}>
+                  Ingredients List
+                   <Space
+                        style={{
+                          display: 'flex',
+                          marginBottom: 8,
+                        }}
+                        align="baseline"
+                      >
+                        <Form.Item
+                          initialValue="Flour"
+                        
+                          name='flour'
+                          rules={[
+                            {
+                              required: true,
+                              message: 'required',
+                            },
+                          ]}
+                        >
+                        <Input
+                        disabled
+                        type="text"
+                          style={{
+                                  width: 300,
+                                }} placeholder="Flour" />
+                        </Form.Item>
+                           <Form.Item
+                          
+                          name='bind'
+                          rules={[
+                            {
+                              required: true,
+                              message: 'required',
+                            },
+                          ]}
+                        >
+                         <Select
+                         onChange={bindHandler}
+                         placeholder="Bind"
+                          style={{
+                            width: 120,
+                          }}
+                          options={[
+                            {
+                              value: 'Grams',
+                              label: 'Grams',
+                            },
+                            {
+                              value: 'Kilo',
+                              label: 'Kilo',
+                            },
+                            {
+                              value: 'Pcs',
+                              label: 'Pcs',
+                            },
+                          ]}
+                        />
+                         </Form.Item>
+
+                        <Form.Item
+                          
+                          name='quantity'
+                          rules={[
+                            {
+                              required: true,
+                              message: 'required',
+                            },
+                          ]}
+                        >
+                          <Input
+                           onChange={quantityHandler}
+                          type="number" 
+                          style={{
+                                  width: 120,
+                                }} placeholder="Quantity" />
+                        </Form.Item>
+                        </Space>
+
             <div>
               <Form.List name="users">
                 {(fields, { add, remove }) => (
@@ -177,7 +278,7 @@ const breadQuantityHandler = (e)=>{
                           rules={[
                             {
                               required: true,
-                              message: 'Missing Ingredients name',
+                              message: 'required',
                             },
                           ]}
                         >
@@ -193,11 +294,40 @@ const breadQuantityHandler = (e)=>{
                                   (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
                                 }
                                 className="text-capitalize"
-                                options={ingredientsList.map((res) =>({label:res.ingredients_name.toLowerCase()+ '-' +res.bind_name.toLowerCase(), value:res.ingredients_name.toLowerCase()+ ' ' +res.bind_name.toLowerCase()+'|'+res.id}))}
+                                options={ingredientsList.map((res) =>({label:res.ingredients_name.toLowerCase(), value:res.ingredients_name.toLowerCase()+'|'+res.id}))}
                               />
                         </Form.Item>
-
-
+                           <Form.Item
+                          {...restField}
+                          name={[name, 'bind']}
+                          rules={[
+                            {
+                              required: true,
+                              message: 'required',
+                            },
+                          ]}
+                        >
+                         <Select
+                         placeholder="Bind"
+                          style={{
+                            width: 120,
+                          }}
+                          options={[
+                            {
+                              value: 'Grams',
+                              label: 'Grams',
+                            },
+                            {
+                              value: 'Kilo',
+                              label: 'Kilo',
+                            },
+                            {
+                              value: 'Pcs',
+                              label: 'Pcs',
+                            },
+                          ]}
+                        />
+                         </Form.Item>
 
                         <Form.Item
                           {...restField}
@@ -205,12 +335,14 @@ const breadQuantityHandler = (e)=>{
                           rules={[
                             {
                               required: true,
-                              message: 'Missing Quantity',
+                              message: 'required',
                             },
                           ]}
                         >
-                          <InputNumber style={{
-                                  width: 300,
+                          <Input
+                          type="number" 
+                          style={{
+                                  width: 120,
                                 }} placeholder="Quantity" />
                         </Form.Item>
                               

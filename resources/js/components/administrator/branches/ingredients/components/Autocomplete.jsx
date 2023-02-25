@@ -2,9 +2,11 @@ import React, { useState,useEffect } from 'react';
 import { Input } from 'antd';
 import { Col, Row } from 'antd';
 import IngredientsCard from './Card';
+
 const IngredientsAutocomplete = (props) => {
 const [ingdata,setIngdata] = useState([]);
 const [timeCount,setTimeCount] = useState(0);
+
 
 useEffect(() => {
   setIngdata(props.data)
