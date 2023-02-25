@@ -49,15 +49,16 @@ class InventoryProductionController extends Controller
                   'status' =>$checkExist
               ]);
           }else{
+            
               $records = new Records;
               $records->branch_id = $request->branchid;
               $records->bread_id = $request->data[0]['branch_bread_id'];
               $records->bread_name =$request->data[0]['bread_name'];
               $records->beginning = $beginning === null?0:$beginning->remaining;
-              $records->production = $request->data[0]['production_quantity'];
-              $records->charge = $request->data[0]['production_quantity'] - $request->pieces;
+              $records->production = $request->pieces;
+              $records->charge = $request->data[0]['production_quantity'] - $request->pieces < 0?0:$request->data[0]['production_quantity'] - $request->pieces;
               $records->price = $bread->price;
-              $records->total = $beginning === null?$request->data[0]['production_quantity']:$beginning->remaining+$request->data[0]['production_quantity'];
+              $records->total = $beginning === null? $request->pieces:$beginning->remaining+ $request->pieces;
               $records->date = $request->date;
               $records->save();
               return response()->json([
