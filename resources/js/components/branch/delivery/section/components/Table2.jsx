@@ -173,7 +173,7 @@ function acceptDelivery(request_id){
         width: '5%',
         render: (_, { created_at,request_id }) => (
           <>
-           <Button block type="primary" ghost onClick={(e)=>acceptDelivery(request_id)}>SHOW</Button>
+           <Button block type="primary" ghost onClick={(e)=>acceptDelivery(request_id)}>ACCEPT</Button>
            </>
         ),
       },

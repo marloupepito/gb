@@ -1,6 +1,6 @@
 import React, { useRef, useState,useEffect } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Space, Table,Tag } from 'antd';
+import { Button, Input, Space, Table,Tag,Popover  } from 'antd';
 import Highlighter from 'react-highlight-words';
 import {ModalSoldOut} from '../section/components/Modal';
 import { SearchBranchId } from '../../../routes/Search';
@@ -25,6 +25,7 @@ useEffect(() => {
     setData(res.data.status.data)
     setLoading(false)
   })
+
 }, []);
 
 
@@ -147,8 +148,15 @@ useEffect(() => {
       width: '15%',
       ...getColumnSearchProps('bread_name'),
     },
+     {
+      title: 'Beginning(pcs)',
+      dataIndex: 'beginning',
+      key: 'beginning',
+      width: '15%',
+      ...getColumnSearchProps('beginning'),
+    },
     {
-      title: 'New Production',
+      title: 'New Production(pcs)',
       dataIndex: 'production',
       key: 'production',
       width: '15%',
@@ -159,8 +167,56 @@ useEffect(() => {
            </Tag>
     ),
     },
+   
     {
-      title: 'Total',
+      title: 'Charge(pcs)',
+      dataIndex: 'charge',
+      key: 'charge',
+      width: '10%',
+      ...getColumnSearchProps('charge'),
+      sorter: (a, b) => a.charge.length - b.charge.length,
+      sortDirections: ['descend', 'ascend'],
+       render: (_, { charge,charge_remarks,key,total }) => (
+       <Popover content={
+      <table className="table">
+          <tbody>
+            <tr>
+              <td className="p-0" scope="row">Target pieces:</td>
+              <td className="p-0"><b>{parseInt(total)+parseInt(charge)}</b></td>
+            </tr>
+            <tr>
+              <td className="p-0" scope="row">New production:</td>
+              <td className="p-0"><b>{parseInt(total)}</b></td>
+            </tr>
+            <tr>
+              <td className="p-0" scope="row">Charge: </td>
+              <td className="p-0"> <b> {charge}</b></td>
+            </tr>
+             <tr>
+              <td className="p-0" colspan="2"><b> {charge_remarks}</b></td>
+            </tr>
+          </tbody>
+        </table>
+        } title="Remark Charges">
+            <Tag color='volcano' key={key}>
+             {charge}
+           </Tag>
+      </Popover>
+     ),
+    },
+    // {
+    //     title: 'Total Amount',
+    //     dataIndex: 'price',
+    //     key: 'total',
+    //     width: '10%',
+    //     render: (_, { price,total }) => (
+    //       <b >
+    //     {price * total}
+    //     </b>
+    //   ),
+    //   },
+       {
+      title: 'Total(pcs)',
       dataIndex: 'total',
       key: 'total',
       width: '10%',
@@ -169,39 +225,20 @@ useEffect(() => {
         <Tag color={total <= 10?'volcano':'green'} key={total}>
              {total}
            </Tag>
-    ),
+     ),
     },
-    {
-      title: 'Price',
-      dataIndex: 'price',
-      key: 'price',
-      width: '10%',
-      ...getColumnSearchProps('price'),
-      sorter: (a, b) => a.price.length - b.price.length,
-      sortDirections: ['descend', 'ascend'],
-    },
-    {
-        title: 'Total Amount',
-        dataIndex: 'price',
-        key: 'total',
-        width: '10%',
-        render: (_, { price,total }) => (
-          <b >
-        {price * total}
-        </b>
-      ),
-      },
     {
         title: '',
         key: 'sold',
         dataIndex: 'sold',
         render: (_, { total,bread_name,key,price,branchid,production,created_at }) => (
-         <div>
-         {moment().format('A') === moment(created_at).format('A')?'Unavailable':<ModalSoldOut data={[key,bread_name,total,price,branchid]}/>}
-              {/*  {moment(created_at).add(12, 'hours').format('LLL')  < moment(new Date(created_at)).format('LLL')?
-         <ModalSoldOut data={[key,bread_name,total,price,branchid]}/>:'Unavailable'}
-            */}
-            </div>
+         // <div>
+         // {moment().format('A') === moment(created_at).format('A')?'Unavailable':<ModalSoldOut data={[key,bread_name,total,price,branchid]}/>}
+         //      {/*  {moment(created_at).add(12, 'hours').format('LLL')  < moment(new Date(created_at)).format('LLL')?
+         // <ModalSoldOut data={[key,bread_name,total,price,branchid]}/>:'Unavailable'}
+         //    */}
+         //    </div>
+          <ModalSoldOut data={[key,bread_name,total,price,branchid,production]}/>
         ),
           width: '5%',
       },

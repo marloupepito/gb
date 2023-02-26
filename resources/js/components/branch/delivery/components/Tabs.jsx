@@ -3,12 +3,10 @@ import { PullRequestOutlined, SendOutlined,ScheduleOutlined } from '@ant-design/
 import { Tabs } from 'antd';
 import {Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import {SearchBranchId} from '../../../routes/Search'
 function DeliveryTabs() {
   const navigate = useNavigate();
   const tabs = window.location.pathname.split('/')[4]
   function nextTab(e){
-    
     const branch = window.location.pathname.split('/')[2]
     const id = window.location.search.substring(1)
     navigate('/branch/'+branch+'/delivery/'+e+'?'+id)

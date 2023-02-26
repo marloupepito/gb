@@ -31,7 +31,7 @@ function ProductionTabs() {
               label: (
               <span>
                 <PullRequestOutlined />
-                 Bread List
+                 Bakers Report
               </span>
             ),
             key: 'list',
@@ -41,7 +41,7 @@ function ProductionTabs() {
               label: (
               <span>
                 <PullRequestOutlined />
-                Records
+                Sales Report
               </span>
             ),
             key: 'records',

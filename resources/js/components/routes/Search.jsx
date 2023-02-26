@@ -10,7 +10,7 @@ export function SearchBranchId(props) {
              sessionStorage.setItem("branchid", value);
         }else{
             const user = localStorage.getItem("id")
-
+            
             setSearchParams('branch_id='+user)
         }
     }, []);

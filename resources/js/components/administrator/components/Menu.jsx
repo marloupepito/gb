@@ -69,7 +69,8 @@ const Menus = () => {
                     key: String('production'+res.id),
                     label:<a id={res.branch_name+'/production/create?branch_id='+res.id} onClick={onTitleClick}>Production</a>,
                     icon:<ProfileTwoTone />,
-                }, {
+                },
+                 {
                     key: String('accounts'+res.id),
                     label:<a id={res.branch_name+'/accounts?branch_id='+res.id} onClick={onTitleClick}>Accounts</a>,
                     icon:<IdcardTwoTone />,

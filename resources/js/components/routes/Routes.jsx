@@ -32,7 +32,7 @@ import RequestSectionBranch from '../branch/delivery/section/Request';
 import DeliverySectionBranch from '../branch/delivery/section/Delivery';
 import ReceivedSectionBranch from '../branch/delivery/section/Received';
 import AppLoadingBranch from '../branch/components/Loading';
-// import EmployeesPageBranch from '../employees/Page';
+import EmployeesPageBranch from '../branch/employees/Page';
 import IngredientsPageBranch from '../branch/ingredients/Page';
 import ProductionPageBranch from '../branch/production/Page';
 import CreateSectionBranch from '../branch/production/section/CreateSection';
@@ -109,6 +109,7 @@ export const router = createBrowserRouter([
       {path:'/branch/:id/production/sold', element: <BreadSoldSectionBranch />},
       {path:'/branch/:id/production/out', element: <BreadOutSectionBranch />},
     ]},
+     {path:'/branch/:id/accounts', element:<EmployeesPageBranch />},
    // { path:'/branch/:id/employees', element:<EmployeesPageBranch />},
     { path:'/branch/:id/loading', element:<AppLoadingBranch />}
   ]

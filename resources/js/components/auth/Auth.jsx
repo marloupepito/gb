@@ -38,11 +38,12 @@ function Auth() {
           password:values.password
       })
       .then(res=>{       
-          if(res.data.status === 'success' && res.data.user.position === 'personnel'){
-              navigate("/branch/"+res.data.user.branch_name.replace(/ /g,'_')+"/ingredients");
-              localStorage.setItem("position", "personnel");
-              localStorage.setItem("branch", res.data.user.branch_name);
-              localStorage.setItem("id", res.data.user.id);
+        console.log(res.data.branch)
+          if(res.data.status === 'success' && res.data.user.position !== 'admin'){
+              navigate("/branch/"+res.data.branch.branch_name.replace(/ /g,'_')+"/ingredients");
+              localStorage.setItem("position", res.data.user.position);
+              localStorage.setItem("branch", res.data.branch.branch_name);
+              localStorage.setItem("id",  res.data.branch.id);
               setLoading(false)
           }else if(res.data.status === 'success' && res.data.user.position === 'admin'){
               navigate("/administrator/dashboard");

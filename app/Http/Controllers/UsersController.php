@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Branches;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,7 @@ public function update_account(Request $request){
      $exist= User::where([['username','=',$request->data['username']],['id','<>',$request->id]])->get();
 
      if(count($exist) === 0){
-        if($request->name === null){
+        if($request->data['password'] === null){
             User::where('id','=',$request->id)->update([
                 'name'=>$request->data['name'],
                 'shift'=>$request->data['shift'],
@@ -35,7 +36,7 @@ public function update_account(Request $request){
                 'shift'=>$request->data['shift'],
                 'username'=>$request->data['username'],
                 'mobile'=>$request->data['mobile'],
-                'password'=>$request->data['password'],
+                'password'=>Hash::make($request->data['password']),
                 'gender'=>$request->data['gender'],
                 'position'=>$request->data['position'],
             ]);
@@ -72,9 +73,12 @@ public function update_account(Request $request){
         ]);
 
         if(Auth::attempt($request->only('username','password'))){
+            
+     $branch = Branches::where('id', '=',Auth::user()['branch_id'])->first();
             return response()->json([
                 'status' => 'success',
-                'user' => Auth::user()
+                'user' => Auth::user(),
+                'branch' => $branch,
             ]);
         }else{
             return response()->json([

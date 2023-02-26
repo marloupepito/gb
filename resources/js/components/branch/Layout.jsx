@@ -16,15 +16,15 @@ const BranchLayout = () => {
     logout === true?setLogout(false):setLogout(true)
   }
   return (
-    <Layout hasSider>
+   <Layout hasSider>
       {
         logout === true?<LogoutSession show={logout}/>:false
       }
       <Sider
+      width="250px"
       className='border border-right'
       style={{
         height: '100vh',
-        position: 'fixed',
         left: 0,
         top: 0,
         bottom: 0,
@@ -39,7 +39,7 @@ const BranchLayout = () => {
         //  console.log(collapsed, type);
         }}
       >
-       <div style={{ height: 32, margin: 16, background: 'red' }} />
+     <img src="/images/logo.jpg" width="100%"/>
         
         <Menus />
         <Button type="primary" danger onClick={LogoutUser}  className="position-absolute bottom-0 end-0" icon={<LogoutOutlined />} block size="large">
@@ -48,37 +48,37 @@ const BranchLayout = () => {
         
       </Sider>
       <Layout
-        style={{
-          marginLeft: 200,
-        }}>
+       style={{
+        height: '100vh',
+        background: colorBgContainer,
+      }}
+       >
         <Header
-        className='border-bottom'
           style={{
-            padding: 0,
             background: colorBgContainer,
           }}
-        ><div style={{marginLeft:'10px'}}>
-            <b className="text-danger">GB</b> <b>BAKESHOP</b>
+          className="border-bottom"
+        ><div>
+            <b className="text-danger">GB BAKESHOP</b> <b> {window.location.pathname.split('/')[2].replace(/_/g,' ')}</b>
             </div></Header>
         <Content
+        style={{
+          overflow: 'auto',
+          height: '100vh',
+        }}
         >
-          <div
-            style={{
-              padding: 24,
-              minHeight: 360,
-              background: colorBgContainer,
-            }}
-          >
-            <Outlet />
+        <br />
+          <div className="container">
+          <Outlet/>
           </div>
         </Content>
-        <Footer
+      {/*  <Footer
           style={{
             textAlign: 'center',
           }}
         >
           Ant Design ©2018 Created by Ant UED
-        </Footer>
+        </Footer>*/}
       </Layout>
     </Layout>
   );

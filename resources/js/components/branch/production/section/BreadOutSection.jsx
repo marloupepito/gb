@@ -7,4 +7,5 @@ function BreadOutSection() {
         <BreadOutTable /></>
      );
 }
+
 export default BreadOutSection;

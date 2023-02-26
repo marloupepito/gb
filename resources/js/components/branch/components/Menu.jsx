@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import {  Menu, theme } from 'antd';
 import { GetAllBranch } from './../../administrator/api/Branch';
-import { ShopTwoTone,SnippetsTwoTone,SettingTwoTone,ProfileTwoTone,ContactsTwoTone,DashboardTwoTone } from '@ant-design/icons';
+import { ShopTwoTone,SnippetsTwoTone,SettingTwoTone,ProfileTwoTone,ContactsTwoTone,DashboardTwoTone,IdcardTwoTone } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
 import { SearchBranchId } from '../../routes/Search';
 import {BranchNameParams} from '../../routes/Params'
@@ -60,7 +60,11 @@ const Menus = () => {
                 label:<a id={'/branch/'+branchName+'/production/create?branch_id='} onClick={onTitleClick}>Production</a>,
                 icon:<ProfileTwoTone />,
             },
-          
+           {
+                    key: String('accounts'),
+                    label:<a id={'/branch/'+branchName+'/accounts?branch_id='} onClick={onTitleClick}>Accounts</a>,
+                    icon:<IdcardTwoTone />,
+                },
           ]
         }
         />
