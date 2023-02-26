@@ -7,8 +7,10 @@ export function SearchBranchId(props) {
     useEffect(() => {
       if(localStorage.getItem("position") === 'admin'){
             setSearchParams(value === null?'branch_id=main':'branch_id='+value)
+             sessionStorage.setItem("branchid", value);
         }else{
             const user = localStorage.getItem("id")
+
             setSearchParams('branch_id='+user)
         }
     }, []);

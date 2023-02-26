@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SearchBranchId } from '../../../../routes/Search';
-import { DatePicker, Button } from 'antd';
+import { DatePicker, Button,Popover } from 'antd';
 import moment from 'moment'
 function ProductionRecords() {
 const branch_id=SearchBranchId().props.children
@@ -73,7 +73,32 @@ const searchDate =()=>{
       <td>{res.price}</td>
       <th>{res.production === null?res.beginning:parseInt(res.beginning) + parseInt(res.production)}</th>
       <td>{res.breadout}</td>
-      <td>{res.charge}</td>
+      <td>
+         <Popover content={
+      <table className="table">
+          <tbody>
+            <tr>
+              <td className="p-0" scope="row">Target pieces:</td>
+              <td className="p-0"><b>{parseInt(res.total)+parseInt(res.charge)}</b></td>
+            </tr>
+            <tr>
+              <td className="p-0" scope="row">New production:</td>
+              <td className="p-0"><b>{parseInt(res.total)}</b></td>
+            </tr>
+            <tr>
+              <td className="p-0" scope="row">Charge: </td>
+              <td className="p-0"> <b> {res.charge}</b></td>
+            </tr>
+             <tr>
+              <td className="p-0" colspan="2"><b> {res.charge_remarks}</b></td>
+            </tr>
+          </tbody>
+        </table>
+        } title="Remark Charges">
+            <a href="#"> {res.charge}</a>
+           
+      </Popover>
+      </td>
       <td>{res.remaining}</td>
       <td>{res.soldout}</td>
       <td>{res.remaining === null?0:parseInt(res.price) * parseInt(res.soldout)}</td>

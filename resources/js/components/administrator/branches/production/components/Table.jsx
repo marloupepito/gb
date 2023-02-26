@@ -1,6 +1,6 @@
 import React, { useRef, useState,useEffect } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Space, Table,Tag } from 'antd';
+import { Button, Input, Space, Table,Tag,Popover  } from 'antd';
 import Highlighter from 'react-highlight-words';
 import {ModalSoldOut} from '../section/components/Modal';
 import { SearchBranchId } from '../../../../routes/Search';
@@ -176,6 +176,33 @@ useEffect(() => {
       ...getColumnSearchProps('charge'),
       sorter: (a, b) => a.charge.length - b.charge.length,
       sortDirections: ['descend', 'ascend'],
+       render: (_, { charge,charge_remarks,key,total }) => (
+       <Popover content={
+      <table className="table">
+          <tbody>
+            <tr>
+              <td className="p-0" scope="row">Target pieces:</td>
+              <td className="p-0"><b>{parseInt(total)+parseInt(charge)}</b></td>
+            </tr>
+            <tr>
+              <td className="p-0" scope="row">New production:</td>
+              <td className="p-0"><b>{parseInt(total)}</b></td>
+            </tr>
+            <tr>
+              <td className="p-0" scope="row">Charge: </td>
+              <td className="p-0"> <b> {charge}</b></td>
+            </tr>
+             <tr>
+              <td className="p-0" colspan="2"><b> {charge_remarks}</b></td>
+            </tr>
+          </tbody>
+        </table>
+        } title="Remark Charges">
+            <Tag color='volcano' key={key}>
+             {charge}
+           </Tag>
+      </Popover>
+     ),
     },
     // {
     //     title: 'Total Amount',

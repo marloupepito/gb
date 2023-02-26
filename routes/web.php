@@ -49,6 +49,12 @@ Route::post('/add_branch','BranchController@add_branch');
 Route::post('/delete_branch','BranchController@delete_branch');
 
 Route::post('/user_login','UsersController@user_login');
+Route::post('/add_account','UsersController@add_account');
+Route::post('/get_all_users','UsersController@get_all_users');
+Route::post('/delete_account','UsersController@delete_account');
+Route::post('/get_every_account','UsersController@get_every_account');
+Route::put('/update_account','UsersController@update_account');
+
 
 
 Route::post('/get_all_ingredients','IngredientsController@get_all_ingredients');
@@ -76,9 +82,10 @@ Route::post('/get_notification','NotificationController@get_notification');
 Route::post('/get_branch_ingredients','BranchIngredientsController@get_branch_ingredients');
 Route::post('/get_every_ingredients','BranchIngredientsController@get_every_ingredients');
 Route::post('/make_branch_ingredients','BranchIngredientsController@make_branch_ingredients');
+Route::post('/make_branch_ingredients','BranchIngredientsController@make_branch_ingredients');
+Route::post('/delete_branch_ingredients','BranchIngredientsController@delete_branch_ingredients');
 
 Route::post('/get_bread_every_branch','BranchBreadController@get_bread_every_branch');
-Route::post('/get_bread_every_branch2','BranchBreadController@get_bread_every_branch2');
 Route::post('/get_bread_every_branch2','BranchBreadController@get_bread_every_branch2');
 
 

@@ -44,7 +44,8 @@ class InventoryProductionController extends Controller
               Records::where([['remember_token','=',null],['bread_id','=',$request->data[0]['branch_bread_id']],['branch_id','=',$request->branchid]])->update([
                 'total' =>$checkExist->total+$request->data[0]['production_quantity'],
                 'production' =>$checkExist->production+$request->data[0]['production_quantity'],
-                'charge' =>$checkExist->charge+($request->data[0]['production_quantity'] - $request->pieces),
+                'charge' =>$request->data[0]['production_quantity'] - $request->pieces < 0?0:$request->data[0]['production_quantity'] - $request->pieces,
+                'charge_remarks' =>$request->remarks,
               ]);
               return response()->json([
                   'status' =>$checkExist
@@ -57,6 +58,7 @@ class InventoryProductionController extends Controller
               $records->bread_name =$request->data[0]['bread_name'];
               $records->beginning = $beginning === null?0:$beginning->remaining;
               $records->production = $request->pieces;
+              $records->charge_remarks = $request->remarks;
               $records->charge = $request->data[0]['production_quantity'] - $request->pieces < 0?0:$request->data[0]['production_quantity'] - $request->pieces;
               $records->price = $bread->price;
               $records->total = $beginning === null? $request->pieces:$beginning->remaining+ $request->pieces;
@@ -72,6 +74,7 @@ class InventoryProductionController extends Controller
              Records::where('key',$checkExist->key)->update([
                 'total' =>$checkExist->beginning+$request->pieces,
                 'production' =>$request->pieces,
+                'charge_remarks' =>$request->remarks,
               ]);
               return response()->json([
                   'status' =>$checkExist

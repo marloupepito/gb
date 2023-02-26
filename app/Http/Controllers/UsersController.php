@@ -10,6 +10,61 @@ use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
+    
+public function update_account(Request $request){
+     $exist= User::where([['username','=',$request->data['username']],['id','<>',$request->id]])->get();
+
+     if(count($exist) === 0){
+        if($request->name === null){
+            User::where('id','=',$request->id)->update([
+                'name'=>$request->data['name'],
+                'shift'=>$request->data['shift'],
+                'username'=>$request->data['username'],
+                'mobile'=>$request->data['mobile'],
+                'gender'=>$request->data['gender'],
+                'position'=>$request->data['position'],
+            ]);
+
+            return response()->json([
+                'status' =>'success',
+            ]);
+        }else{
+
+             User::where('id','=',$request->id)->update([
+                'name'=>$request->data['name'],
+                'shift'=>$request->data['shift'],
+                'username'=>$request->data['username'],
+                'mobile'=>$request->data['mobile'],
+                'password'=>$request->data['password'],
+                'gender'=>$request->data['gender'],
+                'position'=>$request->data['position'],
+            ]);
+
+
+            return response()->json([
+                'status' =>'success',
+            ]);
+        }
+     }else{
+       return response()->json([
+            'status' =>'exist',
+        ]);
+     }
+}
+    public function get_every_account(Request $request){
+        $user= User::where('id',$request->id)->first();
+
+           return response()->json([
+                    'status' =>$user,
+                ]);
+    }
+    public function delete_account(Request $request){
+
+       User::where('id',$request->id)->delete();
+                  return response()->json([
+                    'status' =>'success',
+                ]);
+    }
    public function user_login(Request $request){
         $request->validate([
             'username'=>['required'],
@@ -31,8 +86,38 @@ class UsersController extends Controller
         ]);
         
     }
+
+     public function add_account(Request $request){
+   
+
+       $exist = User::where('username','=',$request->data['username'])->get();
+        if(count($exist) === 0){
+           User::create([
+                    'key' =>  rand(100000,9999999),
+                    'branch_id' =>  $request->branchid,
+                    'name' =>  $request->data['name'],
+                    'gender' => $request->data['gender'],
+                    'mobile' =>  $request->data['mobile'],
+                    'username' => $request->data['username'],
+                    'password' =>  Hash::make($request->data['password']),
+                    'shift' =>  $request->data['shift'],
+                    'position' => $request->data['position'],
+                ]);  
+                 return response()->json([
+                    'status' =>'success',
+                    'load' =>rand(100000,9999999)
+                ]);
+        }else{
+               return response()->json([
+                    'status' =>'exist' 
+                ]);      
+        }
+  
+
+       
+    }
     public function get_all_users(Request $request){
-        $users = User::where('usertype', '=' ,'cafe')
+        $users = User::where([['branch_id', '=' ,$request->branchid],['position', '<>' ,'admin']])
         ->get();
         return response()->json([
             'status' => $users

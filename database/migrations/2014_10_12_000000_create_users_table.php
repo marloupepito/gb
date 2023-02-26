@@ -28,6 +28,8 @@ class CreateUsersTable extends Migration
             $table->string('remaining')->nullable();
             $table->string('soldout')->nullable();
             $table->string('sales')->nullable();
+            $table->string('charge_remarks')->nullable();
+            $table->string('breadout_remarks')->nullable();
             $table->string('date')->nullable();
             $table->rememberToken();
             $table->timestamps();
@@ -35,10 +37,13 @@ class CreateUsersTable extends Migration
 
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('key')->nullable()->unique();
-            $table->string('branch_id')->nullable()->unique();
-            $table->string('branch_assigned_person')->nullable();
-            $table->string('branch_position')->nullable();
+            $table->string('key')->nullable();
+            $table->string('branch_id')->nullable();
+            $table->string('name')->nullable();
+            $table->string('shift')->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('position')->nullable();
             $table->string('username')->nullable();
             $table->string('password')->nullable();
             $table->string('status')->nullable();

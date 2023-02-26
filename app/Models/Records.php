@@ -24,6 +24,8 @@ class Records extends Model
        'remaining',
        'soldout',
        'sales',
+       'charge_remarks',
+       'breadout_remarks',
        'date',
      ];
 }

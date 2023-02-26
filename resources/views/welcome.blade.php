@@ -15,12 +15,10 @@
         <!-- Styles -->
         
 
-      <!--  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <script src="{{ asset('js/app.js') }}" defer></script> -->
+     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <script src="{{ asset('js/app.js') }}" defer></script> 
 
 
- @viteReactRefresh
-         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <style>
             body {
                 font-family: 'Nunito', sans-serif;

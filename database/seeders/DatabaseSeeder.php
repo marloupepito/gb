@@ -159,8 +159,8 @@ class DatabaseSeeder extends Seeder
 
      	    $user = new User;
 	        $user->branch_id = 'admin';
-	        $user->branch_assigned_person = 'admin';
-	        $user->branch_position = 'admin';
+	        $user->name = 'admin';
+	        $user->position = 'admin';
 	        $user->username = 'admin';
 	        $user->password = Hash::make('admin');
 	 		$user->status = 'active';

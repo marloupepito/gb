@@ -15,7 +15,7 @@ function Auth() {
         console.log(res.data)
           if(window.location.pathname === '/'){
               
-              if(res.data.branch_position === 'admin'){
+              if(res.data.position === 'admin'){
                 navigate('/administrator/dashboard');
                 setLoading2(false) 
               }else{
@@ -38,18 +38,18 @@ function Auth() {
           password:values.password
       })
       .then(res=>{       
-          if(res.data.status === 'success' && res.data.user.branch_position === 'personnel'){
+          if(res.data.status === 'success' && res.data.user.position === 'personnel'){
               navigate("/branch/"+res.data.user.branch_name.replace(/ /g,'_')+"/ingredients");
               localStorage.setItem("position", "personnel");
               localStorage.setItem("branch", res.data.user.branch_name);
               localStorage.setItem("id", res.data.user.id);
               setLoading(false)
-          }else if(res.data.status === 'success' && res.data.user.branch_position === 'admin'){
+          }else if(res.data.status === 'success' && res.data.user.position === 'admin'){
               navigate("/administrator/dashboard");
             localStorage.setItem("position", "admin");
             setLoading(false)
           }else{  
-            setError(res.data.user.branch_position) 
+            setError(res.data.user.position) 
             setLoading(false)
           }
       })

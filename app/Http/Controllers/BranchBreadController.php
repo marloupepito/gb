@@ -48,13 +48,21 @@ class BranchBreadController extends Controller
               $records->date = $request->date;
               $records->save();
 
+
+              $alltotal =$getBread->total;
+              $breadout = $request->breadout;
+              $breadTotalRemaining= $alltotal-$breadout;
+              $remaining =  $request->remaining;
+              $soldout =  $breadTotalRemaining - $remaining;
+
+
          Records::where([['branch_id', $branchid],['key', $request->breadid]])
           ->update([
-            'breadout' => $request->breadout,
+            'breadout' => $breadout,
            // 'charge' => $request->charge,
-            'remaining' => $request->remaining,
-            'soldout' =>$getBread->total-$request->remaining,
-            'sales' =>$getBread->price * ($getBread->total-$request->remaining),
+            'remaining' =>$remaining,
+            'soldout' =>$soldout,
+            'sales' =>$getBread->price * $soldout,
             'date' =>$request->date,
             'remember_token' =>'done',
         ]);

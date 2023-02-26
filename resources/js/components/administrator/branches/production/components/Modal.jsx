@@ -6,6 +6,7 @@ import { BranchNameParams } from '../../../../routes/Params';
 import { SearchBranchId } from '../../../../routes/Search';
 import { AppNotification } from '../../../../components/Notification';
 import moment from 'moment'
+const { TextArea } = Input;
 const CodeModal = (props) => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,6 +16,7 @@ const CodeModal = (props) => {
   const branch = BranchNameParams().props.children
   const branchid = SearchBranchId().props.children
   const [notify,setNotify] =useState(false)
+  const [remarks,setRemarks] =useState(null)
 
 
 //this is the calculation of grams to kilo -> res.bind === 'Grams'?res.ingredients_quantity-(parseInt(res.quantity) / 1000):res.ingredients_quantity-res.quantity
@@ -57,6 +59,7 @@ const CodeModal = (props) => {
           data:event,
           branchid:branchid,
           pieces:pieces,
+          remarks:remarks,
           date:moment().format('MMMM DD, YYYY A')
         })
         .then(res=>{
@@ -80,6 +83,12 @@ const CodeModal = (props) => {
  const breadQuantityHandler =(e)=>{
   setPieces(e.target.value)
   }
+
+  const remarksHandler =(e)=>{
+    setRemarks(e.target.value)
+  }
+
+  
   return (
     <>
     {
@@ -93,10 +102,11 @@ const CodeModal = (props) => {
         <b>Bread Name: {props.data.bread_name}</b><br />
         <b>Target pieces per kilo: {props.data.production_quantity}</b>
         <Input
-                    onChange={breadQuantityHandler}
-                     style={{
-                      width:'100%'
-                          }} placeholder="Current pieces" />
+          onChange={breadQuantityHandler}
+           style={{
+            width:'100%'
+                }} placeholder="Current pieces" />
+                 <TextArea rows={3} className="mt-2" onChange={remarksHandler} placeholder="Remarks" maxLength={191} />
         <table className="table">
           <thead>
             <tr>
