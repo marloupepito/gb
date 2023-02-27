@@ -55,7 +55,7 @@ class CreateUsersTable extends Migration
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
             $table->string('key')->nullable()->unique();
-            $table->string('branch_name')->nullable()->unique();
+            $table->string('branch_name')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
