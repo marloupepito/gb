@@ -48,7 +48,7 @@ export function ModalSoldOut(props) {
         .then(res=>{
           setNotify('success')
           setTimeout(() => {
-            navigate('/administrator/'+branchname+'/loading')
+            navigate('/branch/'+branchname+'/loading')
             setLoading(false)
           }, 1000);
         })
