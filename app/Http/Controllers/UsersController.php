@@ -74,7 +74,7 @@ public function update_account(Request $request){
 
         if(Auth::attempt($request->only('username','password'))){
             
-     $branch = Branches::where('id', '=',Auth::user()['branch_id'])->first();
+     $branch = Branches::where('id', '=',intval(Auth::user()['branch_id']))->first();
             return response()->json([
                 'status' => 'success',
                 'user' => Auth::user(),
