@@ -1,16 +1,26 @@
-import React from 'react';
+import React,{useState,useEffect  } from 'react';
 import { PullRequestOutlined, AppleOutlined } from '@ant-design/icons';
 import { Tabs } from 'antd';
 import {Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 function ProductionTabs() {
     const navigate = useNavigate();
+    const [position,setPosition] =useState(null)
     const tabs = window.location.pathname.split('/')[4]
     function nextTab(e){
         const branch = window.location.pathname.split('/')[2]
         const id = window.location.search.substring(1)
         navigate('/branch/'+branch+'/production/'+e+'?'+id)
       }
+
+
+      useEffect(() => {
+
+        setPosition(JSON.parse(localStorage.getItem("user")).position)
+
+      }, []);
+
+      //JSON.parse(localStorage.getItem("user")).name
     return ( 
         <Tabs
         onChange={nextTab}
@@ -28,16 +38,29 @@ function ProductionTabs() {
               children: <Outlet />,
             },
               {
+                disabled: position==='Chief Baker' ||  position==='Baker' ||  position==='Supervisor'? false:true,
               label: (
               <span>
                 <PullRequestOutlined />
                  Bakers Report
               </span>
+                ),
+                key: 'list',
+                children: <Outlet />,
+              },
+           {
+            disabled: position==='Chief Baker' ||  position==='Baker' || position==='Cashier' ||  position==='Supervisor'? false:true,
+              label: (
+              <span>
+                <PullRequestOutlined />
+                 Bread Report
+              </span>
             ),
-            key: 'list',
+            key: 'bread',
             children: <Outlet />,
           },
             {
+               disabled: position==='Cashier' ||  position==='Supervisor'? false:true,
               label: (
               <span>
                 <PullRequestOutlined />

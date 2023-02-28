@@ -27,7 +27,7 @@ const ProductionSectionDrawer = (props) => {
      const [b,setB] =useState([])
   const onClose = () => {
     setOpen(false)
-    navigate('/administrator/'+branchName+'/production/create?branch_id='+branchId);
+    navigate('/branch/'+branchName+'/production/create?branch_id='+branchId);
   };
 
 

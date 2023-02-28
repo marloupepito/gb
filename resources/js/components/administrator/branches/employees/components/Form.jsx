@@ -252,6 +252,7 @@ const EmployeesForm = () => {
         ]}
       >
         <Select className="mb-5" placeholder="select Position">
+        <Option value="Supervisor">Supervisor</Option>
           <Option value="Chief Baker">Chief Baker</Option>
           <Option value="Baker">Baker</Option>
           <Option value="Cashier">Cashier</Option>

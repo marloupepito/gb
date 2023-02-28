@@ -5,6 +5,7 @@ import { AppNotification } from '../../../../components/Notification';
 import { BranchNameParams } from '../../../../routes/Params';
 import { useNavigate } from "react-router-dom";
 import moment from 'moment'
+const { TextArea } = Input;
 
 export function ModalSoldOut(props) {
     const [form] = Form.useForm();
@@ -31,7 +32,7 @@ export function ModalSoldOut(props) {
 
 
     useEffect(() => {
- console.log(moment().format('LL'))
+ //console.log(moment().format('LL'))
 }, []);
 
     const onFinish = (values) => {
@@ -41,7 +42,9 @@ export function ModalSoldOut(props) {
           breadid:props.data[0],
           branchid:branchId,
           remaining:values.remaining,
+          remarks:values.remarks,
           // charge:values.charge,
+          assigned:JSON.parse(localStorage.getItem("user")).name,
           breadout:values.breadout,
           date:moment().format('MMMM DD, YYYY A')
         })
@@ -119,6 +122,23 @@ const breadoutHandler =(e)=>{
                     >
                         <Input type="number" onChange={breadoutHandler}/>
                     </Form.Item>
+
+                    <Form.Item
+                        label="Remarks"
+                        name="remarks"
+                        rules={[
+                        {
+                            required: true,
+                            message: 'Please input the remarks!',
+                        },
+                        ]}
+                    >
+                        
+
+                     <TextArea rows={3} className="mt-2" placeholder="Remarks" maxLength={191} />
+      
+                    </Form.Item>
+
 
              {/*        <Form.Item
                         label="Charge/pcs"

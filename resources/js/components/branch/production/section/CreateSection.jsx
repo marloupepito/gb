@@ -16,7 +16,7 @@ function CreateSection() {
     const [timeCount,setTimeCount] = useState(0);
 
     function goToForm(){
-        navigate('/administrator/'+branchName+'/production/create/form?branch_id='+branchId);
+        navigate('/branch/'+branchName+'/production/create/form?branch_id='+branchId);
     }
     var result = 
 
@@ -48,7 +48,7 @@ function CreateSection() {
     return ( 
         <Row gutter={[16,16]}>
         <Col xs={24} sm={24} md={4} lg={4} xl={4} xxl={4}>
-          <Button onClick={goToForm} type="primary" block>Production Code</Button>
+          {/*<Button onClick={goToForm} type="primary" block>Production Code</Button>*/}
             </Col>
             <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                     <Input.Search

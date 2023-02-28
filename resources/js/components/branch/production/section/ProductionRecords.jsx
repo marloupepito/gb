@@ -18,6 +18,7 @@ useEffect(() => {
   .then(res=>{
     setData(res.data.status)
   })
+
 }, [date]);
 
 const onChange = (date, dateString) => {
@@ -27,11 +28,10 @@ const onChange = (date, dateString) => {
 const searchDate =()=>{
  setDate(dateSearch)
 }
-
+const branch = window.location.pathname.split('/')[2].replace(/_/g,' ')
 
     return ( 
         <div>
-     {date}
           <div className="row">
             <div className="col-md-3">
              <DatePicker showTime = {{ user12hours: true, format: "a" }} 
@@ -47,6 +47,32 @@ const searchDate =()=>{
             </div>
          </div>
 
+{
+  data.length !== 0?(
+    <table className="table">
+      <thead>
+        <tr>
+          <th width="8%">Cashier : </th>
+          <th width="24%">{data[0].assigned2}</th>
+          <th width="8%">Shift :</th>
+          <th width="24%">{moment().format('A')}</th>
+          <th  width="8%">Branch :</th>
+          <th width="24%">{branch}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th  width="8%">Sales Clerk:</th>
+          <th width="24%">{data[0].assigned1}</th>
+          <th  width="8%">Trainee:</th>
+          <th width="24%">{data[0].assigned3}</th>
+          <th  width="8%">Date :</th>
+          <th width="24%">{data[0].date}</th>
+        </tr>
+      </tbody>
+    </table>
+):''
+}
 
         <table className="table table-bordered">
   <thead>
