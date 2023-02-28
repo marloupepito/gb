@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect } from 'react';
 import { Layout, Menu, theme,Button } from 'antd';
 import Menus from './components/Menu';
 import { LogoutOutlined } from '@ant-design/icons';
@@ -7,6 +7,9 @@ const { Header, Content, Footer, Sider } = Layout;
 import LogoutSession from '../auth/Logout'
 const BranchLayout = () => {
   const [logout,setLogout] = useState(false)
+  const [name,setName] = useState(false)
+
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -15,6 +18,12 @@ const BranchLayout = () => {
     
     logout === true?setLogout(false):setLogout(true)
   }
+
+    useEffect(() => {
+      setName(JSON.parse(localStorage.getItem("user")).name)   
+    },[]);
+
+
   return (
    <Layout hasSider>
       {
@@ -59,7 +68,7 @@ const BranchLayout = () => {
           }}
           className="border-bottom"
         ><div>
-            <b className="text-danger">GB BAKESHOP</b> <b> {window.location.pathname.split('/')[2].replace(/_/g,' ')}</b>
+            <b className="text-danger">Hi</b> <b className="text-capitalize">{name}!</b>
             </div></Header>
         <Content
         style={{
