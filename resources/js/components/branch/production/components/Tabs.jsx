@@ -21,7 +21,7 @@ function ProductionTabs() {
                 label: (
                 <span>
                   <PullRequestOutlined />
-                  Production Beginning
+                  Beginning Production
                 </span>
               ),
               key: 'create',

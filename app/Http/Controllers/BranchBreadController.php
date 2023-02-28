@@ -15,7 +15,7 @@ class BranchBreadController extends Controller
 
 // ['date','=',date("F d, Y A")],
         $limit = ($request->current * $request->pageSize) +1;
-        $ingredients = Records::where([['remember_token','=',null],['branch_id','=',$request->branchid]])->orderBy('key', 'ASC')->simplePaginate($limit);
+        $ingredients = Records::where([['status','=',$request->status],['remember_token','=',null],['branch_id','=',$request->branchid]])->orderBy('key', 'ASC')->simplePaginate($limit);
         return response()->json([
             'status' => $ingredients
         ]);
@@ -62,6 +62,8 @@ class BranchBreadController extends Controller
            // 'charge' => $request->charge,
             'remaining' =>$remaining,
             'soldout' =>$soldout,
+            'assigned2' =>$request->assigned,
+            'remark3' =>$request->remarks,
             'sales' =>$getBread->price * $soldout,
             'date' =>$request->date,
             'remember_token' =>'done',

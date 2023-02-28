@@ -38,7 +38,7 @@ function Auth() {
           password:values.password
       })
       .then(res=>{       
-        console.log(res.data.branch)
+        localStorage.setItem("user", JSON.stringify(res.data.user));
           if(res.data.status === 'success' && res.data.user.position !== 'admin'){
               navigate("/branch/"+res.data.branch.branch_name.replace(/ /g,'_')+"/ingredients");
               localStorage.setItem("position", res.data.user.position);

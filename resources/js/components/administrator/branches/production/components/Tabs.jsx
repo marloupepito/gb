@@ -21,7 +21,7 @@ function ProductionTabs() {
                 label: (
                 <span>
                   <PullRequestOutlined />
-                  Production Beginning
+                  Beginning Production
                 </span>
               ),
               key: 'create',
@@ -35,6 +35,16 @@ function ProductionTabs() {
               </span>
             ),
             key: 'list',
+            children: <Outlet />,
+          },
+           {
+              label: (
+              <span>
+                <PullRequestOutlined />
+                 Bread Report
+              </span>
+            ),
+            key: 'bread',
             children: <Outlet />,
           },
             {

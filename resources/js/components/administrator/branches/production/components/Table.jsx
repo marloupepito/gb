@@ -2,7 +2,7 @@ import React, { useRef, useState,useEffect } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table,Tag,Popover  } from 'antd';
 import Highlighter from 'react-highlight-words';
-import {ModalSoldOut} from '../section/components/Modal';
+import ModalBakers from '../section/components/ModalBakers';
 import { SearchBranchId } from '../../../../routes/Search';
 import moment from 'moment'
 const BreadListTable = () => {
@@ -19,7 +19,8 @@ useEffect(() => {
   axios.post('/get_bread_every_branch',{
     current:1,
     pageSize:10,
-    branchid:branch_id
+    branchid:branch_id,
+    status:'bakers'
   })
   .then(res=>{
     setData(res.data.status.data)
@@ -176,24 +177,29 @@ useEffect(() => {
       ...getColumnSearchProps('charge'),
       sorter: (a, b) => a.charge.length - b.charge.length,
       sortDirections: ['descend', 'ascend'],
-       render: (_, { charge,charge_remarks,key,total }) => (
+       render: (_, { charge,charge_remarks,key,total,target }) => (
        <Popover content={
       <table className="table">
           <tbody>
             <tr>
-              <td className="p-0" scope="row">Target pieces:</td>
-              <td className="p-0"><b>{parseInt(total)+parseInt(charge)}</b></td>
+              <td className="p-0" scope="row">Target pieces: </td>
+              <td className="p-0"> <b> {target}</b></td>
             </tr>
             <tr>
               <td className="p-0" scope="row">New production:</td>
               <td className="p-0"><b>{parseInt(total)}</b></td>
             </tr>
             <tr>
+              <td className="p-0" scope="row">Overdone: </td>
+              <td className="p-0"> <b> {(parseInt(total)-parseInt(target))}</b></td>
+            </tr>
+            <tr>
               <td className="p-0" scope="row">Charge: </td>
               <td className="p-0"> <b> {charge}</b></td>
             </tr>
+             
              <tr>
-              <td className="p-0" colspan="2"><b> {charge_remarks}</b></td>
+              <td className="p-0" colSpan="2"><b> {charge_remarks}</b></td>
             </tr>
           </tbody>
         </table>
@@ -231,14 +237,14 @@ useEffect(() => {
         title: '',
         key: 'sold',
         dataIndex: 'sold',
-        render: (_, { total,bread_name,key,price,branchid,production,created_at }) => (
+        render: (_, { total,bread_name,key,price,branchid,production,created_at,charge,target }) => (
          // <div>
-         // {moment().format('A') === moment(created_at).format('A')?'Unavailable':<ModalSoldOut data={[key,bread_name,total,price,branchid]}/>}
+         // {moment().format('A') === moment(created_at).format('A')?'Unavailable':<ModalBakers data={[key,bread_name,total,price,branchid]}/>}
          //      {/*  {moment(created_at).add(12, 'hours').format('LLL')  < moment(new Date(created_at)).format('LLL')?
-         // <ModalSoldOut data={[key,bread_name,total,price,branchid]}/>:'Unavailable'}
+         // <ModalBakers data={[key,bread_name,total,price,branchid]}/>:'Unavailable'}
          //    */}
          //    </div>
-          <ModalSoldOut data={[key,bread_name,total,price,branchid,production]}/>
+          <ModalBakers data={[key,bread_name,production,target,charge]}/>
         ),
           width: '5%',
       },

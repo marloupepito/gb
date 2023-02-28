@@ -74,6 +74,7 @@ Route::post('/get_production_code','ProductionController@get_production_code');
 Route::post('/add_bread_list','InventoryProductionController@add_bread_list');
 Route::post('/get_branch_bread_sold','InventoryProductionController@get_branch_bread_sold');
 Route::post('/get_branch_bread_out','InventoryProductionController@get_branch_bread_out');
+Route::post('/goto_bread_report','InventoryProductionController@goto_bread_report');
 
 
 Route::post('/get_notification','NotificationController@get_notification');

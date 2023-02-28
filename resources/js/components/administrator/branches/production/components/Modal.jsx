@@ -60,6 +60,7 @@ const CodeModal = (props) => {
           branchid:branchid,
           pieces:pieces,
           remarks:remarks,
+          baker:JSON.parse(localStorage.getItem("user")).name,
           date:moment().format('MMMM DD, YYYY A')
         })
         .then(res=>{
@@ -118,7 +119,7 @@ const CodeModal = (props) => {
           </thead>
           <tbody>
           {data.map(res=>    
-            <tr key={res.id}>
+            <tr key={res.id+Math.random()}>
               <th scope="row">{res.ingredients_name}</th>
               <td>{res.bind === 'Grams'? (parseInt(res.quantity) / 1000):parseInt(res.quantity)}{res.bind === 'Grams'?'kg':res.bind === 'Kilo'?'kg':'pcs'}</td>
               <td>{res.ingredients_quantity}kg</td>

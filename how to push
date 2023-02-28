@@ -19,7 +19,7 @@ heroku git:remote -a gould-care
          @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 
-
+JSON.parse(localStorage.getItem("names"))
 
            $breadId = $request->data[0]['branch_bread_id'];
           $totalbread = BranchBread::where([['branch_id','=',$request->branchid],['key','=',$breadId]])->first();
