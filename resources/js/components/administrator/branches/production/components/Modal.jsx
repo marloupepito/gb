@@ -91,7 +91,7 @@ const CodeModal = (props) => {
       <Modal title={props.data.code_name} open={isModalOpen} onOk={handleOk} maskClosable={false} onCancel={handleCancel}
       >
         <b>Bread Name: {props.data.bread_name}</b><br />
-        <b>Targe pieces per kilo: {props.data.production_quantity}</b>
+        <b>Target pieces per kilo: {props.data.production_quantity}</b>
         <Input
                     onChange={breadQuantityHandler}
                      style={{

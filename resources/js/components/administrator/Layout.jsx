@@ -72,13 +72,13 @@ const AdminLayoutPage = () => {
             <Outlet />
           </div>
         </Content>
-        <Footer
+      {/*  <Footer
           style={{
             textAlign: 'center',
           }}
         >
           Ant Design ©2018 Created by Ant UED
-        </Footer>
+        </Footer>*/}
       </Layout>
     </Layout>
   );

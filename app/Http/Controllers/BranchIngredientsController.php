@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\BranchIngredients;
 use App\Models\User;
+use App\Models\Branches;
 
 class BranchIngredientsController extends Controller
 {
     public function get_branch_ingredients(Request $request){
-        $branch =User::where('branch_name','=',$request->branchName)->first();
+        $branch =Branches::where('branch_name','=',$request->branchName)->first();
         $ingredients = BranchIngredients::where('branch_id','=',$branch->id)->orderBy('ingredients_quantity', 'ASC')->get();
          return response()->json([
              'status' => $ingredients

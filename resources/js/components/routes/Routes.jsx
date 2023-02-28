@@ -84,7 +84,7 @@ export const router = createBrowserRouter([
         {path:'/administrator/:id/production/sold', element: <BreadSoldSection />},
         {path:'/administrator/:id/production/out', element: <BreadOutSection />},
       ]},
-      { path:'/administrator/:id/employees', element:<EmployeesPage />},
+      { path:'/administrator/:id/accounts', element:<EmployeesPage />},
       { path:'/administrator/:id/loading', element:<AppLoading />}
     ]
   },

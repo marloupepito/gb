@@ -68,12 +68,11 @@ function Auth() {
      
       };
     return ( 
+      <div>
         <Skeleton loading={loading2}>
-            <Result
-            icon={<WarningTwoTone twoToneColor="red" />}
-                title="Authorized Person Only"
-                extra={
                     <div className="col-md-4 offset-md-4">
+
+                      <img src="/images/logo.jpg" className="col-md-12 mt-5"/>
                     <Form
                     name="basic"
                     initialValues={{ remember: true }}
@@ -109,9 +108,9 @@ function Auth() {
                     </Form.Item>
                   </Form>
                   </div>
-                }
-            />
+             
         </Skeleton>
+        </div>
      );
 }
 

@@ -8,6 +8,7 @@ use App\Models\Ingredients;
 use App\Models\BranchIngredients;
 use App\Models\Production;
 use App\Models\BranchBread;
+use App\Models\Branches;
 use Illuminate\Support\Facades\Hash;
 class DatabaseSeeder extends Seeder
 {
@@ -104,6 +105,14 @@ class DatabaseSeeder extends Seeder
 			
 				for($i=0; $i < 80; $i++){
 					$user = new BranchBread;
+					$user->branch_id = 1;
+					$user->quantity = 200;
+					$user->bread_name = $bread[$i];
+					$user->price = 4;
+					$user->save();
+				}
+				for($i=0; $i < 80; $i++){
+					$user = new BranchBread;
 					$user->branch_id = 2;
 					$user->quantity = 200;
 					$user->bread_name = $bread[$i];
@@ -149,7 +158,7 @@ class DatabaseSeeder extends Seeder
 
 
      	    $user = new User;
-	        $user->branch_name = 'admin';
+	        $user->branch_id = 'admin';
 	        $user->branch_assigned_person = 'admin';
 	        $user->branch_position = 'admin';
 	        $user->username = 'admin';
@@ -160,18 +169,27 @@ class DatabaseSeeder extends Seeder
 
 
 	        $branchName = ['Endrina Brgy-5','DC Cruz Brgy-1','Biron Brgy-2','Espada Brgy-3','Urban highway'];
-        for ($i=0; $i < 4; $i++) { 
-        	$user = new User;
-			$user->key = rand(10000,1000000);
-	        $user->branch_name = $branchName[$i];
-	        $user->branch_assigned_person = 'person '.$i;
-	        $user->branch_position = 'personnel';
-	        $user->username = 'personnel'.$i;
-	        $user->password = Hash::make('admin');
-	 		$user->status = 'active';
-	 		$user->year = date('Y');
-	        $user->save();
-        }
+
+	             for ($i=0; $i < 4; $i++) { 
+		        	$user = new Branches;
+		        	$user->key = rand(10000,1000000);
+			        $user->branch_name = $branchName[$i];
+			        $user->save();
+		        }
+
+
+        // for ($i=0; $i < 4; $i++) { 
+        // 	$user = new User;
+		// 	$user->key = rand(10000,1000000);
+	    //     $user->branch_name = $branchName[$i];
+	    //     $user->branch_assigned_person = 'person '.$i;
+	    //     $user->branch_position = 'personnel';
+	    //     $user->username = 'personnel'.$i;
+	    //     $user->password = Hash::make('admin');
+	 	// 	$user->status = 'active';
+	 	// 	$user->year = date('Y');
+	    //     $user->save();
+        // }
 
 		$ing = 			
 		array('Gold Star',
@@ -245,7 +263,7 @@ class DatabaseSeeder extends Seeder
 
 		//$bind = ['Sako','Baro','Tray','Kilo','Grams','Pcs'];
 
-		for ($i=0; $i < 0; $i++) { 
+		for ($i=0; $i < 1; $i++) { 
 			//$randBind = $bind[array_rand($bind)];
 			$ingredients = new BranchIngredients;
 			$ingredients->branch_id = 1;

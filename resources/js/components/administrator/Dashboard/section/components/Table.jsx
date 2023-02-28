@@ -30,24 +30,24 @@ function DashboardTable() {
       title: 'Branches',
       dataIndex: 'branch_name',
       key: 'branch_name',
-      width:'20%',
+      // width:'20%',
       // render: (text) => <Link type="link" to={"/administrator/dashboard/charts/"+text.replace(/ /g,'_')} >{text}</Link>,
     },
-    {
-      title: 'Assigned Person',
-      dataIndex: 'branch_assigned_person',
-      key: 'branch_assigned_person',
-    },
-    {
-      title: 'Branch Position',
-      dataIndex: 'branch_position',
-      key: 'branch_position',
-    },
-    {
-      title: 'Username',
-      dataIndex: 'username',
-      key: 'username',
-    },
+    // {
+    //   title: 'Assigned Person',
+    //   dataIndex: 'branch_assigned_person',
+    //   key: 'branch_assigned_person',
+    // },
+    // {
+    //   title: 'Branch Position',
+    //   dataIndex: 'branch_position',
+    //   key: 'branch_position',
+    // },
+    // {
+    //   title: 'Username',
+    //   dataIndex: 'username',
+    //   key: 'username',
+    // },
     {
       title: 'Created At',
       dataIndex: 'created_at',

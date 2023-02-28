@@ -4,10 +4,11 @@ import { Form, Input, Select,InputNumber } from 'antd';
 import { SearchBranchId } from '../../../../routes/Search';
 import { BranchNameParams } from '../../../../routes/Params';
 import { useNavigate } from "react-router-dom";
+import { DownOutlined, EditOutlined,DeleteOutlined } from '@ant-design/icons';
 import { AppNotification } from '../../../../components/Notification'
 const { Option } = Select;
 
-const IngredientsModal = () => {
+const IngredientsModal = (props) => {
   const [notify,setNotify] =useState(false)
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -29,9 +30,10 @@ const IngredientsModal = () => {
 
   const onFinish = (values) => {
     setLoading(true)
-    axios.post('/make_branch_ingredients',{
+    axios.post('/edit_branch_ingredients',{
       branchid:branchid,
-      data:values
+      data:values,
+      id:props.data.id
     })
     .then(res=>{
       setNotify('success')
@@ -53,14 +55,21 @@ const IngredientsModal = () => {
      {
       notify ==='success'?<AppNotification type="success" message="Product code has been genarated!"/>:notify ==='error'?<AppNotification type="error" message="Error!"/>:""
     }
-      <a block size="large" type="primary" onClick={showModal}>
-      Edit
-      </a>
+      <Button type="link"  onClick={showModal}>
+      <EditOutlined />
+      </Button>
       <Modal title="Create Ingredients" open={isModalOpen} onOk={handleOk} type="primary" className='mr-3' htmlType="submit" onCancel={handleCancel}>
-      <Form form={form} onFinish={onFinish} layout="vertical">
+      <Form form={form} onFinish={onFinish} layout="vertical"
+         initialValues={{
+          product:props.data.title,
+          bundle:props.data.bind,
+          notification:props.data.notify,
+          quantity:props.data.quantity,
+        }}>
+     
       <Form.Item
         name="product"
-        label="Product Name"
+        label="Name of Raw Material"
         rules={[
           {
             required: true,
@@ -84,11 +93,12 @@ const IngredientsModal = () => {
             // onChange={this.onGenderChange}
             allowClear
           >
-            <Option value="Sako">Sako</Option>
+         {/*   <Option value="Sako">Sako</Option>
             <Option value="Baro">Baro</Option>
             <Option value="Tray">Tray</Option>
+             <Option value="Grams">Grams</Option>*/}
+
             <Option value="Kilo">Kilo</Option>
-             <Option value="Grams">Grams</Option>
             <Option value="Pcs">Pcs</Option>
           </Select>
         </Form.Item>

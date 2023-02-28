@@ -62,6 +62,7 @@ Route::post('/delete_ingredients_request','IngredientsRequestController@delete_i
 
 Route::post('/get_all_production','ProductionController@get_all_production');
 Route::post('/add_branch_ingredients','ProductionController@add_branch_ingredients');
+Route::post('/edit_branch_ingredients','ProductionController@edit_branch_ingredients');
 Route::post('/get_production_code','ProductionController@get_production_code');
 
 Route::post('/add_bread_list','InventoryProductionController@add_bread_list');

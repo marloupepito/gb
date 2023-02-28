@@ -8,6 +8,15 @@ use App\Models\BranchBread;
 use Illuminate\Support\Facades\DB;
 class ProductionController extends Controller
 {
+    public function edit_branch_ingredients(Request $request){
+        BranchIngredients::where('id','=',$request->id)
+        ->update([
+            'ingredients_name' =>$request->data['product'],
+            'ingredients_quantity' =>$request->data['quantity'],
+            'notify'  =>$request->data['notification'],
+            'bind_name'  =>$request->data['bundle'],
+        ]);
+    }
        public function get_all_production(Request $request){
             $data = Production::where('branch_id','=',$request->id)->get()->unique('random_id');
              return response()->json([

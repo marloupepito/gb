@@ -25,11 +25,11 @@ const DashboardModal = () => {
     setLoading(true)
     console.log('Success:', values);
     axios.post('/add_branch',{
-      assignPerson:values.assignPerson,
       branchName:values.branchName,
-      branchPosition:values.branchPosition,
-      username:values.username,
-      password:values.upassword,
+      // assignPerson:values.assignPerson,
+      // branchPosition:values.branchPosition,
+      // username:values.username,
+      // password:values.upassword,
     })
     .then(res=>{
       setNotify('success')
@@ -80,7 +80,7 @@ const DashboardModal = () => {
         <Input />
       </Form.Item>
 
-      <Form.Item
+    {/*  <Form.Item
         label="Assign Person"
         name="assignPerson"
         rules={[
@@ -131,7 +131,7 @@ const DashboardModal = () => {
       >
         <Input />
       </Form.Item>
-
+*/}
 
       <Form.Item
       >

@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import { CheckCircleOutlined, AlertOutlined } from '@ant-design/icons';
 import { Card, Statistic } from 'antd';
-import { DownOutlined, EditOutlined,DeleteOutlined } from '@ant-design/icons';
+import { DownOutlined, EditOutlined,DeleteTwoTone } from '@ant-design/icons';
 import { Dropdown, Space } from 'antd';
 import Edit from './Edit'
 
@@ -27,7 +27,7 @@ const items = [
        Delete
       </a>
     ),
-    icon: <DeleteOutlined />,
+    icon: <DeleteTwoTone />,
   },
 ];
 
@@ -35,8 +35,17 @@ const items = [
   return ( 
     <>
       <div className="site-statistic-demo-card">  
-          <Card>
-           <Dropdown
+          <Card
+             title={props.title}
+          size="small"
+           extra={<div><Edit data={props}/><a href="#">
+                  <DeleteTwoTone twoToneColor="#eb2f96"/>
+                  </a></div>}>
+       {/*    <Edit />
+            <a href="#">
+       Delete
+      </a>*/}
+       {/*    <Dropdown
           className="offset-md-11"
               menu={{
                 items,
@@ -47,10 +56,10 @@ const items = [
                   <DownOutlined/>
                 </Space>
               </a>
-            </Dropdown>
+            </Dropdown>*/}
 
             <Statistic
-              title={props.title}
+           
               value={props.quantity}
               // precision={0}
               valueStyle={{

@@ -40,10 +40,11 @@ useEffect(() => {
        {
                timeCount === 0?props.data.map(res=>
                 <Col key={res.id} xs={12} sm={12} md={4} lg={4} xl={4} xxl={4}>
-                   <IngredientsCard notify={res.notify} bind={res.bind_name} quantity={res.ingredients_quantity} title={res.ingredients_name} />
+                   <IngredientsCard id={res.id} notify={res.notify} bind={res.bind_name} quantity={res.ingredients_quantity} title={res.ingredients_name} />
+                
                 </Col>):ingdata.map(res=>
             <Col key={res.id} xs={12} sm={12} md={4} lg={4} xl={4} xxl={4}>
-               <IngredientsCard notify={res.notify} bind={res.bind_name}  quantity={res.ingredients_quantity} title={res.ingredients_name} />
+               <IngredientsCard id={res.id} notify={res.notify} bind={res.bind_name}  quantity={res.ingredients_quantity} title={res.ingredients_name} />
             </Col>
                )
             }

@@ -33,8 +33,9 @@ class InventoryProductionController extends Controller
 
         $beginning =  Records::where([['date','=',$date],['branch_id','=',$request->branchid],['bread_id','=',$request->data[0]['branch_bread_id']]])->orderBy('created_at','DESC')->first();
 
+// ['date','=',$request->date],
 
-        $checkExist =  Records::where([['remember_token','=',null],['date','=',$request->date],['branch_id','=',$request->branchid],['bread_id','=',$request->data[0]['branch_bread_id']]])->orderBy('created_at','DESC')->first();
+        $checkExist =  Records::where([['remember_token','=',null],['branch_id','=',$request->branchid],['bread_id','=',$request->data[0]['branch_bread_id']]])->orderBy('created_at','DESC')->first();
 
 
         if ($beginning === null) {
@@ -69,8 +70,8 @@ class InventoryProductionController extends Controller
         }else{
 
              Records::where('key',$checkExist->key)->update([
-                'total' =>$checkExist->beginning+$request->data[0]['production_quantity'],
-                'production' =>$request->data[0]['production_quantity'],
+                'total' =>$checkExist->beginning+$request->pieces,
+                'production' =>$request->pieces,
               ]);
               return response()->json([
                   'status' =>$checkExist
