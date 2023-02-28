@@ -255,7 +255,8 @@ useEffect(() => {
     axios.post('/get_bread_every_branch',{
       current:e.current,
       pageSize:e.pageSize,
-      branchid:branch_id
+      branchid:branch_id,
+      status:'bakers'
     })
     .then(res=>{
       setData(res.data.status.data)
