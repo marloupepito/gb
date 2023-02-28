@@ -104,6 +104,7 @@ class InventoryProductionController extends Controller
                 'production' =>$request->pieces,
                 'remark1' =>$request->remarks,
                 'baker' => $request->baker,
+                'charge' =>$request->data[0]['production_quantity'] - $request->pieces < 0?0:$request->data[0]['production_quantity'] - $request->pieces,
                 'target' =>$request->data[0]['production_quantity'],
                 'status' => 'bakers'
               ]);
