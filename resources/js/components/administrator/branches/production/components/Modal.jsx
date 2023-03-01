@@ -12,10 +12,12 @@ const CodeModal = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [data,setData] = useState([])
-  const [pieces,setPieces] = useState(null)
+  const [quantity,setQuantity] = useState(1)
   const branch = BranchNameParams().props.children
   const branchid = SearchBranchId().props.children
   const [notify,setNotify] =useState(false)
+  const [target,setTarget] =useState(props.data.production_quantity*quantity)
+  const [actualTarget,setActualTarget] =useState(props.data.production_quantity)
   const [remarks,setRemarks] =useState(null)
 
 
@@ -46,7 +48,7 @@ const CodeModal = (props) => {
   };
   function handleSubmit(event){
 
-    if(pieces === null || pieces === ''){
+    if(quantity === null || quantity === '' || quantity === '0' || quantity === 0){
       setNotify('error')
        function myGreeting() {
            setNotify(false)
@@ -54,20 +56,27 @@ const CodeModal = (props) => {
           }
           setTimeout(myGreeting, 1500);
     }else{
-       setLoading(true)
+      setLoading(true)
+      console.log(event)
         axios.post('/add_bread_list',{
           data:event,
           branchid:branchid,
-          pieces:pieces,
+          quantity:quantity,
           remarks:remarks,
+          target:props.data.production_quantity*quantity,
+          actualTarget:actualTarget,
           baker:JSON.parse(localStorage.getItem("user")).name,
           date:moment().format('MMMM DD, YYYY A')
         })
         .then(res=>{
-          console.log('waa',res.data.status)
-          setNotify('success')
-          setLoading(false)
           setIsModalOpen(false);
+          setNotify('success')
+           setLoading(true)
+           function myGreeting() {
+           setNotify(false)
+           setLoading(false)
+          }
+          setTimeout(myGreeting, 1500);
         })
         .catch(err=>{
           setNotify('error')
@@ -82,18 +91,21 @@ const CodeModal = (props) => {
   }
 
  const breadQuantityHandler =(e)=>{
-  setPieces(e.target.value)
+  setQuantity(e.target.value)
   }
 
   const remarksHandler =(e)=>{
     setRemarks(e.target.value)
+  }
+   const actualTargetHandler =(e)=>{
+    setActualTarget(e.target.value)
   }
 
   
   return (
     <>
     {
-      notify ==='success'?<AppNotification type="success" message="Production has been added!"/>:notify ==='error'?<AppNotification type="error" message="Please input current pieces!"/>:""
+      notify ==='success'?<AppNotification type="success" message="Production has been added!"/>:notify ==='error'?<AppNotification type="error" message="Please input current quantity!"/>:""
     }
       <Button block type="dashed" size="large" danger onClick={showModal}>
         {props.data.code_name}
@@ -101,13 +113,26 @@ const CodeModal = (props) => {
       <Modal title={props.data.code_name} open={isModalOpen} onOk={handleOk} maskClosable={false} onCancel={handleCancel}
       >
         <b>Bread Name: {props.data.bread_name}</b><br />
-        <b>Target pieces per kilo: {props.data.production_quantity}</b>
+        <b>Target quantity per kilo: {props.data.production_quantity}</b><br />
+        <b>Main Target: {props.data.production_quantity * quantity}</b><br />
+        Quantity
         <Input
+        type="number"
+        defaultValue={1}
           onChange={breadQuantityHandler}
            style={{
             width:'100%'
-                }} placeholder="Current pieces" />
-                 <TextArea rows={3} className="mt-2" onChange={remarksHandler} placeholder="Remarks" maxLength={191} />
+                }} placeholder="quantity" />
+                Actual Target
+                <Input
+                className=""
+        type="number"
+        defaultValue={props.data.production_quantity * quantity}
+          onChange={actualTargetHandler}
+           style={{
+            width:'100%'
+                }} placeholder="Actual Target" />
+                 {/*<TextArea rows={3} className="mt-2" onChange={remarksHandler} placeholder="Remarks" maxLength={191} />*/}
         <table className="table">
           <thead>
             <tr>
@@ -121,9 +146,13 @@ const CodeModal = (props) => {
           {data.map(res=>    
             <tr key={res.id+Math.random()}>
               <th scope="row">{res.ingredients_name}</th>
-              <td>{res.bind === 'Grams'? (parseInt(res.quantity) / 1000):parseInt(res.quantity)}{res.bind === 'Grams'?'kg':res.bind === 'Kilo'?'kg':'pcs'}</td>
+              <td>{res.bind === 'Grams'? ((parseInt(res.quantity) *quantity)/ 1000):
+              parseInt(res.quantity)*quantity}{res.bind === 'Grams'?'kg':res.bind === 'Kilo'?'kg':'pcs'}</td>
               <td>{res.ingredients_quantity}kg</td>
-              <td className={(res.bind === 'Grams'?res.quantity-(parseInt(res.quantity) / 1000):res.ingredients_quantity-res.quantity) > 0?'':'text-danger'}>{res.bind === 'Grams'?res.ingredients_quantity-(parseInt(res.quantity) / 1000):res.ingredients_quantity-res.quantity}kg</td>
+              <td className={(res.bind === 'Grams'?res.quantity-(((parseInt(res.quantity)) / 1000)*quantity):
+                (res.ingredients_quantity-res.quantity)*quantity) > 0?'':
+              'text-danger'}>{res.bind === 'Grams'?(res.ingredients_quantity-(parseInt(res.quantity) / 1000)*quantity):
+              (res.ingredients_quantity-(res.quantity*quantity))}kg</td>
             </tr>
           )}
           </tbody>

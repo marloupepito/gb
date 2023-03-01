@@ -26,50 +26,56 @@ class InventoryProductionController extends Controller
       'remark2' =>$request->remarks,
       'production' =>$request->production,
       'charge' =>$request->charge,
-      'charge' =>$request->charge,
+      'status' =>'breads',
       'assigned1' =>$request->assigned,
       'total' =>$record->remaining+$remaining,
-      'status' =>'breads'
     ]);
 
   }
   public function add_bread_list(Request $request){
         
         
+
+        $target=$request->target;
+        $actualTarget=$request->actualTarget;
+
+
           for ($i=0; $i < count($request->data); $i++) { 
               $branchIngredientId = $request->data[$i]['branch_ingredients_id'];
         
               $remaining = BranchIngredients::where('id',$branchIngredientId)->first();
               // $equal = $remaining->ingredients_quantity - $request->data[$i]['quantity'];
               //res.bind === 'Grams'?res.quantity-(parseInt(res.quantity) / 1000):res.ingredients_quantity-res.quantity
-              $equal =$request->data[$i]['bind'] === 'Grams'?$request->data[$i]['ingredients_quantity']-($request->data[$i]['quantity'] / 1000):$request->data[$i]['ingredients_quantity']-$request->data[$i]['quantity'];
+              $equal =$request->data[$i]['bind'] === 'Grams'?
+              $request->data[$i]['ingredients_quantity']-(($request->data[$i]['quantity'] / 1000) * $request->quantity):
+              $request->data[$i]['ingredients_quantity']-($request->data[$i]['quantity'] * $request->quantity);
 
               BranchIngredients::where('id',$branchIngredientId)
               ->update(['ingredients_quantity' => $equal]);
           }
 
-      //  $date = date("A") === "AM"?date("F d, Y",strtotime ('-1 day')).' '.'PM':date("F d, Y").' '.'AM';
      $date= date("F d, Y A");
 
         $bread=BranchBread::where([['branch_id','=',$request->branchid],['key','=',$request->data[0]['branch_bread_id']]])->first();
 
-        $beginning =  Records::where([['date','=',$date],['branch_id','=',$request->branchid],['bread_id','=',$request->data[0]['branch_bread_id']]])->orderBy('created_at','DESC')->first();
+        $beginning = Records::where([['date','=',$date],['branch_id','=',$request->branchid],['bread_id','=',$request->data[0]['branch_bread_id']]])->orderBy('created_at','DESC')->first();
 
-// ['date','=',$request->date],
 
         $checkExist =  Records::where([['remember_token','=',null],['branch_id','=',$request->branchid],['bread_id','=',$request->data[0]['branch_bread_id']]])->orderBy('created_at','DESC')->first();
+
+
 
 
         if ($beginning === null) {
 
           if($checkExist !== null){
               Records::where([['remember_token','=',null],['bread_id','=',$request->data[0]['branch_bread_id']],['branch_id','=',$request->branchid]])->update([
-                'total' =>$checkExist->total+$request->data[0]['production_quantity'],
-                'production' =>$checkExist->production+$request->data[0]['production_quantity'],
-                'charge' =>$request->data[0]['production_quantity'] - $request->pieces < 0?0:$request->data[0]['production_quantity'] - $request->pieces,
+                'total' =>$checkExist->total+$target,
+                'production' =>$checkExist->production+$target,
+                'charge' => ($target - $actualTarget) < 0?0:$target - $actualTarget,
                 'remark1' =>$request->remarks,
                 'baker' => $request->baker,
-                'target' =>$request->data[0]['production_quantity'],
+                'target' =>$target,
                 'status' => 'bakers'
               ]);
               return response()->json([
@@ -82,13 +88,13 @@ class InventoryProductionController extends Controller
               $records->bread_id = $request->data[0]['branch_bread_id'];
               $records->bread_name =$request->data[0]['bread_name'];
               $records->beginning = $beginning === null?0:$beginning->remaining;
-              $records->production = $request->pieces;
+              $records->production = $actualTarget;
               $records->baker = $request->baker;
-              $records->target = $request->data[0]['production_quantity'];
+              $records->target = $target * $request->quantity;
               $records->remark1 = $request->remarks;
-              $records->charge = $request->data[0]['production_quantity'] - $request->pieces < 0?0:$request->data[0]['production_quantity'] - $request->pieces;
+              $records->charge = ($target - $actualTarget) < 0?0:$target - $actualTarget;
               $records->price = $bread->price;
-              $records->total = $beginning === null? $request->pieces:$beginning->remaining+ $request->pieces;
+              $records->total = $beginning === null? $actualTarget:$beginning->remaining+ $actualTarget;
               $records->date = $request->date;
               $records->status = 'bakers';
               $records->save();
@@ -100,12 +106,12 @@ class InventoryProductionController extends Controller
         }else{
 
              Records::where('key',$checkExist->key)->update([
-                'total' =>$checkExist->beginning+$request->pieces,
-                'production' =>$request->pieces,
+                'total' =>$checkExist->beginning+$actualTarget,
+                'production' =>$actualTarget,
                 'remark1' =>$request->remarks,
                 'baker' => $request->baker,
-                'charge' =>$request->data[0]['production_quantity'] - $request->pieces < 0?0:$request->data[0]['production_quantity'] - $request->pieces,
-                'target' =>$request->data[0]['production_quantity'],
+                'charge' => ($target - $actualTarget) < 0?0:$target - $actualTarget,
+                'target' =>$target,
                 'status' => 'bakers'
               ]);
               return response()->json([
