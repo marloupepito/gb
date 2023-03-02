@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Modal,Input } from 'antd';
+import { Button, Modal,Input,Dropdown } from 'antd';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { BranchNameParams } from '../../../../routes/Params';
@@ -101,15 +101,60 @@ const CodeModal = (props) => {
     setActualTarget(e.target.value)
   }
 
+const items = [
+  {
+    key: '1',
+    label: 'Delete',
+  },
+  // {
+  //   key: '2',
+  //   label: '2nd item',
+  // },
+  // {
+  //   key: '3',
+  //   label: '3rd item',
+  // },
+];
   
+  const onMenuClick = (e) => {
+  setLoading(true)
+  axios.post('/delete_production_code',{
+    id:e
+  })
+  .then(res=>{
+     setIsModalOpen(false);
+          setNotify('deleted')
+           setLoading(true)
+           function myGreeting() {
+           setNotify(false)
+           setLoading(false)
+           setLoading(false)
+            navigate('/administrator/'+branch+'/loading')
+          }
+          setTimeout(myGreeting, 1500);
+  })
+  .catch(err=>{
+     setLoading(false)
+  })
+};
   return (
     <>
     {
-      notify ==='success'?<AppNotification type="success" message="Production has been added!"/>:notify ==='error'?<AppNotification type="error" message="Please input current quantity!"/>:""
+      notify ==='success'?<AppNotification type="success" message="Production has been added!"/>:
+      notify ==='delete'?<AppNotification type="success" message="Deleted successfully!"/>:
+      notify ==='error'?<AppNotification type="error" message="Please input current quantity!"/>:""
     }
-      <Button block type="dashed" size="large" danger onClick={showModal}>
-        {props.data.code_name}
-      </Button>
+    
+
+       <Dropdown.Button
+       block size="medium" danger onClick={showModal}
+      menu={{
+        items,
+        onClick: ()=>onMenuClick(props.data.random_id),
+      }}
+    >
+       {props.data.code_name}
+    </Dropdown.Button>
       <Modal title={props.data.code_name} open={isModalOpen} onOk={handleOk} maskClosable={false} onCancel={handleCancel}
       >
         <b>Bread Name: {props.data.bread_name}</b><br />

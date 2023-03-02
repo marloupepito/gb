@@ -208,7 +208,7 @@ const quantityHandler = (e)=>{
                                 }} placeholder="Flour" />
                         </Form.Item>
                            <Form.Item
-                          
+                          initialValue="Kilo"
                           name='bind'
                           rules={[
                             {
@@ -241,7 +241,7 @@ const quantityHandler = (e)=>{
                          </Form.Item>
 
                         <Form.Item
-                          
+                          initialValue="1"
                           name='quantity'
                           rules={[
                             {

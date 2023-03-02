@@ -26,11 +26,11 @@ function CreateSection() {
           id:branchId
           })
           .then(res=>{
-            setLoading(false)
                setData(Object.values(res.data.status))
                setData2(Object.values(res.data.status))
+            setLoading(false)
           })
-      }, [branchName]);
+      }, [Math.random()]);
 
 
   const handleSearch = (aaa) => {

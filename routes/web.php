@@ -92,6 +92,8 @@ Route::post('/get_bread_every_branch2','BranchBreadController@get_bread_every_br
 
 Route::post('/add_bread_branch_sold','BranchBreadController@add_bread_branch_sold');
 Route::post('/add_bread_branch_out','BranchBreadController@add_bread_branch_out');
+Route::post('/delete_production_code','BranchBreadController@delete_production_code');
+
 
 
 

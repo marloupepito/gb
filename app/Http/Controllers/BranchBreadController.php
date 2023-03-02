@@ -8,9 +8,15 @@ use App\Models\BranchIngredients;
 use App\Models\BranchBreadSold;
 use App\Models\BranchBreadOut;
 use App\Models\Records;
-
+use App\Models\Production;
 class BranchBreadController extends Controller
 {
+
+    
+
+    public function delete_production_code(Request $request){
+        Production::where('random_id','=',$request->id)->delete();
+    }
     public function get_bread_every_branch(Request $request){
 
 // ['date','=',date("F d, Y A")],
