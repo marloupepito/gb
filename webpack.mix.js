@@ -1,5 +1,6 @@
 const mix = require('laravel-mix');
 const path =require('path');
+const tailwindcss = require('tailwindcss');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -14,6 +15,13 @@ const path =require('path');
 mix.js('resources/js/app.js', 'public/js')
     .react()
     .sass('resources/sass/app.scss', 'public/css');
+
+
+    mix.postCss('resources/css/app.css', 'public/css', [
+        tailwindcss('tailwind.config.js'),
+      ]);
+
+      
 mix.webpackConfig({
     stats:{
         children:true
