@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Box } from "@chakra-ui/react";
 import RawMaterialsTable from './components/Table';
+import Card from '../../components/card';
 function RawMaterialsLayout() {
     return ( 
-        <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+        <Card className="mt-4">
           <RawMaterialsTable />
-        </Box>
+        </Card>
      );
 }
 

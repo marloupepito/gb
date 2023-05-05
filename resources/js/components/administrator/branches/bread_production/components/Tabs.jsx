@@ -15,41 +15,38 @@ function BreadProductionTabs() {
     const loc = window.location.pathname.split('/')[5]
     const {branchid} = useParams();
     const [index,setIndex] = useState(loc === undefined?0:loc === 'bakers_report'?1:loc === 'bread_report'?2:3);
-    function nextPage (where){
+    const active ='inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500'
+    const notactive ='inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'
+    function nextPage (where,active){
+
+        setIndex(active)
      navigate("/administrator/branch/"+branchid+'/production'+where);
     }
     return (
         <Card
         extra={"w-full h-full px-6 pb-6 sm:overflow-x-auto mt-3"}
         >
-            <Tabs className="mt-3" defaultIndex={index} variant="enclosed">
-                <TabList>
-                    <Tab onClick={() =>nextPage(' ')}>Create Beginning</Tab>
-                    <Tab onClick={() =>nextPage('/bakers_report')}>Baker Report</Tab>
-                    <Tab onClick={() =>nextPage('/bread_report')}>Bread Report</Tab>
-                    <Tab onClick={() =>nextPage('/sales_report')}>Sales Report</Tab>
-                </TabList>
-                <TabIndicator
-                    mt="-1.5px"
-                    height="2px"
-                    bg="red.600"
-                    borderRadius="1px"
-                />
-                <TabPanels>
-                    <TabPanel>
-                        <Outlet />
-                    </TabPanel>
-                    <TabPanel>
-                        <Outlet />
-                    </TabPanel>
-                    <TabPanel>
-                        <Outlet />
-                    </TabPanel>
-                    <TabPanel>
-                        <Outlet />
-                    </TabPanel>
-                </TabPanels>
-            </Tabs>
+<div className="mb-4 text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+    <ul className="flex flex-wrap -mb-px">
+        <li className="mr-2">
+            <a onClick={() =>nextPage(' ',0)} href="#" class={index === 0?active:notactive}>Create Beginning</a>
+        </li>
+        <li className="mr-2">
+            <a href="#"  onClick={() =>nextPage('/bakers_report',1)} class={index === 1?active:notactive} >Baker Report</a>
+        </li>
+        <li className="mr-2">
+            <a href="#"  onClick={() =>nextPage('/bread_report',2)} class={index === 2?active:notactive}>Bread Report</a>
+        </li>
+        <li className="mr-2">
+            <a href="#"  onClick={() =>nextPage('/sales_report',3)} class={index === 3?active:notactive}>Sales Report</a>
+        </li>
+        {/* <li>
+            <a className="inline-block p-4 text-gray-400 rounded-t-lg cursor-not-allowed dark:text-gray-500">Disabled</a>
+        </li> */}
+    </ul>
+</div>
+<Outlet />
+         
         </Card>
     );
 }

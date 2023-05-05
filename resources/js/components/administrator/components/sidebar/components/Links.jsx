@@ -55,10 +55,10 @@ export function SidebarLinks(props) {
             </Link>:
              <div key={route.key} className="ml-5 mr-5 relative flex">
             <Accordion className='w-full' allowToggle>
-              <AccordionItem className='border-b border-gray-200 ark:!border-white/10'>
+              <AccordionItem className='border-b  border-gray-200 ark:!border-white/10'>
                   {/* <Link key={index} to={route.layout + "/" + route.path}> */}
                     <h2>
-                      <AccordionButton className='flex justify-between'>
+                      <AccordionButton className='m-1 flex justify-between'>
                         <span className='text-left font-bold text-navy-900 dark:text-white' flex='1'>
                           {route.name}
                         </span>

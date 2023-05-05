@@ -96,7 +96,7 @@ function CreateBeginningProduction(props) {
     }
     return (
         <>
-            <a colorScheme="red" variant="outline" onClick={onOpen}>
+            <a className="text-brand-500" variant="outline" onClick={onOpen}>
                 Create Recipes
             </a>
             <Drawer

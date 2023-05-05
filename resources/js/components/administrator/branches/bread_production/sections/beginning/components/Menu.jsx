@@ -1,105 +1,36 @@
 import React from "react";
-
-// Chakra imports
-import {
-  Icon,
-  Flex,
-  Text,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  useDisclosure,
-  useColorModeValue,
-} from "@chakra-ui/react";
-// Assets
-import {
-  MdOutlineMoreHoriz,
-  MdOutlinePerson,
-  MdOutlineCardTravel,
-  MdOutlineLightbulb,
-  MdOutlineSettings,
-} from "react-icons/md";
+import Dropdown from "./../../../../../components/dropdown";
+import { BsThreeDots } from "react-icons/bs";
 import CreateBeginningProduction from "./Drawer1";
-export default function BeginningMenu(props) {
-  const { ...rest } = props;
-
-  const textColor = useColorModeValue("secondaryGray.500", "white");
-  const textHover = useColorModeValue(
-    { color: "secondaryGray.900", bg: "unset" },
-    { color: "secondaryGray.500", bg: "unset" }
-  );
-  const iconColor = useColorModeValue("brand.500", "white");
-  const bgList = useColorModeValue("white", "whiteAlpha.100");
-  const bgShadow = useColorModeValue(
-    "14px 17px 40px 4px rgba(112, 144, 176, 0.08)",
-    "unset"
-  );
-  const bgButton = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
-  const bgHover = useColorModeValue(
-    { bg: "secondaryGray.400" },
-    { bg: "whiteAlpha.50" }
-  );
-  const bgFocus = useColorModeValue(
-    { bg: "secondaryGray.300" },
-    { bg: "whiteAlpha.100" }
-  );
-
-  // Ellipsis modals
-  const {
-    isOpen: isOpen1,
-    onOpen: onOpen1,
-    onClose: onClose1,
-  } = useDisclosure();
-
+function BeginningMenu(props) {
+  const { transparent } = props;
+  const [open, setOpen] = React.useState(false);
   return (
-    <Menu isOpen={isOpen1} onClose={onClose1}>
-      <MenuButton
-        align='center'
-        justifyContent='center'
-        bg={bgButton}
-        _hover={bgHover}
-        _focus={bgFocus}
-        _active={bgFocus}
-        w='37px'
-        h='37px'
-        lineHeight='100%'
-        onClick={onOpen1}
-        borderRadius='10px'
-        {...rest}>
-        <Icon as={MdOutlineMoreHoriz} color={iconColor} w='24px' h='24px' />
-      </MenuButton>
-      <MenuList
-        w='250px'
-        minW='unset'
-        maxW='150px !important'
-        border='transparent'
-        backdropFilter='blur(63px)'
-        bg={bgList}
-        boxShadow={bgShadow}
-        borderRadius='20px'
-        p='15px'>
-     
-        <MenuItem
-          transition='0.2s linear'
-          color={textColor}
-          _hover={textHover}
-          p='0px'
-          borderRadius='8px'
-          _active={{
-            bg: "transparent",
-          }}
-          _focus={{
-            bg: "transparent",
-          }}
-          >
-          <Flex align='center'>
-            {/* <Icon as={MdOutlineSettings} h='16px' w='32px' me='8px' /> */}
-            <CreateBeginningProduction />
-            
-          </Flex>
-        </MenuItem>
-      </MenuList>
-    </Menu>
+    <Dropdown
+      button={
+        <button
+          onClick={() => setOpen(!open)}
+          open={open}
+          className={`flex items-center text-xl hover:cursor-pointer ${
+            transparent
+              ? "bg-none text-white hover:bg-none active:bg-none"
+              : "bg-lightPrimary p-2 text-brand-500 hover:bg-gray-100 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10"
+          } linear justify-center rounded-lg font-bold transition duration-200`}
+        >
+          <BsThreeDots className="h-6 w-6" />
+        </button>
+      }
+      animation={"origin-top-right transition-all duration-300 ease-in-out"}
+      classNames={`${transparent ? "top-8" : "top-11"} left-0 w-max`}
+      children={
+        <div className="z-50 w-max rounded-xl bg-white  py-3 px-4 text-sm shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+          <div className="hover:text-black flex cursor-pointer items-center gap-2 text-gray-600 hover:font-medium">
+          <CreateBeginningProduction />
+          </div>
+        </div>
+      }
+    />
   );
 }
+
+export default BeginningMenu;
