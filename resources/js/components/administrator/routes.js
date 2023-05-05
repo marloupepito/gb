@@ -60,7 +60,7 @@ const routes = [
         key:res.id+Math.random(),
         name: "Bread Production",
         layout: "/administrator",
-        path: "/branch/"+res.id+'/production/beginning', 
+        path: "/branch/"+res.id+'/production', 
         
       },
       {

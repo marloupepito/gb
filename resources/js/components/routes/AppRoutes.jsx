@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import AdminLayout from "../administrator/Layout";
 import AdministratorDashboardLayout from "../administrator/dashboard/Layout";
-
+import AuthLogin from "../auth/Auth";
 import MainDashboard from "../administrator/views/admin/default";
 // import SignInCentered from "../administrator/views/auth/signIn";
 // import Profile from "../administrator/views/admin/profile";
@@ -20,9 +20,7 @@ import AccountSectionLayout from "../administrator/branches/accounts/sections/pr
 export const router = createBrowserRouter([
     {
     path: "/",
-    // children:[
-       
-    // ]
+    element:<AuthLogin />
     },
     {
         path: "/administrator",
@@ -53,7 +51,7 @@ export const router = createBrowserRouter([
                     element: <BreadProductionLayout />,
                     children:[
                       {
-                        path: "/administrator/branch/:branchid/production/beginning", 
+                        path: "/administrator/branch/:branchid/production", 
                         element:<BeginningLayout />
                       },
                       {

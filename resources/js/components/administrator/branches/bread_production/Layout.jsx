@@ -4,9 +4,10 @@ import Card from "./../../components/card";
 import BreadProductionTabs from './components/Tabs';
 function BreadProductionLayout() {
     return ( 
-        <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+        <div
+       >
                 <BreadProductionTabs />
-        </Box>
+        </div>
      );
 }
 

@@ -44,11 +44,7 @@ export default function SalesReportTable(props) {
     }, [location.hash+location.search]);
     
     return (
-        <Card
-            direction="column"
-            w="100%"
-            px="0px"
-            overflowX={{ sm: "scroll", lg: "hidden" }}
+        <div
         >
             <Flex px="25px" mb="20px" align="center">
                <SearchDrawerDate />
@@ -62,6 +58,7 @@ export default function SalesReportTable(props) {
                     Beginning of Production
                 </Text>
             </Flex>
+            <div className="mt-8 overflow-x-scroll xl:overflow-hidden">
             <Table size="sm" variant="simple" color="gray.500" mb="24px">
                 <Thead>
                     <Tr>
@@ -283,6 +280,7 @@ export default function SalesReportTable(props) {
                     ))}
                 </Tbody>
             </Table>
-        </Card>
+            </div>
+        </div>
     );
 }

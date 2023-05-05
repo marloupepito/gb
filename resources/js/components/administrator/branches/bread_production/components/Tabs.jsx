@@ -14,23 +14,20 @@ function BreadProductionTabs() {
     const navigate = useNavigate();
     const loc = window.location.pathname.split('/')[5]
     const {branchid} = useParams();
-    const [index,setIndex] = useState(loc === 'beginning'?0:loc === 'bakers_report'?1:loc === 'bread_report'?2:3);
+    const [index,setIndex] = useState(loc === undefined?0:loc === 'bakers_report'?1:loc === 'bread_report'?2:3);
     function nextPage (where){
-     navigate("/administrator/branch/"+branchid+'/production/'+where);
+     navigate("/administrator/branch/"+branchid+'/production'+where);
     }
     return (
         <Card
-            direction="column"
-            w="100%"
-            px="10px"
-            overflowX={{ sm: "scroll", lg: "hidden" }}
+        extra={"w-full h-full px-6 pb-6 sm:overflow-x-auto mt-3"}
         >
-            <Tabs defaultIndex={index} variant="enclosed">
+            <Tabs className="mt-3" defaultIndex={index} variant="enclosed">
                 <TabList>
-                    <Tab onClick={() =>nextPage('beginning')}>Create Beginning</Tab>
-                    <Tab onClick={() =>nextPage('bakers_report')}>Baker Report</Tab>
-                    <Tab onClick={() =>nextPage('bread_report')}>Bread Report</Tab>
-                    <Tab onClick={() =>nextPage('sales_report')}>Sales Report</Tab>
+                    <Tab onClick={() =>nextPage(' ')}>Create Beginning</Tab>
+                    <Tab onClick={() =>nextPage('/bakers_report')}>Baker Report</Tab>
+                    <Tab onClick={() =>nextPage('/bread_report')}>Bread Report</Tab>
+                    <Tab onClick={() =>nextPage('/sales_report')}>Sales Report</Tab>
                 </TabList>
                 <TabIndicator
                     mt="-1.5px"

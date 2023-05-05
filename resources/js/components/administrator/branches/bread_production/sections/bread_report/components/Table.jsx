@@ -24,11 +24,7 @@ export default function BreadBakersReportTable(props) {
 
 
     return (
-        <Card
-            direction="column"
-            w="100%"
-            px="0px"
-            overflowX={{ sm: "scroll", lg: "hidden" }}
+        <div
         >
             
             <Flex px="25px" mb="20px" align="center">
@@ -42,6 +38,7 @@ export default function BreadBakersReportTable(props) {
                     Bread Reports
                 </Text>
             </Flex>
+            <div className="mt-8 overflow-x-scroll xl:overflow-hidden">
             <Table variant="simple" color="gray.500" mb="24px">
                 <Thead>
                     <Tr>
@@ -171,6 +168,7 @@ export default function BreadBakersReportTable(props) {
                     ))}
                 </Tbody>
             </Table>
-        </Card>
+            </div>
+        </div>
     );
 }
