@@ -1,7 +1,9 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import TableInformation from "./Table";
+import Card from "../../../../../components/card";
 function AccountProfileTabs() {
     return (
+        <Card className="w-full h-full px-6 pb-6 overflow-x-auto">
         <Tabs className="mt-3"  isFitted>
             <TabList>
                 <Tab>Information</Tab>
@@ -28,7 +30,9 @@ function AccountProfileTabs() {
                     <div>6!</div>
                 </TabPanel>
             </TabPanels>
+            
         </Tabs>
+        </Card>
     );
 }
 

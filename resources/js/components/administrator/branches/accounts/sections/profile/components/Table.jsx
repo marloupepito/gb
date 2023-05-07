@@ -23,7 +23,6 @@ function TableInformation() {
      }, [accountid]);
     return (
         <>
-            <TableContainer>
                 <Table variant="simple">
                     <TableCaption>
                         GB Bakeshop Personal Information
@@ -64,7 +63,6 @@ function TableInformation() {
                         </Tr>
                     </Tbody>
                 </Table>
-            </TableContainer>
         </>
     );
 }

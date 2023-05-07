@@ -1,5 +1,5 @@
-import React from "react";
-import { Routes, Route, Outlet, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Route, Outlet, useLocation } from "react-router-dom";
 import Navbar from "./components/navbar";
 import Sidebar from "./components/sidebar";
 // import Footer from "components/footer/Footer";
@@ -10,6 +10,26 @@ export default function AdminLayout(props) {
   const location = useLocation();
   const [open, setOpen] = React.useState(true);
   const [currentRoute, setCurrentRoute] = React.useState("Main Dashboard");
+const navigate = useNavigate()
+  useEffect(() => {
+    axios
+        .get("/api/user")
+        .then((res) => {
+          console.log(res.data)
+            if (res.data !== '' && window.location.pathname !== "/") {
+                //  navigate("/administrator/dashboards");
+            }
+            else{
+               navigate("/");
+            }
+        })
+        .catch((err) => {
+            if (window.location.pathname !== "/") {
+                navigate("/");
+                setLoading(false);
+            }
+        });
+}, []);
 
   React.useEffect(() => {
     window.addEventListener("resize", () =>
@@ -67,7 +87,7 @@ export default function AdminLayout(props) {
           className={`mx-[12px] h-full flex-none transition-all md:pr-2 xl:ml-[313px]`}
         >
           {/* Routes */}
-          <div className="pl-5 h-full">
+          <div className="lg:pl-5 h-full">
             <Navbar
               onOpenSidenav={() => setOpen(true)}
               logoText={"Horizon UI Tailwind React"}

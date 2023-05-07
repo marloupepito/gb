@@ -12,7 +12,7 @@ import React, { useState, useEffect } from 'react';
 
 // Custom components
 import Card from "./../../../components/card";
-import RawMaterialsMenu from "./Menu";
+import AccountMenu from "./Menu";
 // Assets
 import {
     MdArrowCircleRight,
@@ -47,16 +47,9 @@ export default function AccountsTable(props) {
    }
    
     return (
-        <Card
-            direction="column"
-            w="100%"
-            px="0px"
-            overflowX={{ sm: "scroll", lg: "hidden" }}
-        >
-            
+        <Card extra={"px-6 pb-6 overflow-x-auto pl-0 pr-0"}>    
             <Flex px="25px" justify="space-between" mb="20px" align="center">
-                
-            <RawMaterialsMenu />
+            <AccountMenu />
                 <Text
                     color={textColor}
                     fontSize="22px"
@@ -139,7 +132,7 @@ export default function AccountsTable(props) {
                                     Delete
                                 </Button>
                                 </PopoverTrigger>
-                                <PopoverContent mr="5" >
+                                <PopoverContent >
                                     <PopoverHeader  fontWeight='semibold'>Account Deletion</PopoverHeader>
                                     <PopoverArrow />
                                     <PopoverCloseButton />

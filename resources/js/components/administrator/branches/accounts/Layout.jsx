@@ -6,10 +6,10 @@ function AccountsLayout() {
     return (
         <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
            <div className="row">
-                <div className="col-md-5">
+                <div className="col-md-5 col-12">
                    <AccountsTable />
                 </div>
-                <div className="col-md-7">
+                <div className="col-md-7 col-12">
                   <Outlet />
                 </div>
            </div>

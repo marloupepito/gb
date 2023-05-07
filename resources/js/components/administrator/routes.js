@@ -37,19 +37,19 @@ const routes = [
     layout: "/administrator",
     path: "/branch/"+res.id,
     children:[
-      {
-        key:res.id+Math.random(),
-        name: "Dashboard", 
-        layout: "/administrator",
-        path: "/branch/"+res.id+'/dashboard',
-      },
-      {
-        key:res.id+Math.random(),
-        name: "Delivery",
-        layout: "/administrator",
-        path: "/branch/"+res.id+'/delivery', 
+      // {
+      //   key:res.id+Math.random(),
+      //   name: "Dashboard", 
+      //   layout: "/administrator",
+      //   path: "/branch/"+res.id+'/dashboard',
+      // },
+      // {
+      //   key:res.id+Math.random(),
+      //   name: "Delivery",
+      //   layout: "/administrator",
+      //   path: "/branch/"+res.id+'/delivery', 
       
-      },
+      // },
       {
         key:res.id+Math.random(),
         name: "Raw Materials", 
