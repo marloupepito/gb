@@ -4,6 +4,7 @@ import Navbar from "./components/navbar";
 import Sidebar from "./components/sidebar";
 // import Footer from "components/footer/Footer";
 import routes from "./routes.js";
+import axios from 'axios';
 
 export default function AdminLayout(props) {
   const { ...rest } = props;
@@ -11,32 +12,30 @@ export default function AdminLayout(props) {
   const [open, setOpen] = React.useState(true);
   const [currentRoute, setCurrentRoute] = React.useState("Main Dashboard");
 const navigate = useNavigate()
-  useEffect(() => {
-    axios
-        .get("/api/user")
-        .then((res) => {
-          console.log(res.data)
-            if (res.data !== '' && window.location.pathname !== "/") {
-                //  navigate("/administrator/dashboards");
-            }
-            else{
-               navigate("/");
-            }
-        })
-        .catch((err) => {
-            if (window.location.pathname !== "/") {
-                navigate("/");
-                setLoading(false);
-            }
-        });
-}, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener("resize", () =>
       window.innerWidth < 1200 ? setOpen(false) : setOpen(true)
     );
+
+    axios
+    .get("/api/user")
+    .then((res) => {
+        if (res.data !== '' && window.location.pathname !== "/") {
+            //  navigate("/administrator/dashboards");
+        }
+        else{
+           navigate("/");
+        }
+    })
+    .catch((err) => {
+        if (window.location.pathname !== "/") {
+            navigate("/");
+        }
+    });
   }, []);
-  React.useEffect(() => {
+
+  useEffect(() => {
     getActiveRoute(routes);
   }, [location.pathname]);
 
