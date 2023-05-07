@@ -18,21 +18,21 @@ const navigate = useNavigate()
       window.innerWidth < 1200 ? setOpen(false) : setOpen(true)
     );
 
-    axios
-    .get("/api/user")
-    .then((res) => {
-        if (res.data !== '' && window.location.pathname !== "/") {
-            //  navigate("/administrator/dashboards");
-        }
-        else{
-           navigate("/");
-        }
-    })
-    .catch((err) => {
-        if (window.location.pathname !== "/") {
-            navigate("/");
-        }
-    });
+    // axios
+    // .get("/api/user")
+    // .then((res) => {
+    //     if (res.data !== '' && window.location.pathname !== "/") {
+    //         //  navigate("/administrator/dashboards");
+    //     }
+    //     else{
+    //        navigate("/");
+    //     }
+    // })
+    // .catch((err) => {
+    //     if (window.location.pathname !== "/") {
+    //         navigate("/");
+    //     }
+    // });
   }, []);
 
   useEffect(() => {
