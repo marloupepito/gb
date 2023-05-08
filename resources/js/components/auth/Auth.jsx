@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import InputField from "./../administrator/components/fields/InputField";
-import { FcGoogle } from "react-icons/fc";
+import { FcSelfie } from "react-icons/fc";
 import Checkbox from "./../administrator/components/checkbox";
 import Footer from "./../administrator/components/footer/FooterAuthDefault";
 import authImg from "./../assets/img/auth/auth.png";
@@ -84,23 +84,19 @@ export default function AuthLogin() {
         </p>
         <div className="mb-6 flex h-[50px] w-full items-center justify-center gap-2 rounded-xl bg-lightPrimary hover:cursor-pointer dark:bg-navy-800">
           <div className="rounded-full text-xl">
-            <FcGoogle />
+            <FcSelfie />
           </div>
           <h5 className="text-sm font-medium text-navy-700 dark:text-white">
-            Sign In with Google
+            Attendance Scanner
           </h5>
         </div>
         <div className="mb-6 flex items-center  gap-3">
           <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
-          <p className="text-base text-gray-600 dark:text-white"> or </p>
+          <p className="text-base text-gray-600 dark:text-white"> SIGN </p>
           <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
         </div>
         <form onSubmit={loginUser}>
         {/* username */}
-
-
-   
-
     <div className={`mb-3`}>
       <label
         htmlFor='username'

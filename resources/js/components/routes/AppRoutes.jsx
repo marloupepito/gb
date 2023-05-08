@@ -17,6 +17,8 @@ import BreadReportLayout from "../administrator/branches/bread_production/sectio
 import AccountsLayout from "../administrator/branches/accounts/Layout";
 // import Overview from "../administrator/views/admin/profile";
 import AccountSectionLayout from "../administrator/branches/accounts/sections/profile/Layout";
+import AccountAttendanceLayout from "../administrator/branches/accounts/sections/attendance/Layout";
+import TableInformation from "../administrator/branches/accounts/sections/profile/components/Table";
 export const router = createBrowserRouter([
     {
     path: "/",
@@ -75,6 +77,22 @@ export const router = createBrowserRouter([
                       {
                         path: "/administrator/branch/:branchid/accounts/profile/:accountid",
                         element: <AccountSectionLayout />,
+                      },
+                      {
+                        path: "/administrator/branch/:branchid/accounts/attendance/:accountid",
+                        element: <AccountAttendanceLayout />,
+                      },
+                      {
+                        path: "/administrator/branch/:branchid/accounts/charges/:accountid",
+                        element: <AccountAttendanceLayout />,
+                      },
+                      {
+                        path: "/administrator/branch/:branchid/accounts/salary/:accountid",
+                        element: <AccountAttendanceLayout />,
+                      },
+                      {
+                        path: "/administrator/branch/:branchid/accounts/credits/:accountid",
+                        element: <AccountAttendanceLayout />,
                       }
                     ]
                   }, 

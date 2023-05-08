@@ -5,11 +5,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { GetEveryAccount } from "../../../../../../api/Account";
 import AccountProfileTabs from "./Tabs";
+import avatar from "./../../../../../../assets/img/avatars/avatar11.png";
+import banner from "./../../../../../../assets/img/profile/banner.png";
 export default function AccountCard(props) {
     const { accountid } = useParams();
-    
+      console.log(props)
     const [account,setAccount] = useState([]);
-  const { banner, avatar, name, job, posts, followers, following } = props;
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
   const borderColor = useColorModeValue(
@@ -21,7 +22,6 @@ export default function AccountCard(props) {
      GetEveryAccount(accountid).then(res=>{
         setAccount(res.data.status)
     })
-   
   }, [accountid]);
   return (
     <Card
