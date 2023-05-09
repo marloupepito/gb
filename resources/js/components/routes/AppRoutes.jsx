@@ -19,10 +19,16 @@ import AccountsLayout from "../administrator/branches/accounts/Layout";
 import AccountSectionLayout from "../administrator/branches/accounts/sections/profile/Layout";
 import AccountAttendanceLayout from "../administrator/branches/accounts/sections/attendance/Layout";
 import TableInformation from "../administrator/branches/accounts/sections/profile/components/Table";
+
+import QrcodeLayout from "../administrator/branches/accounts/sections/qrcode/Layout";
+import QrScanner from "../auth/QrScanner";
 export const router = createBrowserRouter([
     {
     path: "/",
-    element:<AuthLogin />
+    children:[
+      { path: "/", element:<AuthLogin />},
+      { path: "/qrcode", element:<QrScanner />},
+    ]
     },
     {
         path: "/administrator",
@@ -93,6 +99,10 @@ export const router = createBrowserRouter([
                       {
                         path: "/administrator/branch/:branchid/accounts/credits/:accountid",
                         element: <AccountAttendanceLayout />,
+                      },
+                      {
+                        path: "/administrator/branch/:branchid/accounts/qrcode/:accountid",
+                        element: <QrcodeLayout />,
                       }
                     ]
                   }, 

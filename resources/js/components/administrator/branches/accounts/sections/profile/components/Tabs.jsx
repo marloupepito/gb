@@ -15,10 +15,10 @@ function AccountProfileTabs() {
     const userid = window.location.pathname.split('/')[6]
     const {branchid} = useParams();
   
-    const [index,setIndex] = useState(loc === 'profile'?'0':loc === 'attendance'?'1':loc === 'charges'?'2':'3');
+    const [index,setIndex] = useState(loc === 'profile'?'0':loc === 'attendance'?'1':loc === 'charges'?'2':loc === 'salary'?'3':loc === 'credits'?'4':'5');
 
-    const active ='inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500'
-    const notactive ='inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'
+    const active ='inline-block p-3 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500'
+    const notactive ='inline-block p-3 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'
     function nextPage (where,active){
         setIndex(active)
           navigate("/administrator/branch/"+branchid+'/accounts/'+where+'/'+userid);
@@ -42,6 +42,9 @@ function AccountProfileTabs() {
                 </li>
                 <li className="mr-2">
                     <a  onClick={() =>nextPage('credits','4')} class={index === '4'?active:notactive}>Credits</a>
+                </li>
+                <li className="mr-2">
+                    <a  onClick={() =>nextPage('qrcode','5')} class={index === '5'?active:notactive}>Qrcode</a>
                 </li>
                 {/* <li>
                     <a className="inline-block p-4 text-gray-400 rounded-t-lg cursor-not-allowed dark:text-gray-500">Disabled</a>

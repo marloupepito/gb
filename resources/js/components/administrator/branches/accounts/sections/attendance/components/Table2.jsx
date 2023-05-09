@@ -10,22 +10,28 @@ import {
     Td,
     TableCaption,
     TableContainer,
+    useColorModeValue,
+    Flex,
+    Text
 } from "@chakra-ui/react";
-
-import { GetEveryAccount } from "../../../../../../api/Account";
-import { useParams } from "react-router-dom";
 function AccountAttendanceTable() {
-    const { accountid } = useParams();
-    const [account,setAccount] = useState([]);
-    useEffect(() => {
-        GetEveryAccount(accountid).then(res=>{
-           setAccount(res.data.status)
-       })
-     }, [accountid]);
+  
+    const textColor = useColorModeValue("secondaryGray.900", "white");
     return ( 
     <Card  extra={"px-6 pb-6 overflow-x-auto  mt-4"}>
+        <Flex px="25px" justify="space-between" mb="20px" align="center">
+                <Text
+                    color={textColor}
+                    fontSize="22px"
+                    fontWeight="700"
+                    lineHeight="100%"
+                    className='mt-3'
+                >
+                  Daily Attendance
+                </Text>
+            </Flex>
            <Table variant="simple">
-                    <TableCaption>
+                    <TableCaption >
                         GB Bakeshop Attendance
                     </TableCaption>
                     <Thead>
@@ -41,27 +47,27 @@ function AccountAttendanceTable() {
                     <Tbody>
                         <Tr>
                             <Td>Name:</Td>
-                            <Td>{account.name}</Td>
+                            <Td></Td>
                         </Tr>
                         <Tr>
                             <Td>Shift:</Td>
-                            <Td>{account.shift}</Td>
+                            <Td></Td>
                         </Tr>
                         <Tr>
                             <Td>Mobile:</Td>
-                            <Td>{account.mobile}</Td>
+                            <Td></Td>
                         </Tr>
                         <Tr>
                             <Td>Gender:</Td>
-                            <Td>{account.gender}</Td>
+                            <Td></Td>
                         </Tr>
                         <Tr>
                             <Td>Position:</Td>
-                            <Td>{account.position}</Td>
+                            <Td></Td>
                         </Tr>
                         <Tr>
                             <Td>Username:</Td>
-                            <Td>{account.username}</Td>
+                            <Td></Td>
                         </Tr>
                         <Tr>
                             <Td>Password:</Td>

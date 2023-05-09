@@ -47,7 +47,7 @@ function LogoutSession(props) {
   <Modal isOpen={isModalOpen} onClose={handleCancel} className="!z-[1010]">
     <ModalOverlay className="bg-[#000] !opacity-30" />
     <ModalContent >
-      <ModalBody class="p-0">
+      <ModalBody className="p-0">
         <Card extra="px-[30px] pt-[35px] pb-[40px] max-w-[450px] flex flex-col !z-[1004]">
           <h1 className="mb-[20px] text-2xl font-bold">Logout Session</h1>
           <div className=" float-right">

@@ -75,7 +75,9 @@ export default function AuthLogin() {
               </Link>
               <div className="flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-0 lg:mb-10 lg:items-center lg:justify-start">
       {/* Sign in section */}
+ 
       <div className=" w-full max-w-full flex-col items-center md:pl-4 lg:pl-0 xl:max-w-[420px]">
+      <Link to='/qrcode'>
         <h4 className="mb-2.5 text-4xl font-bold text-navy-700 dark:text-white">
           Sign In
         </h4>
@@ -90,6 +92,7 @@ export default function AuthLogin() {
             Attendance Scanner
           </h5>
         </div>
+        </Link>
         <div className="mb-6 flex items-center  gap-3">
           <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
           <p className="text-base text-gray-600 dark:text-white"> SIGN </p>
