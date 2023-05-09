@@ -29,22 +29,22 @@ function AccountProfileTabs() {
         <div className="mb-4 text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
             <ul className="flex flex-wrap -mb-px">
                 <li className="mr-2">
-                    <a onClick={() =>nextPage('profile','0')} class={index === '0'?active:notactive}>Information</a>
+                    <a onClick={() =>nextPage('profile','0')} className={index === '0'?active:notactive}>Information</a>
                 </li>
                 <li className="mr-2">
-                    <a  onClick={() =>nextPage('attendance','1')} class={index === '1'?active:notactive} >Attendance</a>
+                    <a  onClick={() =>nextPage('attendance','1')} className={index === '1'?active:notactive} >Attendance</a>
                 </li>
                 <li className="mr-2">
-                    <a  onClick={() =>nextPage('charges','2')} class={index === '2'?active:notactive}>Charges</a>
+                    <a  onClick={() =>nextPage('charges','2')} className={index === '2'?active:notactive}>Charges</a>
                 </li>
                 <li className="mr-2">
-                    <a  onClick={() =>nextPage('salary','3')} class={index === '3'?active:notactive}>Salary</a>
+                    <a  onClick={() =>nextPage('salary','3')} className={index === '3'?active:notactive}>Salary</a>
                 </li>
                 <li className="mr-2">
-                    <a  onClick={() =>nextPage('credits','4')} class={index === '4'?active:notactive}>Credits</a>
+                    <a  onClick={() =>nextPage('credits','4')} className={index === '4'?active:notactive}>Credits</a>
                 </li>
                 <li className="mr-2">
-                    <a  onClick={() =>nextPage('qrcode','5')} class={index === '5'?active:notactive}>Qrcode</a>
+                    <a  onClick={() =>nextPage('qrcode','5')} className={index === '5'?active:notactive}>Qrcode</a>
                 </li>
                 {/* <li>
                     <a className="inline-block p-4 text-gray-400 rounded-t-lg cursor-not-allowed dark:text-gray-500">Disabled</a>

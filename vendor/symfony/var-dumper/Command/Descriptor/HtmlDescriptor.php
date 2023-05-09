@@ -44,7 +44,7 @@ class HtmlDescriptor implements DumpDescriptorInterface
         $title = '-';
         if (isset($context['request'])) {
             $request = $context['request'];
-            $controller = "<span class='dumped-tag'>{$this->dumper->dump($request['controller'], true, ['maxDepth' => 0])}</span>";
+            $controller = "<span className='dumped-tag'>{$this->dumper->dump($request['controller'], true, ['maxDepth' => 0])}</span>";
             $title = sprintf('<code>%s</code> <a href="%s">%s</a>', $request['method'], $uri = $request['uri'], $uri);
             $dedupIdentifier = $request['identifier'];
         } elseif (isset($context['cli'])) {

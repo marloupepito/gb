@@ -29,16 +29,16 @@ function BreadProductionTabs() {
 <div className="mb-4 text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
     <ul className="flex flex-wrap -mb-px">
         <li className="mr-2">
-            <a onClick={() =>nextPage(' ',0)} href="#" class={index === 0?active:notactive}>Create Beginning</a>
+            <a onClick={() =>nextPage(' ',0)} href="#" className={index === 0?active:notactive}>Create Beginning</a>
         </li>
         <li className="mr-2">
-            <a href="#"  onClick={() =>nextPage('/bakers_report',1)} class={index === 1?active:notactive} >Baker Report</a>
+            <a href="#"  onClick={() =>nextPage('/bakers_report',1)} className={index === 1?active:notactive} >Baker Report</a>
         </li>
         <li className="mr-2">
-            <a href="#"  onClick={() =>nextPage('/bread_report',2)} class={index === 2?active:notactive}>Bread Report</a>
+            <a href="#"  onClick={() =>nextPage('/bread_report',2)} className={index === 2?active:notactive}>Bread Report</a>
         </li>
         <li className="mr-2">
-            <a href="#"  onClick={() =>nextPage('/sales_report',3)} class={index === 3?active:notactive}>Sales Report</a>
+            <a href="#"  onClick={() =>nextPage('/sales_report',3)} className={index === 3?active:notactive}>Sales Report</a>
         </li>
         {/* <li>
             <a className="inline-block p-4 text-gray-400 rounded-t-lg cursor-not-allowed dark:text-gray-500">Disabled</a>
