@@ -69,7 +69,7 @@ export default function RawMaterialsDrawer(props) {
     };
     return (
         <>
-            <a href="#" ref={btnRef} colorscheme="teal" onClick={onOpen}>
+            <a href="#" ref={btnRef} colorScheme="teal" onClick={onOpen}>
             <div className={`rounded-full text-xl`}>
                 <MdModeEdit onClick={onOpen} className="text-blue-500" />
             </div>
@@ -129,7 +129,7 @@ export default function RawMaterialsDrawer(props) {
                             <Button variant="outline" mr={3} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button type="submit" colorscheme="blue">Save</Button>
+                            <Button type="submit" colorScheme="blue">Save</Button>
                         </DrawerFooter>
                     </DrawerContent>
                 </form>
