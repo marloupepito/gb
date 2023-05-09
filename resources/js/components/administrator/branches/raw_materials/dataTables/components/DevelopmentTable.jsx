@@ -158,7 +158,7 @@ export default function DevelopmentTable(props) {
                         </Text>
                         <Progress
                           variant='table'
-                          colorScheme='brandScheme'
+                          colorscheme='brandScheme'
                           h='8px'
                           w='63px'
                           value={cell.value}

@@ -65,7 +65,7 @@ export default function SalesReportDrawer(props) {
             <Button
                 variant="outline"
                 size="sm"
-                colorScheme="red"
+                colorscheme="red"
                 onClick={() => onOpen()}
             >
                 Check
@@ -123,7 +123,7 @@ export default function SalesReportDrawer(props) {
                             isLoading={loading}
                                 variant="outline"
                                 type="submit"
-                                colorScheme="red"
+                                colorscheme="red"
                             >
                                 Submit
                             </Button>

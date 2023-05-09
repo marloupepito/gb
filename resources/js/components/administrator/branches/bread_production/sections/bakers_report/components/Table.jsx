@@ -129,7 +129,7 @@ export default function TableBakersReport(props) {
                                         fontSize="sm"
                                         fontWeight="700"
                                     >
-                                          <Badge ml='1' colorScheme='green'>
+                                          <Badge ml='1' colorscheme='green'>
                                           {res.production}
                                           </Badge>
                                       
@@ -143,7 +143,7 @@ export default function TableBakersReport(props) {
                                         fontSize="sm"
                                         fontWeight="700"
                                     >
-                                        <Badge ml='1' colorScheme='red'>
+                                        <Badge ml='1' colorscheme='red'>
                                         {res.charge}
                                         </Badge>
                                         

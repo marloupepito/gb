@@ -60,7 +60,7 @@ function SearchDrawerDate(props) {
             <Button
                 onClick={onOpen}
                 leftIcon={<SearchIcon />}
-                colorScheme="red"
+                colorscheme="red"
                 variant="outline"
             >
                 Search
@@ -123,7 +123,7 @@ function SearchDrawerDate(props) {
                                 <Switch
                                     value={time}
                                     onChange={timeHandler}
-                                    colorScheme="red"
+                                    colorscheme="red"
                                     size="lg"
                                 />
                                 <Text
@@ -143,7 +143,7 @@ function SearchDrawerDate(props) {
                             <Button variant="outline" mr={3} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button type="submit" colorScheme="red">
+                            <Button type="submit" colorscheme="red">
                                 Search
                             </Button>
                         </DrawerFooter>

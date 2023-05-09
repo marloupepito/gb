@@ -146,7 +146,7 @@ export default function ColumnsTable(props) {
                       <Flex align='center'>
                         <Progress
                           variant='table'
-                          colorScheme='brandScheme'
+                          colorscheme='brandScheme'
                           h='8px'
                           w='108px'
                           value={cell.value}

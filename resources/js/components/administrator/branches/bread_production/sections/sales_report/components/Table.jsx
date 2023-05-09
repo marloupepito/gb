@@ -186,7 +186,7 @@ export default function SalesReportTable(props) {
                                         fontSize="sm"
                                         fontWeight="700"
                                     >
-                                        <Badge ml="1" colorScheme="green">
+                                        <Badge ml="1" colorscheme="green">
                                             {res.production}
                                         </Badge>
 
@@ -200,7 +200,7 @@ export default function SalesReportTable(props) {
                                     fontSize="sm"
                                     fontWeight="700"
                                 >
-                                    <Badge ml="1" colorScheme="green">
+                                    <Badge ml="1" colorscheme="green">
                                         {res.price}
                                     </Badge>
                                 </Text>
@@ -223,7 +223,7 @@ export default function SalesReportTable(props) {
                                     fontSize="sm"
                                     fontWeight="700"
                                 >
-                                    <Badge ml="1" colorScheme="red">
+                                    <Badge ml="1" colorscheme="red">
                                         {res.breadout}
                                     </Badge>
                                 </Text>
@@ -234,7 +234,7 @@ export default function SalesReportTable(props) {
                                     fontSize="sm"
                                     fontWeight="700"
                                 >
-                                    <Badge ml="1" colorScheme="red">
+                                    <Badge ml="1" colorscheme="red">
                                         {res.charge}
                                     </Badge>
                                 </Text>
@@ -245,7 +245,7 @@ export default function SalesReportTable(props) {
                                     fontSize="sm"
                                     fontWeight="700"
                                 >
-                                    <Badge ml="1" colorScheme="green">
+                                    <Badge ml="1" colorscheme="green">
                                         {res.remaining}
                                     </Badge>
                                 </Text>
@@ -257,7 +257,7 @@ export default function SalesReportTable(props) {
                                     fontSize="sm"
                                     fontWeight="700"
                                 >
-                                    <Badge ml="1" colorScheme="green">
+                                    <Badge ml="1" colorscheme="green">
                                         {res.soldout}
                                     </Badge>
                                 </Text>
@@ -268,7 +268,7 @@ export default function SalesReportTable(props) {
                                     fontSize="sm"
                                     fontWeight="700"
                                 >
-                                    <Badge ml="1" colorScheme="green">
+                                    <Badge ml="1" colorscheme="green">
                                         {res.remaining === null
                                             ? 0
                                             : parseInt(res.price) *

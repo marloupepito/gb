@@ -128,7 +128,7 @@ export default function AccountsTable(props) {
                             <Td>
                                 <Popover matchWidth={true} placement='top-start'>
                                 <PopoverTrigger>
-                                <Button  leftIcon={<DeleteIcon />}  size="sm" colorScheme='red' variant='outline'>
+                                <Button  leftIcon={<DeleteIcon />}  size="sm" colorscheme='red' variant='outline'>
                                     Delete
                                 </Button>
                                 </PopoverTrigger>
@@ -138,14 +138,14 @@ export default function AccountsTable(props) {
                                     <PopoverCloseButton />
                                     <PopoverFooter display='flex' justifyContent='flex-end'>
                                         <ButtonGroup size='sm'>
-                                        <Button onClick={() =>deleteHandler(res.id)} colorScheme='red'>Delete</Button>
+                                        <Button onClick={() =>deleteHandler(res.id)} colorscheme='red'>Delete</Button>
                                         </ButtonGroup>
                                     </PopoverFooter>
                                 </PopoverContent>
                                 </Popover>
                             </Td>
                             <Td>
-                            <Button onClick={()=>showAccount(res.id)} size="sm" rightIcon={<MdArrowCircleRight />} colorScheme='blue' variant='outline'>
+                            <Button onClick={()=>showAccount(res.id)} size="sm" rightIcon={<MdArrowCircleRight />} colorscheme='blue' variant='outline'>
                                 Show
                             </Button>
                             </Td>

@@ -170,7 +170,7 @@ export default function AccountDrawer() {
                             <Button variant="outline" mr={3} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button variant="outline" isLoading={loading} type="submit" colorScheme="red">
+                            <Button variant="outline" isLoading={loading} type="submit" colorscheme="red">
                                 Save
                             </Button>
                         </DrawerFooter>

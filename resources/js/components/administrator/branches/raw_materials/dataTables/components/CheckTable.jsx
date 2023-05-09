@@ -99,7 +99,7 @@ export default function CheckTable(props) {
                       <Flex align='center'>
                         <Checkbox
                           defaultChecked={cell.value[1]}
-                          colorScheme='brandScheme'
+                          colorscheme='brandScheme'
                           me='10px'
                         />
                         <Text color={textColor} fontSize='sm' fontWeight='700'>

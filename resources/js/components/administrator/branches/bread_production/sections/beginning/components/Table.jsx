@@ -1,4 +1,4 @@
-import {Flex,Table,Progress,Icon,Tbody,Td,Text,Th,Thead,Tr,useColorModeValue,} from "@chakra-ui/react";
+import {Flex,Table,Progress,Icon,Tbody,Td,Text,Th,Thead,Tr,useColorModeValue,Button} from "@chakra-ui/react";
 import React, { useState, useEffect } from 'react';
 // Custom components
 import Card from "./../../../../../components/card";
@@ -133,14 +133,14 @@ export default function BeginningTable(props) {
                             </Td>
                             <Td>
                                 <Flex align="center">
-                                    <a href="#">
+                                    <Button>
                                        <UpdateBeginningProduction data={res} />
-                                    </a>
+                                    </Button>
                                     &nbsp;&nbsp;
-                                    <a>
+                                    <Button>
                                    sss
                                        
-                                    </a>
+                                    </Button>
                                 </Flex>
                             </Td>
                         </Tr>

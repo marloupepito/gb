@@ -107,7 +107,7 @@ function UpdateBeginningProduction(props) {
     }
     return (
         <>
-            <a href="#" onClick={onOpen}>
+            <a  onClick={onOpen}>
            <Icon
                     color="blue.500"
                     w="24px"
@@ -172,7 +172,7 @@ function UpdateBeginningProduction(props) {
                                     </FormControl>
                                     <center>
                                         <Button
-                                            colorScheme="red"
+                                            colorscheme="red"
                                             className="mt-5 mb-3"
                                             variant="outline"
                                             type="button"
@@ -269,7 +269,7 @@ function UpdateBeginningProduction(props) {
                                                 </div>
                                                 <div className="col-md-2 col-2">
                                                     <Button
-                                                        colorScheme="red"
+                                                        colorscheme="red"
                                                         onClick={() =>
                                                             deleteItem(index)
                                                         }
@@ -289,7 +289,7 @@ function UpdateBeginningProduction(props) {
                             <Button variant="outline" mr={3} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button type="submit" colorScheme="red">
+                            <Button type="submit" colorscheme="red">
                                 Submit
                             </Button>
                         </DrawerFooter>

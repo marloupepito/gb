@@ -149,7 +149,7 @@ function CreateBeginningProduction(props) {
                                     </FormControl>
                                     <center>
                                         <Button
-                                            colorScheme="red"
+                                            colorscheme="red"
                                             className="mt-5 mb-3"
                                             variant="outline"
                                             type="button"
@@ -245,7 +245,7 @@ function CreateBeginningProduction(props) {
                                                 </div>
                                                 <div className="col-md-2 col-2">
                                                     <Button
-                                                        colorScheme="red"
+                                                        colorscheme="red"
                                                         onClick={() =>
                                                             deleteItem(index)
                                                         }
@@ -265,7 +265,7 @@ function CreateBeginningProduction(props) {
                             <Button variant="outline" mr={3} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button type="submit" colorScheme="red">
+                            <Button type="submit" colorscheme="red">
                                 Submit
                             </Button>
                         </DrawerFooter>

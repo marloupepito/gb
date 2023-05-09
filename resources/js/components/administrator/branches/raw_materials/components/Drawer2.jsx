@@ -66,7 +66,7 @@ export default function CreateRawMaterialsDrawer(props) {
     };
     return (
         <>
-            <a href="#" ref={btnRef} colorScheme="teal" onClick={onOpen}>
+            <a href="#" ref={btnRef} colorscheme="teal" onClick={onOpen}>
                 <Text fontSize="sm" fontWeight="400">
                     Add Raw Materials
                 </Text>
@@ -131,7 +131,7 @@ export default function CreateRawMaterialsDrawer(props) {
                             <Button variant="outline" mr={3} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button type="submit" colorScheme="blue">
+                            <Button type="submit" colorscheme="blue">
                                 Save
                             </Button>
                         </DrawerFooter>

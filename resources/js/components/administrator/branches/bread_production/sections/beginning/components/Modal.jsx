@@ -95,7 +95,7 @@ export function BeginningCreateModal(props) {
                 size="sm"
                 onClick={onOpen}
                 leftIcon={<MdAddCircle />}
-                colorScheme="blue"
+                colorscheme="blue"
                 variant="outline"
             >
                 Create
@@ -244,7 +244,7 @@ export function BeginningCreateModal(props) {
                             <Button variant="outline" mr={3} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button type="submit" colorScheme="red">
+                            <Button type="submit" colorscheme="red">
                                 Submit
                             </Button>
                         </DrawerFooter>
