@@ -34,7 +34,7 @@ export default function AccountsTable(props) {
     GetAllUsers(branchid).then(res=>{
         setTableData(res.data.status)
     })
-   }, [location]);
+   }, [location+branchid]);
 
    const showAccount =(id)=>{
     navigate('/administrator/branch/'+branchid+'/accounts/profile/'+id)
@@ -126,26 +126,26 @@ export default function AccountsTable(props) {
                                 </Flex>
                             </Td>
                             <Td>
-                                <Popover matchWidth={true} placement='top-start'>
+                                <Popover placement='top'>
                                 <PopoverTrigger>
-                                <Button  leftIcon={<DeleteIcon />}  size="sm" colorscheme='red' variant='outline'>
+                                <Button className="  bg-red-500    text-base font-medium text-white transition duration-200 hover:bg-red-600 active:bg-red-700 dark:bg-red-400 dark:text-white dark:hover:bg-red-300 dark:active:bg-red-200" leftIcon={<DeleteIcon />}  size="sm" colorscheme='red' variant='outline'>
                                     Delete
                                 </Button>
                                 </PopoverTrigger>
-                                <PopoverContent >
+                                <PopoverContent>
                                     <PopoverHeader  fontWeight='semibold'>Account Deletion</PopoverHeader>
                                     <PopoverArrow />
                                     <PopoverCloseButton />
                                     <PopoverFooter display='flex' justifyContent='flex-end'>
                                         <ButtonGroup size='sm'>
-                                        <Button onClick={() =>deleteHandler(res.id)} colorscheme='red'>Delete</Button>
+                                        <Button  variant="outline" className="  bg-red-500    text-base font-medium text-white transition duration-200 hover:bg-red-600 active:bg-red-700 dark:bg-red-400 dark:text-white dark:hover:bg-red-300 dark:active:bg-red-200" onClick={() =>deleteHandler(res.id)} colorscheme='red'>Delete</Button>
                                         </ButtonGroup>
                                     </PopoverFooter>
                                 </PopoverContent>
                                 </Popover>
                             </Td>
                             <Td>
-                            <Button onClick={()=>showAccount(res.id)} size="sm" rightIcon={<MdArrowCircleRight />} colorscheme='blue' variant='outline'>
+                            <Button className="  bg-brand-500    text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200" onClick={()=>showAccount(res.id)} size="sm" rightIcon={<MdArrowCircleRight />} colorscheme='blue' variant='outline'>
                                 Show
                             </Button>
                             </Td>

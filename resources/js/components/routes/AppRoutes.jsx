@@ -22,6 +22,12 @@ import TableInformation from "../administrator/branches/accounts/sections/profil
 
 import QrcodeLayout from "../administrator/branches/accounts/sections/qrcode/Layout";
 import QrScanner from "../auth/QrScanner";
+
+import AttendanceLayout from "../administrator/branches/attendance/Layout";
+import ChargesLayout from "../administrator/branches/charges/Layout";
+import CreditsLayout from "../administrator/branches/credits/Layout";
+import SalaryLayout from "../administrator/branches/salary/Layout";
+
 export const router = createBrowserRouter([
     {
     path: "/",
@@ -106,6 +112,23 @@ export const router = createBrowserRouter([
                       }
                     ]
                   }, 
+                  //wala pani
+                  {
+                    path: "/administrator/branch/:branchid/salary",
+                    element: <SalaryLayout />,
+                  },  
+                  {
+                    path: "/administrator/branch/:branchid/credits",
+                    element: <CreditsLayout />,
+                  }, 
+                  {
+                    path: "/administrator/branch/:branchid/charges",
+                    element: <ChargesLayout />,
+                  },   
+                  {
+                    path: "/administrator/branch/:branchid/attendance",
+                    element: <AttendanceLayout />,
+                  },  
                 ]
               }, 
         ]

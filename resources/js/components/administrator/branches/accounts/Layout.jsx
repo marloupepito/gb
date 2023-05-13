@@ -22,9 +22,9 @@ function AccountsLayout() {
                     userid !=undefined?<AccountCard />:''
                   }
                 </div>
-                <div className="col-md-12 col-12">
+                {/* <div className="col-md-12 col-12">
                     <AccountAttendanceTable />
-                  </div>
+                  </div> */}
            </div>
         </Box>
     );

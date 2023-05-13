@@ -63,6 +63,7 @@ export default function BakersReportDrawer(props) {
     return (
         <>
             <Button
+            className="  bg-brand-500    text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200" 
                 variant="outline"
                 size="sm"
                 colorscheme="red"
@@ -116,14 +117,14 @@ export default function BakersReportDrawer(props) {
                             </FormControl>
                         </DrawerBody>
                         <DrawerFooter borderTopWidth="1px">
-                            <Button variant="outline" mr={3}>
+                            <Button className="  bg-red-500    text-base font-medium text-white transition duration-200 hover:bg-red-600 active:bg-red-700 dark:bg-red-400 dark:text-white dark:hover:bg-red-300 dark:active:bg-red-200"  variant="outline" mr={3}>
                                 Cancel
                             </Button>
                             <Button
                             isLoading={loading}
                                 variant="outline"
                                 type="submit"
-                                colorscheme="red"
+                                className="  bg-brand-500    text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200" 
                             >
                                 Submit
                             </Button>

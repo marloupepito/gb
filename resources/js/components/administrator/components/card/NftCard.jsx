@@ -12,7 +12,7 @@ const NftCard = ({ title, author, price, image, bidders, extra }) => {
         <div className="relative w-full">
           <img
             src={image}
-            className="mb-3 h-full w-full rounded-xl 3xl:h-full 3xl:w-full"
+            className="mb-3 h-full w-full   3xl:h-full 3xl:w-full"
             alt=""
           />
           <button

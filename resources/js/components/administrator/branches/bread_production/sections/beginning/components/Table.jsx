@@ -133,9 +133,7 @@ export default function BeginningTable(props) {
                             </Td>
                             <Td>
                                 <Flex align="center">
-                                    <Button>
                                        <UpdateBeginningProduction data={res} />
-                                    </Button>
                                     &nbsp;&nbsp;
                                     <Button>
                                    sss

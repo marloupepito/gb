@@ -61,7 +61,7 @@ const [result, setResult] = useState("");
         <p className="mb-9 ml-1 text-base text-gray-600">
           Enter your email and password to sign in!
         </p>
-        <div className="mb-6 flex h-[50px] w-full items-center justify-center gap-2 rounded-xl bg-lightPrimary hover:cursor-pointer dark:bg-navy-800">
+        <div className="mb-6 flex h-[50px] w-full items-center justify-center gap-2   bg-lightPrimary hover:cursor-pointer dark:bg-navy-800">
           <div className="rounded-full text-xl">
             <FcSelfie />
           </div>

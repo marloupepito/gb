@@ -63,12 +63,37 @@ const routes = [
         path: "/branch/"+res.id+'/production', 
         
       },
+    
+      
       {
+        key:res.id+Math.random(),
+        name: "Salary", 
+        layout: "/administrator",
+        path: "/branch/"+res.id+'/salary', 
+      },
+      {
+        key:res.id+Math.random(),
+        name: "Credits", 
+        layout: "/administrator",
+        path: "/branch/"+res.id+'/credits', 
+      },
+      {
+        key:res.id+Math.random(),
+        name: "Charges", 
+        layout: "/administrator",
+        path: "/branch/"+res.id+'/charges', 
+      },  {
         key:res.id+Math.random(),
         name: "Accounts", 
         layout: "/administrator",
         path: "/branch/"+res.id+'/accounts', 
-      }
+      },
+      {
+        key:res.id+Math.random(),
+        name: "Attendance", 
+        layout: "/administrator",
+        path: "/branch/"+res.id+'/attendance', 
+      },
     ]
   }))
   ,

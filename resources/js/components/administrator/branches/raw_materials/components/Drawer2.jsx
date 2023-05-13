@@ -128,10 +128,10 @@ export default function CreateRawMaterialsDrawer(props) {
                         </DrawerBody>
 
                         <DrawerFooter>
-                            <Button variant="outline" mr={3} onClick={onClose}>
+                            <Button className="  bg-red-500    text-base font-medium text-white transition duration-200 hover:bg-red-600 active:bg-red-700 dark:bg-red-400 dark:text-white dark:hover:bg-red-300 dark:active:bg-red-200"  variant="outline" mr={3} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button type="submit" colorscheme="blue">
+                            <Button type="submit" className="  bg-brand-500    text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200"  colorscheme="blue">
                                 Save
                             </Button>
                         </DrawerFooter>

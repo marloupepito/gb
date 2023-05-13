@@ -149,8 +149,7 @@ function CreateBeginningProduction(props) {
                                     </FormControl>
                                     <center>
                                         <Button
-                                            colorscheme="red"
-                                            className="mt-5 mb-3"
+                                           className="mt-5 mb-3 bg-brand-500 text-white"
                                             variant="outline"
                                             type="button"
                                             onClick={addItem}
@@ -245,7 +244,8 @@ function CreateBeginningProduction(props) {
                                                 </div>
                                                 <div className="col-md-2 col-2">
                                                     <Button
-                                                        colorscheme="red"
+                                                    variant="outline"
+                                                        className=" bg-red-500 text-base font-medium text-white transition duration-200 hover:bg-red-600 active:bg-red-700 dark:bg-red-400 dark:text-white dark:hover:bg-red-300 dark:active:bg-red-200" 
                                                         onClick={() =>
                                                             deleteItem(index)
                                                         }
@@ -262,10 +262,10 @@ function CreateBeginningProduction(props) {
                         </DrawerBody>
 
                         <DrawerFooter borderTopWidth="1px">
-                            <Button variant="outline" mr={3} onClick={onClose}>
+                            <Button className="  bg-red-500    text-base font-medium text-white transition duration-200 hover:bg-red-600 active:bg-red-700 dark:bg-red-400 dark:text-white dark:hover:bg-red-300 dark:active:bg-red-200"  variant="outline" mr={3} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button type="submit" colorscheme="red">
+                            <Button variant="outline" type="submit" className="  bg-brand-500    text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200" >
                                 Submit
                             </Button>
                         </DrawerFooter>

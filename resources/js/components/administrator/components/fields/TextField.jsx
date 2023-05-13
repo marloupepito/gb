@@ -17,7 +17,7 @@ function InputField(props) {
           cols={cols}
           rows={rows}
           placeholder={placeholder}
-          className={`flex w-full items-center justify-center rounded-xl border bg-white/0 pl-3 pt-3 text-sm outline-none ${
+          className={`flex w-full items-center justify-center   border bg-white/0 pl-3 pt-3 text-sm outline-none ${
             disabled === true
               ? "!border-none !bg-gray-100 dark:!bg-white/5 dark:placeholder:!text-[rgba(255,255,255,0.15)]"
               : state === "error"

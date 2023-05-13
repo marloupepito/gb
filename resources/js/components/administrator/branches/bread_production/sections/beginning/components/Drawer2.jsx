@@ -107,15 +107,16 @@ function UpdateBeginningProduction(props) {
     }
     return (
         <>
-            <a  onClick={onOpen}>
-           <Icon
-                    color="blue.500"
-                    w="24px"
-                    h="24px"
-                    me="5px"
-                    as={MdModeEdit}
-                />
-            </a>
+         <Button
+                size="sm"
+                onClick={onOpen}
+                leftIcon={<MdModeEdit />}
+                className="  bg-brand-500    text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200" 
+                variant="outline"
+            >
+                Edit
+            </Button>
+       
             <Drawer
                 size="full"
                 isOpen={isOpen}
@@ -172,8 +173,8 @@ function UpdateBeginningProduction(props) {
                                     </FormControl>
                                     <center>
                                         <Button
-                                            colorscheme="red"
-                                            className="mt-5 mb-3"
+                                            
+                                            className="mt-5 mb-3 bg-brand-500 text-white"
                                             variant="outline"
                                             type="button"
                                             onClick={addItem}
@@ -269,7 +270,8 @@ function UpdateBeginningProduction(props) {
                                                 </div>
                                                 <div className="col-md-2 col-2">
                                                     <Button
-                                                        colorscheme="red"
+                                                    variant="outline"
+                                                       className="bg-red-500 text-base font-medium text-white transition duration-200 hover:bg-red-600 active:bg-red-700 dark:bg-red-400 dark:text-white dark:hover:bg-red-300 dark:active:bg-red-200" 
                                                         onClick={() =>
                                                             deleteItem(index)
                                                         }
@@ -286,10 +288,10 @@ function UpdateBeginningProduction(props) {
                         </DrawerBody>
 
                         <DrawerFooter borderTopWidth="1px">
-                            <Button variant="outline" mr={3} onClick={onClose}>
+                            <Button className="  bg-red-500    text-base font-medium text-white transition duration-200 hover:bg-red-600 active:bg-red-700 dark:bg-red-400 dark:text-white dark:hover:bg-red-300 dark:active:bg-red-200"  variant="outline" mr={3} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button type="submit" colorscheme="red">
+                            <Button  variant="outline" className="  bg-brand-500    text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200"  type="submit">
                                 Submit
                             </Button>
                         </DrawerFooter>
