@@ -14,9 +14,16 @@ import {
     Flex,
     Text
 } from "@chakra-ui/react";
+import { useParams } from 'react-router-dom';
 function AttendanceTable() {
-  
+    let { branchid } = useParams();
     const textColor = useColorModeValue("secondaryGray.900", "white");
+    useEffect(() => {
+        axios.get('/api/get_branch_attendance/'+branchid)
+        .then(res=>{
+            console.log(res.data.status)
+        })
+    }, []);
     return ( 
     <Card  extra={"px-6 pb-6 overflow-x-auto  mt-4"}>
         <Flex px="25px" justify="space-between" mb="20px" align="center">

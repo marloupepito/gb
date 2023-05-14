@@ -3,9 +3,7 @@ import BeginningTable from "./components/Table";
 function BeginningLayout() {
     return (
         <>
-            <div className="row">
-               <BeginningTable />
-            </div>
+            <BeginningTable />
         </>
     );
 }

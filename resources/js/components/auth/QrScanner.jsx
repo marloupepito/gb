@@ -1,27 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import { FcSelfie } from "react-icons/fc";
 import authImg from "./../assets/img/auth/auth.png";
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 import FixedPlugin from "./../administrator/components/fixedPlugin/FixedPlugin";
 import { useNavigate } from "react-router-dom";
 import { UsersLogin } from "./../api/Users";
 import Swal from "sweetalert2";
 import { useZxing } from "react-zxing";
-
+import moment from 'moment';
+import { setAddAttendance } from '../api/Attendance';
 export default function QrScanner() {
-    
-const [result, setResult] = useState("");
+  const { hash } = useLocation();
+  const navigate = useNavigate()
+  const [result, setResult] = useState("");
+  const [load, setLoad] = useState(false);
   const { ref } = useZxing({
-    onResult(result) {
-      setResult(result.getText());
-      axios.post('/add_attendance',{
-        data:result.getText()
-      })
-      .then(res=>{
-        console.log(res.data.status)
-      })
-    },
-  });
+      onResult(result) {
+        //hash is #timein or #timeout
+        if(load === false){
+          setLoad(true)
+          const res= setAddAttendance({
+            qr:result.getText(),
+            type:hash,
+            date:moment().format('LLL')
+          })
+          res.then(ress=>{
+            Swal.fire({
+              icon: 'success',
+              title: hash.substring(1)+' Attendance Check',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            setLoad(false)
+            navigate('/#'+ress.data.status)
+          })
+        }
+       
+      },
+    }
+  );
+
     
   return (
     <div>
@@ -31,7 +49,7 @@ const [result, setResult] = useState("");
         <div className="relative flex">
           <div className="mx-auto flex min-h-full w-full flex-col justify-start pt-12 md:max-w-[75%] lg:h-screen lg:max-w-[1013px] lg:px-8 lg:pt-0 xl:h-[100vh] xl:max-w-[1383px] xl:px-0 xl:pl-[70px]">
             <div className="mb-auto flex flex-col pl-5 pr-5 md:pr-0 md:pl-12 lg:max-w-[48%] lg:pl-0 xl:max-w-full">
-              <Link to="/admin" className="mt-0 w-max lg:pt-10">
+              <Link to="/" className="mt-0 w-max lg:pt-10">
                 <div className="mx-auto flex h-fit w-fit items-center hover:cursor-pointer">
                   <svg
                     width="8"

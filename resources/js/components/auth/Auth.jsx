@@ -6,11 +6,11 @@ import Footer from "./../administrator/components/footer/FooterAuthDefault";
 import authImg from "./../assets/img/auth/auth.png";
 import { Link, Routes, Route, Navigate } from "react-router-dom";
 import FixedPlugin from "./../administrator/components/fixedPlugin/FixedPlugin";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import { UsersLogin } from "./../api/Users";
 import Swal from "sweetalert2";
 export default function AuthLogin() {
-
+     const { hash } = useLocation();
     const navigate = useNavigate();
     const [username,setUsername] =useState('')
     const [password,setPassword] =useState('')
@@ -45,16 +45,30 @@ export default function AuthLogin() {
       }
     
       
+      
+      
+      
     
   return (
     <div>
+      {
+        hash === '#success'?
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+          <strong className="font-bold">Success! </strong>
+          <span className="block sm:inline">Attendance Checked.</span>
+          <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
+            <svg className="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+          </span>
+        </div>:''
+      }
+        
     <div className="relative float-right h-full min-h-screen w-full !bg-white dark:!bg-navy-900">
       <FixedPlugin />
       <main className={`mx-auto min-h-screen`}>
         <div className="relative flex">
           <div className="mx-auto flex min-h-full w-full flex-col justify-start pt-12 md:max-w-[75%] lg:h-screen lg:max-w-[1013px] lg:px-8 lg:pt-0 xl:h-[100vh] xl:max-w-[1383px] xl:px-0 xl:pl-[70px]">
             <div className="mb-auto flex flex-col pl-5 pr-5 md:pr-0 md:pl-12 lg:max-w-[48%] lg:pl-0 xl:max-w-full">
-              <Link to="/admin" className="mt-0 w-max lg:pt-10">
+              <Link to="/" className="mt-0 w-max lg:pt-10">
                 <div className="mx-auto flex h-fit w-fit items-center hover:cursor-pointer">
                   <svg
                     width="8"
@@ -77,22 +91,41 @@ export default function AuthLogin() {
       {/* Sign in section */}
  
       <div className=" w-full max-w-full flex-col items-center md:pl-4 lg:pl-0 xl:max-w-[420px]">
-      <Link to='/qrcode'>
+    
         <h4 className="mb-2.5 text-4xl font-bold text-navy-700 dark:text-white">
           Sign In
         </h4>
         <p className="mb-9 ml-1 text-base text-gray-600">
           Enter your email and password to sign in!
         </p>
+        <div className='row'>
+        <div className='col-md-6 col-6'>
+        <Link to='/qrcode#TimeIn'>
         <div className="mb-6 flex h-[50px] w-full items-center justify-center gap-2   bg-lightPrimary hover:cursor-pointer dark:bg-navy-800">
           <div className="rounded-full text-xl">
             <FcSelfie />
           </div>
           <h5 className="text-sm font-medium text-navy-700 dark:text-white">
-            Attendance Scanner
+            Time In
           </h5>
         </div>
         </Link>
+        </div>
+        <div className='col-md-6 col-6'>
+        <Link to='/qrcode#TimeOut'>
+        <div className="mb-6 flex h-[50px] w-full items-center justify-center gap-2   bg-lightPrimary hover:cursor-pointer dark:bg-navy-800">
+          <div className="rounded-full text-xl">
+            <FcSelfie />
+          </div>
+          <h5 className="text-sm font-medium text-navy-700 dark:text-white">
+            Time Out
+          </h5>
+        </div>
+        </Link>
+        </div>
+          </div>
+      
+     
         <div className="mb-6 flex items-center  gap-3">
           <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
           <p className="text-base text-gray-600 dark:text-white"> SIGN </p>

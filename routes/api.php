@@ -66,3 +66,7 @@ Route::get('/get_bread_every_branch2/{id}','App\Http\Controllers\BranchBreadCont
 Route::get('/get_bakers_report/{id}','App\Http\Controllers\BranchBreadController@get_bakers_report');
 Route::get('/get_bread_report/{id}','App\Http\Controllers\BranchBreadController@get_bread_report');
 
+
+Route::get('/get_branch_attendance/{id}','App\Http\Controllers\AttendanceController@get_branch_attendance');
+
+

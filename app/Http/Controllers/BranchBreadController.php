@@ -12,6 +12,11 @@ use App\Models\Production;
 class BranchBreadController extends Controller
 {
     
+    public function add_attendance(){
+        return response()->json([
+            'status' => 'success'
+        ]);
+    }
     public function delete_bread($id){
         BranchBread::where('key',$id)->delete();
          return response()->json([

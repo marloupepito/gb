@@ -53,11 +53,10 @@ export function AddProductionAPI(props) {
       }
 }
 
-export function GetAllProductionAPI(branchid){
+export async function GetAllProductionAPI(branchid){
   try {
-    const data=axios.get('/api/get_all_production/'+branchid)
+    const data = await axios.get('/api/get_all_production/'+branchid)
     return data;
-    
   } catch (error) {
     
   }

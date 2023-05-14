@@ -17,9 +17,11 @@ export default function BeginningTable(props) {
     const textColor = useColorModeValue("secondaryGray.900", "white");
     const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
         useEffect(() => {
-            GetAllProductionAPI(branchid).then(res=>{
-                setData(res.data.status)
-            })
+            const result = GetAllProductionAPI(branchid)
+            .then(res=>{
+                    setData(Object.values(res.data.status))
+                    
+                })
         }, [hash]);
    
     return (

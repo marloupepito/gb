@@ -1,17 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\EvaluatorController;
-// use App\Http\Controllers\UsersController;
-// use App\Http\Controllers\BranchIngredientsController;
-// use App\Http\Controllers\IngredientsController;
-// use App\Http\Controllers\IngredientsRequestController;
-// use App\Http\Controllers\ProductionController;
-// use App\Http\Controllers\InventoryProductionController;
-// use App\Http\Controllers\BranchController;
-// use App\Http\Controllers\NotificationController;
-// use App\Http\Controllers\BranchBreadController;
-// use App\Http\Controllers\RecordsController;
 use Illuminate\Http\Request;
 
 /*
@@ -91,6 +80,9 @@ Route::post('/add_branch_bread','App\Http\Controllers\BranchBreadController@add_
 Route::post('/get_all_records','App\Http\Controllers\RecordsController@get_all_records');
 Route::post('/get_user_charge','App\Http\Controllers\RecordsController@get_user_charge');
 
+
+
+Route::post('/add_attendance','App\Http\Controllers\AttendanceController@add_attendance');
 
 Route::post('/add_branch_expenses','App\Http\Controllers\ExpensesController@add_branch_expenses');
 

@@ -18,7 +18,7 @@ export default function TableBakersReport(props) {
     const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
         useEffect(() => {
             GetBakersReportAPI(branchid).then(res=>{
-                setData(res.data.status)
+                setData(Object.values(res.data.status))
             })
         }, [hash]);
 
