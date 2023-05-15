@@ -44,12 +44,12 @@ function AttendanceTable() {
                     <Thead>
                         <Tr>
                             <Th>Employees</Th>
+                            <Th>Position</Th>
                             <Th>Time In</Th>
                             <Th>Time out</Th>
                             <Th>Time In</Th>
                             <Th>Time out</Th>
                             <Th>Total</Th>
-                            <Th>Date</Th>
                         </Tr>
                     </Thead>
                     <Tbody>

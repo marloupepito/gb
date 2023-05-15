@@ -99,7 +99,7 @@ export default function AuthLogin() {
           Enter your email and password to sign in!
         </p>
         <div className='row'>
-        <div className='col-md-6 col-6'>
+        {/* <div className='col-md-6 col-6'>
         <Link to='/qrcode#TimeIn'>
         <div className="mb-6 flex h-[50px] w-full items-center justify-center gap-2   bg-lightPrimary hover:cursor-pointer dark:bg-navy-800">
           <div className="rounded-full text-xl">
@@ -110,15 +110,15 @@ export default function AuthLogin() {
           </h5>
         </div>
         </Link>
-        </div>
-        <div className='col-md-6 col-6'>
-        <Link to='/qrcode#TimeOut'>
+        </div> */}
+        <div className='col-md-12 col-12'>
+        <Link to='/qrcode'>
         <div className="mb-6 flex h-[50px] w-full items-center justify-center gap-2   bg-lightPrimary hover:cursor-pointer dark:bg-navy-800">
           <div className="rounded-full text-xl">
             <FcSelfie />
           </div>
           <h5 className="text-sm font-medium text-navy-700 dark:text-white">
-            Time Out
+            SCAN ATTENDANCE
           </h5>
         </div>
         </Link>

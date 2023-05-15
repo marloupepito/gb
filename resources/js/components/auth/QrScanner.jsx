@@ -15,27 +15,47 @@ export default function QrScanner() {
   const [result, setResult] = useState("");
   const [load, setLoad] = useState(false);
   const { ref } = useZxing({
-      onResult(result) {
+      onResult(resultValue) {
         //hash is #timein or #timeout
-        if(load === false){
-          setLoad(true)
-          const res= setAddAttendance({
-            qr:result.getText(),
-            type:hash,
-            date:moment().format('LLL')
-          })
-          res.then(ress=>{
-            Swal.fire({
-              icon: 'success',
-              title: hash.substring(1)+' Attendance Check',
-              showConfirmButton: false,
-              timer: 1500
+
+        let timerInterval
+        Swal.fire({
+          title: 'Attendance Check!',
+          html: 'It will close in <b></b> seconds.',
+          timer: 6000,
+          allowOutsideClick:false,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Math.ceil(Swal.getTimerLeft() / 1000)
+            }, 1000)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            const res= setAddAttendance({
+              qr:resultValue.getText(),
+              date:moment().format('h:mm:ss')
             })
-            setLoad(false)
-            navigate('/#'+ress.data.status)
-          })
-        }
-       
+            res.then(ress=>{
+              Swal.fire({
+                icon: 'success',
+                title: ' Attendance Check',
+                showConfirmButton: false,
+                timer: 1500
+              })
+              setLoad(false)
+              console.log(ress.data.status)
+              // navigate('/#'+ress.data.status)
+            })
+          }
+        })
+      
       },
     }
   );
