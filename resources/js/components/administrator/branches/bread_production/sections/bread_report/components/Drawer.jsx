@@ -23,11 +23,10 @@ export default function BreadReportDrawer(props) {
     const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const { branchid } = useParams();
-    const [formData,setFormData] = useState({
-        remaining:props.data.production,
-        breadout:0,
-        remarks:''
-    })
+  
+    const [remaining, setRemaining] = useState(props.data.production);
+    const [breadout, setBreadout] = useState(0);
+    const [remarks, setRemarks] = useState('');
     let location = useLocation().pathname;
     const navigate = useNavigate()
   
@@ -47,10 +46,10 @@ export default function BreadReportDrawer(props) {
         const status = AddBreadSoldReportAPI({
             breadid:props.data.key,
             branchid:branchid,
-            remaining:formData.remaining,
-            remarks:formData.remarks,
+            remaining:remaining,
+            remarks:remarks,
             assigned:JSON.parse(localStorage.getItem("user")).name,
-            breadout:formData.breadout,
+            breadout:breadout,
             date:moment().format('MMMM DD, YYYY A')
           })
           if(status === 'success'){
@@ -92,8 +91,8 @@ export default function BreadReportDrawer(props) {
                             <FormControl isRequired>
                                 <FormLabel>Remaining</FormLabel>
                                 <NumberInput
-                                    defaultValue={formData.remaining}
-                                    // onChange={quantityHandler}
+                                    defaultValue={remaining}
+                                     onChange={(e)=>setRemaining(e)}
                                 >
                                     <NumberInputField name="remaining" />
                                 </NumberInput>
@@ -102,8 +101,8 @@ export default function BreadReportDrawer(props) {
                             <FormControl isRequired>
                                 <FormLabel>Breadout</FormLabel>
                                 <NumberInput
-                                    defaultValue={formData.breadout}
-                                    // onChange={quantityHandler}
+                                    defaultValue={breadout}
+                                    onChange={(e)=>setBreadout(e)}
                                 >
                                     <NumberInputField name="breadout" />
                                 </NumberInput>
@@ -112,7 +111,7 @@ export default function BreadReportDrawer(props) {
                             <FormControl isRequired>
                                 <FormLabel>Remarks</FormLabel>
 
-                                <Textarea defaultValue={formData.remarks} placeholder="Write your remarks here!" />
+                                <Textarea defaultValue={remarks} onChange={(e)=>setRemarks(e.target.value)} placeholder="Write your remarks here!" />
                             </FormControl>
                         </DrawerBody>
                         <DrawerFooter borderTopWidth="1px">

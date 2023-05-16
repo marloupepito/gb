@@ -22,6 +22,7 @@ function success(){
 export function GetBreadSoldReportAPI(datas) {
   try {
    const data= axios.get('/api/get_branch_record/'+datas.branchid+'/'+datas.date)
+    
      return data;
   } catch (error) {
     error()
@@ -62,9 +63,8 @@ export function GetBakersReportAPI(branchid) {
 export function GoToBreadReportAPI(datas) {
 
   try {
-    axios.post('/goto_bread_report',datas)
-    success()
-     return 'success';
+   const result =  axios.post('/goto_bread_report',datas)
+     return result;
   } catch (error) {
     error()
     return error

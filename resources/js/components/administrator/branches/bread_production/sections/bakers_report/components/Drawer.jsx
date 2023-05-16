@@ -19,15 +19,19 @@ import {
 } from "@chakra-ui/react";
 import moment from 'moment'
 import { GoToBreadReportAPI } from "../../../../../../api/Report";
+import Swal from "sweetalert2";
 export default function BakersReportDrawer(props) {
     const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const { branchid } = useParams();
-    const [formData,setFormData] = useState({
-        current:props.data.production,
-        charge:props.data.charge,
-        remarks:''
-    })
+    // const [formData,setFormData] = useState({
+    //     current:props.data.production,
+    //     charge:props.data.charge,
+    //     remarks:''
+    // })
+    const [current,setCurrent] = useState(props.data.production)
+    const [charge,setCharge] = useState(props.data.charge)
+    const [remark,setRemark] = useState('')
     let location = useLocation().pathname;
     const navigate = useNavigate()
   
@@ -43,21 +47,33 @@ export default function BakersReportDrawer(props) {
     const nextTransaction =(e) =>{
         e.preventDefault()
         setLoading(true)
-        const status = GoToBreadReportAPI({
-            charge:formData.charge,
+        const data = {
+            charge:charge,
             branchid:branchid,
-            production:formData.current,
-            remarks:formData.remarks,
+            production:current,
+            remarks:remark,
             id:props.data.key,
             assigned:JSON.parse(localStorage.getItem("user")).name,
             userid:JSON.parse(localStorage.getItem("user")).id,
             date:moment().format('MMMM DD, YYYY A')
-          })
-          if(status === 'success'){
+          }
+    GoToBreadReportAPI(data)
+       .then(res=>{
+        console.log(res.data.status)
+        if(res.data.status === 'success'){
+            Swal.fire({
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+              })
             setIsOpen(false);
             setLoading(false)
             navigate(location+'#'+Math.random())
           }
+       })
+        
+          
           
     }
     return (
@@ -93,8 +109,8 @@ export default function BakersReportDrawer(props) {
                             <FormControl isRequired>
                                 <FormLabel>Current pieces</FormLabel>
                                 <NumberInput
-                                    defaultValue={formData.current}
-                                    // onChange={quantityHandler}
+                                    defaultValue={current}
+                                     onChange={(e)=>setCurrent(e)}
                                 >
                                     <NumberInputField name="current" />
                                 </NumberInput>
@@ -103,8 +119,8 @@ export default function BakersReportDrawer(props) {
                             <FormControl isRequired>
                                 <FormLabel>Charge pieces</FormLabel>
                                 <NumberInput
-                                    defaultValue={formData.charge}
-                                    // onChange={quantityHandler}
+                                    defaultValue={charge}
+                                    onChange={(e)=>setCharge(e)}
                                 >
                                     <NumberInputField name="charge" />
                                 </NumberInput>
@@ -113,7 +129,7 @@ export default function BakersReportDrawer(props) {
                             <FormControl isRequired>
                                 <FormLabel>Remarks</FormLabel>
 
-                                <Textarea defaultValue={formData.remarks} placeholder="Write your remarks here!" />
+                                <Textarea  onChange={(e)=>setRemark(e.target.value)} defaultValue={remark} placeholder="Write your remarks here!" />
                             </FormControl>
                         </DrawerBody>
                         <DrawerFooter borderTopWidth="1px">

@@ -56,7 +56,9 @@ class InventoryProductionController extends Controller
     //  Records::where('key', $request->id)->delete();
     }
   
-
+    return response()->json([
+        'status' =>'success'
+    ]);
   }
   public function add_bread_list(Request $request){
         
