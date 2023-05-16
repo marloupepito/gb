@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../../components/card';
+import { getBranchAttendance } from '../../../../api/Attendance';
 import {
     Table,
     Thead,
@@ -17,11 +18,12 @@ import {
 import { useParams } from 'react-router-dom';
 function AttendanceTable() {
     let { branchid } = useParams();
+    const [data,setData] = useState([]);
     const textColor = useColorModeValue("secondaryGray.900", "white");
     useEffect(() => {
-        axios.get('/api/get_branch_attendance/'+branchid)
+        getBranchAttendance(branchid)
         .then(res=>{
-            console.log(res.data.status)
+            setData(res.data.status)
         })
     }, []);
     return ( 
@@ -37,7 +39,7 @@ function AttendanceTable() {
                   Daily Attendance
                 </Text>
             </Flex>
-           <Table variant="simple">
+           <Table variant="simple" size='sm'>
                     <TableCaption >
                         GB Bakeshop Attendance
                     </TableCaption>
@@ -49,38 +51,31 @@ function AttendanceTable() {
                             <Th>Time out</Th>
                             <Th>Time In</Th>
                             <Th>Time out</Th>
+                            <Th>Time In</Th>
+                            <Th>Time out</Th>
+                            <Th>Time In</Th>
+                            <Th>Time out</Th>
                             <Th>Total</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
-                        <Tr>
-                            <Td>Name:</Td>
-                            <Td></Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Shift:</Td>
-                            <Td></Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Mobile:</Td>
-                            <Td></Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Gender:</Td>
-                            <Td></Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Position:</Td>
-                            <Td></Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Username:</Td>
-                            <Td></Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Password:</Td>
-                            <Td>None</Td>
-                        </Tr>
+                        {
+                            data.map(res=> <Tr key={res.id}>
+                                <Td>{res.attendance_belongs_to_account.name}</Td>
+                                <Td>{res.attendance_belongs_to_account.position}</Td>
+                                <Td>{res.time_in1 === null?'none':res.time_in1}</Td>
+                                <Td>{res.time_out1 === null?'none':res.time_out1}</Td>
+                                <Td>{res.time_in2 === null?'none':res.time_in2}</Td>
+                                <Td>{res.time_out2 === null?'none':res.time_out2}</Td>
+                                <Td>{res.time_in3 === null?'none':res.time_in3}</Td>
+                                <Td>{res.time_out3 === null?'none':res.time_out3}</Td>
+                                <Td>{res.time_in4 === null?'none':res.time_in4}</Td>
+                                <Td>{res.time_out4 === null?'none':res.time_out4}</Td>
+                                <Td>{res.total === null?'none':res.total.substring(0,5)}</Td>
+                            </Tr>)
+                        }
+                       
+                     
                     </Tbody>
                 </Table>
     </Card>

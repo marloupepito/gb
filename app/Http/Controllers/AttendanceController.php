@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Attendance;
 use App\Models\User;
-use Mockery\Undefined;
 use DateTime;
 class AttendanceController extends Controller
 {
 
     
     public function get_branch_attendance($id){
+
+        $att = Attendance::where('branchid',$id)->with('attendanceBelongsToAccount')->get();
         return response()->json([
-            'status' => $id
+            'status' => $att
         ]);
     }
     public function add_attendance(Request $request){
@@ -23,6 +24,7 @@ class AttendanceController extends Controller
           if($att == null){
             Attendance::create([
                 'userid' =>$account->id,
+                'branchid' =>$account->branch_id,
                 'time_in1' =>$request->date
             ]);
           }else if($att->time_in1 !== null && $att->time_out1 === null){

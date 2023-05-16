@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->string('userid')->nullable();
+            $table->string('branchid')->nullable();
             $table->string('time_in1')->nullable();
             $table->string('time_out1')->nullable();
             $table->string('time_in2')->nullable();
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->string('time_out3')->nullable();
             $table->string('time_in4')->nullable();
             $table->string('time_out4')->nullable();
+            $table->string('total')->nullable();
             $table->timestamps();
         });
     }

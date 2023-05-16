@@ -41,7 +41,6 @@ export default function AccountDrawer() {
     const onClose = (e) => {
         setIsOpen(false);
     };
-
     const submitAccount = (e) => {
         setLoading(true)
         e.preventDefault()

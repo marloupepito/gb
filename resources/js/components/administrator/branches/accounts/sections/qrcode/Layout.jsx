@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
-
+import { GetEveryAccount } from '../../../../../api/Account';
+import { useParams } from 'react-router-dom';
 function QrcodeLayout() {
-    const password = JSON.parse(localStorage.getItem("user")).password;
+    const [password,setPassword] = useState('')
+    let { accountid } = useParams();
+    useEffect(() => {
+        GetEveryAccount(accountid)
+        .then(res=>{
+            setPassword(res.data.status.password)
+        })
+    }, []);
     return ( 
         <>
         {
