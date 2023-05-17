@@ -54,10 +54,10 @@ export function ModalDelete(props) {
                         </AlertDialogBody>
 
                         <AlertDialogFooter>
-                            <Button className="  bg-red-500    text-base font-medium text-white transition duration-200 hover:bg-red-600 active:bg-red-700 dark:bg-red-400 dark:text-white dark:hover:bg-red-300 dark:active:bg-red-200"  ref={cancelRef} onClick={onClose}>
+                            <Button variant="outline" className="bg-red-500 text-base font-medium text-white transition duration-200 hover:bg-red-600 active:bg-red-700 dark:bg-red-400 dark:text-white dark:hover:bg-red-300 dark:active:bg-red-200"  ref={cancelRef} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button className="  bg-brand-500    text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200"  colorscheme="red" onClick={DeleteData} ml={3}>
+                            <Button variant="outline" className="bg-brand-500 text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200"  onClick={DeleteData} ml={3}>
                                 Delete
                             </Button>
                         </AlertDialogFooter>

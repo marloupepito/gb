@@ -27,6 +27,9 @@ class CreditsController extends Controller
                 'date' => 'required',
                 'userid' => 'required'
             ]));
+            return response()->json([
+                'status' =>'success'
+            ]);
         }else{
             Credits::create($request->validate([
                 'name' => 'required',
@@ -36,7 +39,11 @@ class CreditsController extends Controller
                 'date' => 'required',
                 'userid' => 'required'
             ]));
+            return response()->json([
+                'status' =>'success'
+            ]);
         }
+       
     }
     public function get_user_credits($id){
         $charge=Credits::where('userid',$id)->get();

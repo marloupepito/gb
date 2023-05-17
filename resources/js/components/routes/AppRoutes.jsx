@@ -26,6 +26,7 @@ import QrScanner from "../auth/QrScanner";
 import AttendanceLayout from "../administrator/branches/attendance/Layout";
 import ChargesLayout from "../administrator/branches/charges/Layout";
 import CreditsLayout from "../administrator/branches/credits/Layout";
+import CreditsSectionLayout from "../administrator/branches/credits/sections/credits/Layout";
 import SalaryLayout from "../administrator/branches/salary/Layout";
 
 export const router = createBrowserRouter([
@@ -120,6 +121,12 @@ export const router = createBrowserRouter([
                   {
                     path: "/administrator/branch/:branchid/credits",
                     element: <CreditsLayout />,
+                    children:[
+                      {
+                        path:"/administrator/branch/:branchid/credits/:accountid",
+                        element:<CreditsSectionLayout />
+                      }
+                    ]
                   }, 
                   {
                     path: "/administrator/branch/:branchid/charges",

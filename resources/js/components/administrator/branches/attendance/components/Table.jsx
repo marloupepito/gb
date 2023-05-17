@@ -25,7 +25,7 @@ function AttendanceTable() {
         .then(res=>{
             setData(res.data.status)
         })
-    }, []);
+    }, [branchid]);
     return ( 
     <Card  extra={"px-6 pb-6 overflow-x-auto  mt-4"}>
         <Flex px="25px" justify="space-between" mb="20px" align="center">
