@@ -18,7 +18,7 @@ class CreditsController extends Controller
         ]);
     }
     public function create_credit_or_charge(Request $request){
-        if($request->type === 'Charge'){
+        if($request->type === 'Charges'){
             Charges::create($request->validate([
                 'name' => 'required',
                 'description' => 'required',

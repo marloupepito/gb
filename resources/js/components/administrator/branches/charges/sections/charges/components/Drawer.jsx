@@ -54,7 +54,7 @@ export default function ChargesSectionDrawer() {
         setLoading(true)
         e.preventDefault()
         const data = {
-            type:'Credits',
+            type:'Charges',
             name:user.name,
             description:description,
             amount:amount,
@@ -76,7 +76,7 @@ export default function ChargesSectionDrawer() {
     return (
         <>
             <a ref={btnRef} onClick={onOpen}>
-                Create Credits
+                Create Charges
             </a>
             <Drawer
                 isOpen={isOpen}
