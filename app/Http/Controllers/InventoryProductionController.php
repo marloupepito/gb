@@ -26,7 +26,7 @@ class InventoryProductionController extends Controller
     if($request->charge !== 0){
       Charges::create([
         'branch_id'=>$record->branch_id,
-        'userid'=>$record->userid,
+        'userid'=>$request->userid,
         'name' =>$record->baker,
         'description' =>$request->remarks,
         'amount' =>$request->charge * $record->price,
